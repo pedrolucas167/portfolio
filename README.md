@@ -1,4 +1,4 @@
-Site Pessoal
+
 Este é o meu site pessoal, onde compartilho informações sobre minha trajetória profissional, projetos, habilidades e contato.
 
 Funcionalidades
