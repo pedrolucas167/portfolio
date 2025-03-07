@@ -9,6 +9,28 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     };
+    
     window.addEventListener('scroll', revealSection);
-    revealSection();
+    revealSection(); // Para ativar a verificação inicial
+
+    // Adiciona efeito suave ao header ao rolar a página
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Animação de botões ao passar o mouse
+    const buttons = document.querySelectorAll('.hero button, .call-to-action');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+            button.style.transform = 'scale(1.1)';
+        });
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'scale(1)';
+        });
+    });
 });

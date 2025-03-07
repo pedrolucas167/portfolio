@@ -1,271 +1,317 @@
-     /* Configuração geral */
-     html {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f4f7f6;
-        color: #292621;
-        line-height: 1.6;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    }
-    
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    
-    /* Cabeçalho */
-    header {
-        position: relative;
-        top: 9px;
-        width: 95%;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 35px 45px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        transition: background-color 0.3s, box-shadow 0.3s;
-    }
-    
-    header:hover {
-        background: rgba(255, 255, 255, 1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-    
-    .logo {
-        width: 155px;
-        height: flex;
-        margin-right: 19px;
-    }
-    
-    /* Navegação */
-    nav {
-        display: flex;
-        gap: 20px;
-    }
-    
-    nav a {
-        text-decoration: none;
-        color: #212529;
-        font-weight: 400;
-        font-size: 1.1em;
-        position: relative;
-        overflow: hidden;
-        transition: color 0.3s ease;
-    }
-    
-    nav a::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: rgba(0, 123, 255, 0.7);
-        transition: width 0.3s ease;
-    }
-
-    /* Estilos responsivos para dispositivos móveis */
-@media (max-width: 480px) {
-    header {
-        padding: 15px 20px; /* Padding ainda menor para móveis */
-        flex-direction: column; /* Alinhar itens verticalmente */
-        align-items: flex-start; /* Alinhar à esquerda */
-    }
-
-    .logo {
-        width: 100px; /* Tamanho menor para o logo */
-        margin-right: 0; /* Remover margem à direita */
-        margin-bottom: 10px; /* Adicionar margem inferior */
-    }
+/* Configuração geral */
+html {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f7f6;
+    color: #292621;
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
-    
-    
-    nav a:hover {
-        color: rgba(0, 123, 255, 0.7)
-    }
-    
-    nav a:hover::before {
-        width: 100%;
-    }
-    
-   /* Hero (painel principal) */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Cabeçalho */
+header {
+    position: relative;
+    top: 9px;
+    width: 95%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin: 0 auto;
+}
+
+header:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+    width: 155px;
+    height: auto;
+    margin-right: 19px;
+}
+
+/* Navegação */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 400;
+    font-size: 1.1em;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: rgba(0, 123, 255, 0.7);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: rgba(0, 123, 255, 0.7)
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+/* Hero (painel principal) */
 .hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Altura reduzida */
-    width: 80%; /* Largura reduzida */
-    margin: 50px auto; /* Margem ajustada */
+    height: 50vh;
+    width: 80%;
+    margin: 50px auto;
     background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7)),
     url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=') no-repeat center/cover;
     border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombras mais leves */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     color: white;
     position: relative;
     text-align: center;
-    padding: 20px; /* Padding reduzido */
+    padding: 20px;
     overflow: hidden;
     transition: transform 0.6s, box-shadow 0.6s;
 }
 
-    
-    .hero:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+.hero:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    animation: rotate 10s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero h2 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.hero p {
+    font-size: 1.5em;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
+.hero button {
+    padding: 10px 25px;
+    font-size: 1em;
+    color: white;
+    background: rgba(0, 123, 255, 0.8);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.hero button:hover {
+    background: rgba(0, 123, 255, 1);
+    transform: scale(1.1);
+}
+
+/* Section Styles */
+.section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.highlight {
+    font-size: 1.4rem;
+    color: #0078d7;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.call-to-action {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: #0078d7;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    color: white;
+    background-color: #0078d7;
+    border-radius: 15px;
+    margin: 5px auto;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.badge:hover {
+    background-color: #0056a4;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #212529;
+    color: #fff;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Estilos responsivos para dispositivos móveis */
+@media (max-width: 768px) {
+    header {
+        padding: 20px 30px;
+        flex-direction: column;
+        align-items: center;
     }
     
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-        animation: rotate 10s infinite linear;
-        pointer-events: none;
+    .logo {
+        margin-right: 0;
+        margin-bottom: 15px;
     }
     
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero {
+        width: 90%;
+        height: 40vh;
     }
     
     .hero h2 {
-        font-size: 3.5em;
-        font-weight: 700;
-        margin-bottom: 20px;
-        position: relative;
-        text-align: center;
-        z-index: 2;
-        animation: fadeIn 1s ease-out forwards;
+        font-size: 2.5em;
     }
     
     .hero p {
-        font-size: 1.5em;
-        font-weight: 300;
-        position: relative;
-        z-index: 2;
-        animation: fadeIn 1.5s ease-out forwards;
+        font-size: 1.2em;
     }
     
-    .hero button {
-        padding: 10px 25px;
-        font-size: 1em;
-        color: white;
-        background: rgba(0, 123, 255, 0.8);
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-top: 20px;
-        position: relative;
-        z-index: 2;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-    
-    .hero button:hover {
-        background: rgba(0, 123, 255, 1);
-        transform: scale(1.1);
-    }
-    
-    /* Section Styles */
     .section {
-        padding: 60px 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        margin: 20px auto;
-        max-width: 800px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 1.5s ease-in-out;
+        padding: 40px 15px;
     }
     
     .section-title {
-        font-size: 2.5rem;
-        color: #333;
-        text-align: center;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
     }
     
-    .content {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #555;
+    .logo {
+        width: 100px;
+        margin-right: 0;
+        margin-bottom: 10px;
     }
     
-    .highlight {
-        font-size: 1.4rem;
-        color: #0078d7;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
+    .hero {
+        height: 30vh;
     }
     
-    .call-to-action {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 1.2rem;
-        color: #0078d7;
-        font-weight: bold;
-        text-transform: uppercase;
+    .hero h2 {
+        font-size: 2em;
     }
-    
-    /* Fade-in Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .fade-in {
-        animation: fadeIn 1.5s ease-in-out;
-    }
-    
-    .badge {
-        display: inline-block;
-        padding: 5px 10px;
-        font-size: 0.9em;
-        color: white;
-        background-color: #0078d7;
-        border-radius: 15px;
-        margin: 5px auto; /* Adicionado auto para centralizar horizontalmente */
-        text-decoration: none;
-        text-align: center;
-        transition: background-color 0.3s;
-    }
-    
-    
-    .badge:hover {
-        background-color: #0056a4;
-    }
-    
-    
-    
-    /* Rodapé */
-    footer {
-        text-align: center;
-        padding: 30px;
-        background: #212529;
-        color: #fff;
-    }
-    
-    footer p {
-        margin: 0;
+       
+    .hero p {
         font-size: 1em;
     }
-    
+}
