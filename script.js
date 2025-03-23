@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const sections = document.querySelectorAll('.fade-in');
+    
+    // Função para revelar seções com efeito fade-in ao rolar
     const revealSection = () => {
         const scrollY = window.pageYOffset;
         sections.forEach(section => {
@@ -11,26 +13,25 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     
     window.addEventListener('scroll', revealSection);
-    revealSection(); // Para ativar a verificação inicial
+    revealSection(); // Verificação inicial ao carregar a página
 
-    // Adiciona efeito suave ao header ao rolar a página
-    const header = document.querySelector('header');
+    // Efeito suave no header ao rolar a página
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 30) { // Alterado de 50 para 30
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
     });
 
-    // Animação de botões ao passar o mouse
-    const buttons = document.querySelectorAll('.hero button, .call-to-action');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            button.style.transform = 'scale(1.1)';
+    // Animação de escala ao passar o mouse sobre elementos interativos
+    const interactiveElements = document.querySelectorAll('.call-to-action, .badge');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            element.style.transform = 'scale(1.1)';
         });
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = 'scale(1)';
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = 'scale(1)';
         });
     });
 });
