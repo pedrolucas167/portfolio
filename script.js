@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const sections = document.querySelectorAll('.fade-in');
+    const header = document.querySelector('header');
+    const interactiveElements = document.querySelectorAll('.call-to-action, .badge');
     
-    // Função para revelar seções com efeito fade-in ao rolar
+
     const revealSection = () => {
         const scrollY = window.pageYOffset;
         sections.forEach(section => {
@@ -11,27 +13,46 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     };
-    
-    window.addEventListener('scroll', revealSection);
-    revealSection(); // Verificação inicial ao carregar a página
 
-    // Efeito suave no header ao rolar a página
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 30) { // Alterado de 50 para 30
+    // Função para o efeito de scroll no header
+    const handleHeaderScroll = () => {
+        if (window.scrollY > 30) { 
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
+    };
+
+    // Função para o efeito de escala ao passar o mouse
+    const handleMouseEnter = (element) => {
+        element.style.transform = 'scale(1.1)';
+    };
+
+    const handleMouseLeave = (element) => {
+        element.style.transform = 'scale(1)';
+    };
+
+    
+    window.addEventListener('scroll', () => {
+        revealSection();
+        handleHeaderScroll();
+    });
+    revealSection(); // Chama imediatamente para aplicar efeito nas seções ao carregar a página
+
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => handleMouseEnter(element));
+        element.addEventListener('mouseleave', () => handleMouseLeave(element));
     });
 
-    // Animação de escala ao passar o mouse sobre elementos interativos
-    const interactiveElements = document.querySelectorAll('.call-to-action, .badge');
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            element.style.transform = 'scale(1.1)';
-        });
-        element.addEventListener('mouseleave', () => {
-            element.style.transform = 'scale(1)';
-        });
+    // Otimização de scroll com debounce
+    let debounceTimeout;
+    window.addEventListener('scroll', () => {
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
+        }
+        debounceTimeout = setTimeout(() => {
+            revealSection();
+            handleHeaderScroll();
+        }, 100); 
     });
 });

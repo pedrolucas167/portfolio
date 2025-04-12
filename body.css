@@ -1,78 +1,102 @@
-/* Configuração geral */
-html {
-    font-family: 'Inter', sans-serif;
+/* ====================================
+   Variáveis Globais e Reset Básico
+==================================== */
+:root {
+    --font-main: 'Inter', sans-serif;
+    --bg-color: #f5f7f4;
+    --text-color: #272129;
+    --primary-color: #0078d7;
+    --primary-hover: #0056a4;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --header-bg-scrolled: rgba(255, 255, 255, 1);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+    --shadow-heavy: rgba(0, 0, 0, 0.3);
+}
+
+* {
     margin: 0;
     padding: 0;
-    background: #f5f7f4;
-    color: #272129;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: var(--font-main);
+    background: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-}
-
-/* Cabeçalho */
 header {
     position: relative;
-    top: 0;
+    top: 20px; /* Ajusta o espaçamento superior do header */
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px 25px;
+    width: 100%; /* Aproveita toda a largura da tela */
+    background: var(--header-bg);
+    padding: 20px 40px; /* Aumenta o padding para um design mais espaçoso */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px var(--shadow-light); /* Sombra mais suave */
     z-index: 1000;
     transition: all 0.3s ease;
+    border-radius: 10px; /* Arredonda os cantos para um visual mais moderno */
+    margin: 0 auto;
 }
 
+
 header.scrolled {
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
+    background: var(--header-bg-scrolled);
+    box-shadow: 0 6px 15px var(--shadow-medium); 
+    padding: 15px 35px; 
 }
 
 .logo {
     width: 120px;
     height: auto;
+    transition: transform 0.3s ease; 
 }
 
-/* Navegação */
+.logo:hover {
+    transform: scale(1.05); /* Aumenta um pouco a logo quando passar o mouse */
+}
+
 nav {
     display: flex;
-    gap: 12px;
+    gap: 20px; 
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
-    color: #212529;
-    font-weight: 400;
-    font-size: 1em;
-    transition: color 0.3s ease;
+    color: var(--text-color);
+    font-weight: 600; 
+    font-size: 1.1em; 
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 nav a:hover {
     color: rgba(0, 123, 255, 0.7);
+    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
 }
 
-/* Hero/About Section */
+
+
 #about {
     padding: 50px 15px;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7)), 
-                url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=') no-repeat center/cover;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7)),
+        url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=') no-repeat center/cover;
     border-radius: 15px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 20px var(--shadow-heavy);
     color: white;
-    margin: 60px auto 20px;
+    margin: 30px auto 20px; /* Diminui o valor de margem superior para 30px */
     max-width: 1200px;
     transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
+
 
 #about:hover {
     transform: translateY(-5px) scale(1.02);
@@ -84,6 +108,7 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 40px;
+    flex-wrap: wrap;
 }
 
 .text-content {
@@ -92,21 +117,17 @@ nav a:hover {
 }
 
 .text-content h2 {
-    font-size: 3em;
+    font-size: clamp(2rem, 5vw, 3em);
     font-weight: 700;
     margin-bottom: 20px;
     text-align: left;
 }
 
-.text-content p {
-    font-size: 1.4em;
+.text-content p,
+.about-content p {
+    font-size: 1.2em;
     font-weight: 300;
     margin-bottom: 20px;
-}
-
-.about-content p {
-    font-size: 1.1em;
-    line-height: 1.8;
 }
 
 .photo-content {
@@ -118,7 +139,7 @@ nav a:hover {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px var(--shadow-medium);
 }
 
 .photo-caption {
@@ -128,6 +149,9 @@ nav a:hover {
     font-weight: 300;
 }
 
+/* ====================================
+   Destaques e Call to Action
+==================================== */
 .highlight {
     font-size: 1.4em;
     font-weight: bold;
@@ -143,18 +167,20 @@ nav a:hover {
     text-transform: uppercase;
 }
 
-/* Seções Gerais */
+/* ====================================
+   Seções Gerais
+==================================== */
 .section {
     padding: 50px 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     margin: 20px auto;
     max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-light);
 }
 
 .section h2 {
-    font-size: 2.5em;
+    font-size: clamp(1.8rem, 4vw, 2.5em);
     color: #333;
     text-align: center;
     margin-bottom: 20px;
@@ -162,12 +188,12 @@ nav a:hover {
     letter-spacing: 1px;
 }
 
-/* Tech Stack */
+
 #tech-stack p {
     font-size: 1.2em;
     font-weight: bold;
     color: #555;
-    text-align: left; /* Alterado de 'center' para 'left' */
+    text-align: left;
     margin: 10px 0;
 }
 
@@ -176,7 +202,7 @@ nav a:hover {
     padding: 5px 10px;
     font-size: 0.9em;
     color: white;
-    background-color: #0078d7;
+    background-color: var(--primary-color);
     border-radius: 15px;
     margin: 5px;
     text-decoration: none;
@@ -184,18 +210,19 @@ nav a:hover {
 }
 
 .badge:hover {
-    background-color: #0056a4;
+    background-color: var(--primary-hover);
     transform: scale(1.1);
 }
 
-/* Contact */
-#contact {
+/* ====================================
+   Contato e Rodapé
+==================================== */
+#contact,
+footer {
     text-align: center;
 }
 
-/* Footer */
 footer {
-    text-align: center;
     padding: 30px;
     background: #212529;
     color: #fff;
@@ -206,7 +233,9 @@ footer p {
     font-size: 1em;
 }
 
-/* Fade-in Animation */
+/* ====================================
+   Animações
+==================================== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -227,7 +256,9 @@ footer p {
     opacity: 1;
 }
 
-/* Responsividade */
+/* ====================================
+   Responsividade
+==================================== */
 @media (max-width: 1024px) {
     header {
         padding: 12px 20px;
@@ -276,14 +307,7 @@ footer p {
         margin-bottom: 20px;
     }
     .text-content h2 {
-        font-size: 2em;
         text-align: center;
-    }
-    .text-content p {
-        font-size: 1.1em;
-    }
-    .about-content p {
-        font-size: 1em;
     }
     .section {
         padding: 40px 15px;
