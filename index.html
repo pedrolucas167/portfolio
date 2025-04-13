@@ -14,7 +14,6 @@
     </script>
     <link rel="stylesheet" href="body.css">
     <link rel="icon" href="Assets/favicon.png" type="image/x-icon">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -22,7 +21,6 @@
     <script src="script.js"></script>
 </head>
 <body>
-
     <!-- Header -->
     <header>
         <img src="Assets/logo.png" class="logo">
@@ -33,77 +31,78 @@
         </nav>
     </header>
 
-<!-- Unified Hero/About Section -->
-<section id="about" class="section fade-in">
-    <div class="hero-about">
-        <div class="text-content">
-            <h2>bem-vindo(a) ao meu espaço!</h2>
-            <div class="about-content">
-                <p class="highlight">
-                    <strong>Tecnologia é minha linguagem para resolver desafios</strong>
-                </p> 
-                <p>
-                    Sou apaixonado por tecnologia e por criar soluções inteligentes que realmente fazem a diferença. Com <strong>3 anos de experiência</strong> em <strong>suporte técnico</strong> e <strong>implantação de sistemas</strong>, desenvolvi uma base sólida em <strong>infraestrutura</strong>, <strong>troubleshooting</strong> e <strong>visão sistêmica</strong>.
-                </p>
-                <p>
-                    Atualmente, estou em transição para o <strong>desenvolvimento full-stack</strong>, com foco no <strong>backend em Java</strong> e no ecossistema <strong>Spring Boot</strong>. Também me dedico ao <strong>front-end</strong>, explorando <strong>JavaScript</strong>, <strong>Node.js</strong> e boas práticas de usabilidade, com o objetivo de criar experiências completas e fluidas.
-                </p>
-                <p>
-                    Tenho me aprofundado em <strong>desenvolvimento web</strong>, <strong>arquitetura de sistemas</strong> e <strong>código limpo</strong>, sempre buscando performance, escalabilidade e eficiência nas soluções que entrego.
-                </p>
-                <p>
-                    Gosto de aprender, compartilhar e construir com propósito. Acredito que a tecnologia tem o poder de transformar realidades e gerar um impacto positivo por meio de sistemas bem projetados e executados.
-                </p>
-                <p class="call-to-action">
-                    <strong>Vamos construir o futuro juntos?</strong>
-                </p>
+    <!-- Unified Hero/About Section -->
+    <section id="about" class="section fade-in">
+        <div class="hero-about">
+            <div class="text-content">
+                <h2>bem-vindo(a) ao meu espaço!</h2>
+                <div class="about-content">
+                    <p class="highlight">
+                        <strong>Tecnologia é minha linguagem para resolver desafios</strong>
+                    </p> 
+                    <p>
+                        Sou apaixonado por tecnologia e por criar soluções inteligentes que realmente fazem a diferença. Com <strong>3 anos de experiência</strong> em <strong>suporte técnico</strong> e <strong>implantação de sistemas</strong>, desenvolvi uma base sólida em <strong>infraestrutura</strong>, <strong>troubleshooting</strong> e <strong>visão sistêmica</strong>.
+                    </p>
+                    <p>
+                        Atualmente, estou em transição para o <strong>desenvolvimento full-stack</strong>, com foco no <strong>backend em Java</strong> e no ecossistema <strong>Spring Boot</strong>. Também me dedico ao <strong>front-end</strong>, explorando <strong>JavaScript</strong>, <strong>Node.js</strong> e boas práticas de usabilidade, com o objetivo de criar experiências completas e fluidas.
+                    </p>
+                    <p>
+                        Tenho me aprofundado em <strong>desenvolvimento web</strong>, <strong>arquitetura de sistemas</strong> e <strong>código limpo</strong>, sempre buscando performance, escalabilidade e eficiência nas soluções que entrego.
+                    </p>
+                    <p>
+                        Gosto de aprender, compartilhar e construir com propósito. Acredito que a tecnologia tem o poder de transformar realidades e gerar um impacto positivo por meio de sistemas bem projetados e executados.
+                    </p>
+                    <p class="call-to-action">
+                        <strong>Vamos construir o futuro juntos?</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="photo-content">
+                <img src="Assets/pedro.png" alt="Foto de Pedro Marques" class="profile-photo">
+                <p class="photo-caption"><strong>Pedro Marques - Desenvolvedor Full-Stack</strong></p>
             </div>
         </div>
-        <div class="photo-content">
-            <!-- Espaço para a foto -->
-            <img src="Assets/pedro.png" alt="Foto de Pedro Marques" class="profile-photo">
-            <p class="photo-caption"><strong>Pedro Marques - Desenvolvedor Full-Stack</strong></p>
-        </div>
-    </div>
-</section>
+    </section>
 
-    
     <!-- Tech Stack Section -->
     <section id="tech-stack" class="section fade-in">
         <h2>My Tech Stack</h2>
-        <p><strong>Languages & Frameworks:</strong></p>
-        <a href="#" class="badge">Python</a>
-        <a href="#" class="badge">Java</a>
-        <a href="#" class="badge">JavaScript</a>
-        <a href="#" class="badge">Node.js</a>
-        <a href="#" class="badge">React</a>
-        <a href="#" class="badge">Next.js</a>
-        <a href="#" class="badge">TypeScript</a>
-        <a href="#" class="badge">Django</a>
-
-        <p><strong>Tools & Platforms:</strong></p>
-        <a href="#" class="badge">Docker</a>
-        <a href="#" class="badge">Kubernetes</a>
-        <a href="#" class="badge">PostgreSQL</a>
-        <a href="#" class="badge">RabbitMQ</a>
-        <a href="#" class="badge">MongoDB</a>
-        <a href="#" class="badge">GCP</a>
-        <a href="#" class="badge">Linux</a>
-        <a href="#" class="badge">Git</a>
+        <p>Languages & Frameworks:</p>
+        <div class="tech-stack-container">
+            <a href="#" class="badge python" data-tooltip="Versatile language for automation and backend" style="--order: 1;"><i class="fab fa-python"></i> Python</a>
+            <a href="#" class="badge java" data-tooltip="Robust language for enterprise apps" style="--order: 2;"><i class="fab fa-java"></i> Java</a>
+            <a href="#" class="badge javascript" data-tooltip="Dynamic scripting for web" style="--order: 3;"><i class="fab fa-js-square"></i> JavaScript</a>
+            <a href="#" class="badge nodejs" data-tooltip="Server-side JavaScript runtime" style="--order: 4;"><i class="fab fa-node-js"></i> Node.js</a>
+            <a href="#" class="badge react" data-tooltip="UI library for interactive interfaces" style="--order: 5;"><i class="fab fa-react"></i> React</a>
+            <a href="#" class="badge nextjs" data-tooltip="React framework for SSR and SSG" style="--order: 6;"><i class="fab fa-react"></i> Next.js</a>
+            <a href="#" class="badge typescript" data-tooltip="Typed JavaScript for scalability" style="--order: 7;"><i class="fab fa-js"></i> TypeScript</a>
+            <a href="#" class="badge django" data-tooltip="Python framework for rapid development" style="--order: 8;"><i class="fab fa-python"></i> Django</a>
+        </div>
+        <p>Tools & Platforms:</p>
+        <div class="tech-stack-container">
+            <a href="#" class="badge docker" data-tooltip="Containerization for deployment" style="--order: 1;"><i class="fab fa-docker"></i> Docker</a>
+            <a href="#" class="badge kubernetes" data-tooltip="Orchestration for containers" style="--order: 2;"><i class="fab fa-kubernetes"></i> Kubernetes</a>
+            <a href="#" class="badge postgresql" data-tooltip="Relational database for scalability" style="--order: 3;"><i class="fas fa-database"></i> PostgreSQL</a>
+            <a href="#" class="badge rabbitmq" data-tooltip="Message broker for async tasks" style="--order: 4;"><i class="fas fa-server"></i> RabbitMQ</a>
+            <a href="#" class="badge mongodb" data-tooltip="NoSQL database for flexibility" style="--order: 5;"><i class="fas fa-database"></i> MongoDB</a>
+            <a href="#" class="badge gcp" data-tooltip="Cloud platform for infrastructure" style="--order: 6;"><i class="fab fa-google"></i> GCP</a>
+            <a href="#" class="badge linux" data-tooltip="OS for servers and development" style="--order: 7;"><i class="fab fa-linux"></i> Linux</a>
+            <a href="#" class="badge git" data-tooltip="Version control for collaboration" style="--order: 8;"><i class="fab fa-git-alt"></i> Git</a>
+        </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section fade-in">
         <h2>Let’s Connect!</h2>
-        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-            <a href="mailto:pedro_marques_dev@hotmail.com" style="text-decoration: none; color: #d93025;">
-                <i class="fas fa-envelope fa-2x"></i>
+        <div class="contact-container">
+            <a href="mailto:pedro_marques_dev@hotmail.com" class="contact-icon email" data-tooltip="Send me an email">
+                <i class="fas fa-envelope"></i>
             </a>
-            <a href="https://linkedin.com/in/pedrolucas167" target="_blank" style="text-decoration: none; color: #0077b5;">
-                <i class="fab fa-linkedin fa-2x"></i>
-
-            <a href="https://github.com/pedrolucas167" target="_blank" style="text-decoration: none; color: #333;">
-                <i class="fab fa-github fa-2x"></i>
+            <a href="https://linkedin.com/in/pedrolucas167" target="_blank" class="contact-icon linkedin" data-tooltip="Connect on LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/pedrolucas167" target="_blank" class="contact-icon github" data-tooltip="Check my projects">
+                <i class="fab fa-github"></i>
             </a>
         </div>
     </section>
