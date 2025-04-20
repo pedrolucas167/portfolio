@@ -3,16 +3,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const header = document.querySelector('header');
     const interactiveElements = document.querySelectorAll('.call-to-action, .badge');
     
-
-    const revealSection = () => {
-        const scrollY = window.pageYOffset;
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - window.innerHeight / 1.3;
-            if (scrollY > sectionTop) {
-                section.classList.add('visible');
+    // Otimização com IntersectionObserver para o efeito de fade
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
-    };
+    }, { threshold: 0.1 }); // 10% da seção visível para acionar
+
+    sections.forEach(section => observer.observe(section));
 
     // Função para o efeito de scroll no header
     const handleHeaderScroll = () => {
@@ -32,27 +32,23 @@ document.addEventListener('DOMContentLoaded', function () {
         element.style.transform = 'scale(1)';
     };
 
-    
-    window.addEventListener('scroll', () => {
-        revealSection();
-        handleHeaderScroll();
-    });
-    revealSection(); // Chama imediatamente para aplicar efeito nas seções ao carregar a página
+    // Debounce para scroll
+    let debounceTimeout;
+    const handleScroll = () => {
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
+        }
+        debounceTimeout = setTimeout(() => {
+            handleHeaderScroll();
+        }, 100);
+    };
 
+    // Adicionando os ouvintes de eventos
+    window.addEventListener('scroll', handleScroll);
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => handleMouseEnter(element));
         element.addEventListener('mouseleave', () => handleMouseLeave(element));
     });
 
-    // Otimização de scroll com debounce
-    let debounceTimeout;
-    window.addEventListener('scroll', () => {
-        if (debounceTimeout) {
-            clearTimeout(debounceTimeout);
-        }
-        debounceTimeout = setTimeout(() => {
-            revealSection();
-            handleHeaderScroll();
-        }, 100); 
-    });
+    handleHeaderScroll();
 });
