@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Seletores, Elementos e Configurações (Estrutura excelente!) ---
   const selectors = {
-    sections: '.fade-in',
+    sections: 'section[id]', // Um pouco mais específico para seções animadas
     header: 'header',
-    interactive: '.call-to-action, .badge, .project-card, .education-item',
+    interactive: '.project-card, .education-item, .contact-icon',
     themeToggle: '.theme-toggle',
     themeIcon: '.theme-toggle i',
   };
@@ -18,25 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const config = {
     observerThreshold: 0.1,
     scrollThreshold: 30,
-    debounceDelay: 100,
+    debounceDelay: 20, // Reduzido para uma resposta mais rápida da UI
     themeKey: 'themePreference',
   };
 
-  // WeakMap para guardar listeners e evitar poluir DOM
+  // WeakMap para listeners continua sendo uma ótima escolha.
   const interactiveListeners = new WeakMap();
+
+  // --- Funções ---
 
   const applyTheme = (theme) => {
     try {
-      document.body.classList.toggle('dark', theme === 'dark');
-
+      // PONTO 1: Usando o sistema data-theme para alinhar com o CSS customizado.
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // A lógica de ícones e ARIA está perfeita.
       elements.themeIcon.classList.toggle('fa-moon', theme === 'light');
       elements.themeIcon.classList.toggle('fa-sun', theme === 'dark');
-
-      elements.themeToggle.setAttribute(
-        'aria-label',
-        `Alternar modo ${theme === 'light' ? 'escuro' : 'claro'}`
-      );
-
+      elements.themeToggle.setAttribute('aria-label', `Alternar para modo ${theme === 'light' ? 'escuro' : 'claro'}`);
+      
       localStorage.setItem(config.themeKey, theme);
     } catch (error) {
       console.error('Erro ao aplicar tema:', error);
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const toggleTheme = () => {
-    const currentTheme = localStorage.getItem(config.themeKey) || 'light';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     applyTheme(currentTheme === 'light' ? 'dark' : 'light');
   };
 
@@ -59,27 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const setupObserver = () => {
+    if (!('IntersectionObserver' in window)) return null;
     try {
       const observer = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach(({ target, isIntersecting }) => {
-            if (isIntersecting) {
-              target.classList.add('opacity-100', 'translate-y-0');
-              obs.unobserve(target);
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
             }
           });
         },
-        {
-          threshold: config.observerThreshold,
-          rootMargin: '50px',
-        }
+        { threshold: config.observerThreshold }
       );
-
-      elements.sections.forEach((section) => {
-        section.classList.add('opacity-0', 'translate-y-4');
-        observer.observe(section);
-      });
-
+      elements.sections.forEach((section) => observer.observe(section));
       return observer;
     } catch (error) {
       console.error('Erro ao configurar observer:', error);
@@ -94,17 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const addInteractiveEffects = (element) => {
     try {
-      element.setAttribute('aria-interactive', 'true');
-
-      const onHover = () => {
-        element.classList.add('scale-105');
-        element.setAttribute('aria-expanded', 'true');
-      };
-
-      const onLeave = () => {
-        element.classList.remove('scale-105');
-        element.setAttribute('aria-expanded', 'false');
-      };
+      const onHover = () => element.classList.add('is-hovered');
+      const onLeave = () => element.classList.remove('is-hovered');
 
       element.addEventListener('mouseenter', onHover);
       element.addEventListener('mouseleave', onLeave);
@@ -116,16 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Erro ao aplicar efeitos interativos:', error);
     }
   };
-
+  
   const removeInteractiveEffects = (element) => {
     const listeners = interactiveListeners.get(element);
     if (!listeners) return;
-
     element.removeEventListener('mouseenter', listeners.onHover);
     element.removeEventListener('mouseleave', listeners.onLeave);
     element.removeEventListener('focus', listeners.onHover);
     element.removeEventListener('blur', listeners.onLeave);
-
     interactiveListeners.delete(element);
   };
 
@@ -137,44 +120,33 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
+  // --- Inicialização ---
+
   const init = () => {
-    if (!elements.header) console.warn('Elemento de cabeçalho não encontrado');
     if (!elements.themeToggle) console.warn('Botão de alternar tema não encontrado');
 
     loadTheme();
-
     const observer = setupObserver();
-
     elements.interactive.forEach(addInteractiveEffects);
-
+    
     const debouncedUpdateHeader = debounce(updateHeader, config.debounceDelay);
     window.addEventListener('scroll', debouncedUpdateHeader, { passive: true });
 
     if (elements.themeToggle) {
       elements.themeToggle.addEventListener('click', toggleTheme);
-
-      const keypressHandler = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleTheme();
-        }
-      };
-
-      elements.themeToggle.addEventListener('keypress', keypressHandler);
-
-      // Cleanup no unload
-      window.addEventListener('unload', () => {
-        if (observer) observer.disconnect();
-        window.removeEventListener('scroll', debouncedUpdateHeader);
-
-        elements.interactive.forEach(removeInteractiveEffects);
-
-        elements.themeToggle.removeEventListener('click', toggleTheme);
-        elements.themeToggle.removeEventListener('keypress', keypressHandler);
-      });
     }
+    
+    // PONTO 3: Usando 'pagehide' em vez de 'unload' para limpeza.
+    window.addEventListener('pagehide', () => {
+      if (observer) observer.disconnect();
+      window.removeEventListener('scroll', debouncedUpdateHeader);
+      elements.interactive.forEach(removeInteractiveEffects);
+      if (elements.themeToggle) {
+        elements.themeToggle.removeEventListener('click', toggleTheme);
+      }
+    });
 
-    updateHeader();
+    updateHeader(); // Executa uma vez no load
   };
 
   init();
