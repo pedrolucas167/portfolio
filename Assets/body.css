@@ -1,305 +1,308 @@
-/* ==========================================================================
-   1. Definições Globais e Variáveis (Light & Dark Themes)
-   ========================================================================== */
-:root {
-  /* Tipografia */
-  --font-main: 'Inter', sans-serif;
-
-  /* Paleta de Cores (Tema Padrão - Light) */
-  --bg-color: #f5f7f4;
-  --bg-secondary-color: #ffffff;
-  --header-bg: rgba(255, 255, 255, 0.9);
-  --header-bg-scrolled: #ffffff;
-  --text-color: #272129;
-  --text-light: #ffffff;
-  --primary-color: #0078d7;
-  --primary-hover: #0056a4;
-
-  /* Sombras */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.18);
-
-  /* Transição Padrão */
-  --transition-fast: 0.2s ease-out;
-  --transition-medium: 0.3s ease-in-out;
-}
-
-/* Definições para o Tema Escuro */
-[data-theme='dark'] {
-  --bg-color: #121212;
-  --bg-secondary-color: #1e1e1e;
-  --header-bg: rgba(25, 25, 25, 0.9);
-  --header-bg-scrolled: #1e1e1e;
-  --text-color: #e1e1e1;
-  --text-light: #ffffff;
-  --primary-color: #0090ff; /* Cor primária um pouco mais vibrante para o fundo escuro */
-  --primary-hover: #33aaff;
-
-  /* Sombras adaptadas para o modo escuro */
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-/* ==========================================================================
-   2. Reset e Estilos Base
-   ========================================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* Assets/body.css */
 body {
-  font-family: var(--font-main);
-  background: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  overflow-x: hidden;
-  transition: background var(--transition-medium), color var(--transition-medium);
+  font-family: 'Inter', sans-serif;
+  background-color: #f3f4f6; /* bg-gray-100 */
+  color: #111827; /* text-gray-900 */
 }
 
-/* ==========================================================================
-   3. Layout (Header)
-   ========================================================================== */
-header {
-  /* Usando 'sticky' para um header fixo moderno */
-  position: sticky;
-  top: 0;
+.dark body {
+  background-color: #111827; /* dark:bg-gray-900 */
+  color: #f3f4f6; /* dark:text-gray-100 */
+}
+
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+  position: relative;
   width: 100%;
-  z-index: 1000;
-  
+  background-color: #ffffff; /* bg-white */
+  background: rgba(255, 255, 255, 0.95); /* bg-opacity-95 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+  padding: 1rem; /* p-4 */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  padding: 15px 20px;
-  background: var(--header-bg);
-  backdrop-filter: blur(5px); /* Efeito de vidro para navegadores modernos */
-  box-shadow: var(--shadow-sm);
-  
-  /* Transições específicas para performance */
-  transition: background var(--transition-medium), box-shadow var(--transition-medium), padding var(--transition-medium);
+  border-radius: 0 0 0.5rem 0.5rem; /* rounded-b-lg */
+  max-width: 1280px; /* max-w-5xl */
+  margin: 0 auto; /* mx-auto */
+  z-index: 50;
 }
 
-header.scrolled {
-  background: var(--header-bg-scrolled);
-  box-shadow: var(--shadow-md);
-  padding: 10px 20px;
+.dark .header {
+  background-color: #1f2937; /* dark:bg-gray-800 */
+  background: rgba(31, 41, 55, 0.95); /* dark:bg-opacity-95 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* dark:shadow-gray-700 */
 }
 
 .logo {
-  width: 100px;
-  height: auto;
-  transition: transform var(--transition-medium);
+  width: 6rem; /* w-24 */
 }
 
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* hover:scale-105 */
+  transition: transform 0.3s ease; /* transition-transform */
 }
 
-nav {
+.nav {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap; /* flex-wrap */
+  gap: 1rem; /* gap-4 */
   align-items: center;
-  flex-wrap: wrap;
 }
 
-nav a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-weight: 500;
-  font-size: clamp(0.9rem, 2.5vw, 1em);
-  transition: color var(--transition-fast), transform var(--transition-fast);
+.nav-link {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: inherit;
 }
 
-nav a:hover {
-  color: var(--primary-color);
-  transform: scale(1.05);
+.nav-link:hover {
+  color: #2563eb; /* hover:text-blue-600 */
 }
 
-/* ==========================================================================
-   4. Componentes Reutilizáveis (Botões, Cards, Badges)
-   ========================================================================== */
+.dark .nav-link:hover {
+  color: #60a5fa; /* dark:hover:text-blue-400 */
+}
 
-/* --- Componente: Botão de Tema --- */
 .theme-toggle {
+  width: 2.25rem; /* w-9 */
+  height: 2.25rem; /* h-9 */
+  background-color: #2563eb; /* bg-blue-600 */
+  border-radius: 9999px; /* rounded-full */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: var(--primary-color);
-  color: var(--text-light);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: background-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: background-color 0.3s ease; /* transition-all */
 }
 
 .theme-toggle:hover {
-  background: var(--primary-hover);
-  transform: scale(1.1);
-  box-shadow: var(--shadow-md);
+  background-color: #1e40af; /* hover:bg-blue-700 */
 }
 
 .theme-toggle i {
-  font-size: 1.1em;
+  color: #ffffff;
 }
 
-.theme-toggle:focus-visible { /* Melhor acessibilidade */
-  outline: 2px solid var(--primary-hover);
-  outline-offset: 2px;
+.main {
+  max-width: 1280px; /* max-w-5xl */
+  margin: 0 auto; /* mx-auto */
+  padding: 1rem; /* px-4 */
 }
 
-/* --- Componente: Card de Seção (DRY) --- */
-.section-card {
-  background: var(--bg-secondary-color);
-  border-radius: 10px;
-  margin: 20px auto;
-  padding: 40px 15px;
-  max-width: 1000px;
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+.section {
+  padding: 2.5rem 0; /* py-10 */
+  background: linear-gradient(to right, #ffffff, #e5e7eb); /* bg-gradient-to-r from-white to-gray-200 */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+  margin: 1.25rem 0; /* my-5 */
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition-all */
 }
 
-.section-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+.dark .section {
+  background: linear-gradient(to right, #1f2937, #374151); /* dark:from-gray-800 dark:to-gray-700 */
 }
 
-.section-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+.section:hover {
+  transform: translateY(-0.25rem); /* hover:-translate-y-1 */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15); /* hover:shadow-xl */
 }
 
-.section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5em);
-  color: var(--text-color);
+.about-content {
+  display: flex;
+  flex-wrap: wrap; /* flex-wrap */
+  gap: 1.5rem; /* gap-6 */
+}
+
+.about-text {
+  flex: 1 1 250px; /* flex-1 min-w-[250px] */
+}
+
+.about-image {
+  flex: 1 1 200px; /* flex-1 min-w-[200px] */
   text-align: center;
-  margin-bottom: 25px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
 }
 
-/* --- Componente: Badge de Tecnologia --- */
-.tech-stack-container {
+h2 {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+@media (min-width: 640px) {
+  h2 {
+    font-size: 1.875rem; /* sm:text-3xl */
+  }
+}
+
+p {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.call-to-action {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 700; /* font-bold */
+  text-align: center;
+  color: #93c5fd; /* text-blue-300 */
+}
+
+.tech-grid, .project-grid, .education-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  justify-items: center;
-  padding: 15px;
+  grid-template-columns: 1fr; /* grid-cols-1 */
+  gap: 1rem; /* gap-4 */
+  padding: 0 1rem; /* px-4 */
+}
+
+@media (min-width: 640px) {
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+  }
+}
+
+@media (min-width: 768px) {
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 */
+  }
+  .project-grid, .education-grid {
+    grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+  }
+}
+
+@media (min-width: 1024px) {
+  .tech-grid {
+    grid-template-columns: repeat(4, 1fr); /* md:grid-cols-4 */
+  }
+  .project-grid, .education-grid {
+    grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+  }
 }
 
 .badge {
-  /* ... (código do badge mantido, pois já era excelente) ... */
+  background-color: #2563eb; /* bg-blue-600 */
+  color: #ffffff;
+  padding: 0.5rem 1rem; /* py-2 px-4 */
+  border-radius: 9999px; /* rounded-full */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  font-size: clamp(0.9rem, 2.2vw, 1em);
-  font-weight: 500;
-  color: #fff;
-  background: var(--primary-color);
-  border-radius: 20px;
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
-  min-width: 120px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  animation: slideIn 0.5s ease forwards;
-  animation-delay: calc(var(--order) * 0.1s);
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium), background-color var(--transition-medium);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* transition-all */
 }
 
 .badge:hover {
-  transform: scale(1.1) translateY(-3px);
-  box-shadow: var(--shadow-md);
-  background: var(--primary-hover);
+  background-color: #1e40af; /* hover:bg-blue-700 */
+  transform: scale(1.05); /* hover:scale-105 */
 }
 
-/* Cores específicas para as badges (mantidas) */
-.badge.python { background: linear-gradient(135deg, #3776AB, #4B8BBE); }
-.badge.java { background: linear-gradient(135deg, #D32F2F, #E57373); }
-.badge.javascript { background: linear-gradient(135deg, #F7DF1E, #FFEB3B); color: #000; }
-/* ... etc ... */
-
-
-/* ==========================================================================
-   5. Estilos de Seção Específicos
-   ========================================================================== */
-
-/* --- Seção Sobre (About) --- */
-.about-section {
-  padding: 40px 15px;
-  background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7)),
-    url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=') no-repeat center/cover;
-  border-radius: 10px;
-  box-shadow: var(--shadow-lg);
-  color: var(--text-light);
-  margin: 20px auto;
-  max-width: 1000px;
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-}
-.about-section:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+.project-card, .education-item {
+  background-color: #ffffff; /* bg-white */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1rem; /* p-4 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition-all */
 }
 
-/* ... (estilos de conteúdo da seção 'about' mantidos) ... */
-
-/* --- Seção Projetos (Projects) --- */
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  justify-items: center;
+.dark .project-card, .dark .education-item {
+  background-color: #1f2937; /* dark:bg-gray-800 */
 }
 
-.project-card {
-  background: var(--bg-secondary-color);
-  border-radius: 10px;
-  box-shadow: var(--shadow-sm);
-  padding: 20px;
-  width: 100%;
-  max-width: 350px;
+.project-card:hover, .education-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
+  transform: scale(1.05); /* hover:scale-105 */
+}
+
+.project-link {
+  color: #2563eb; /* text-blue-600 */
+  font-weight: 600; /* font-semibold */
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 0.5rem; /* mt-2 */
+  display: inline-block;
+}
+
+.project-link:hover {
+  color: #1e40af; /* hover:text-blue-700 */
+}
+
+.contact-section {
+  max-width: 768px; /* max-w-3xl */
+  margin: 0 auto; /* mx-auto */
+}
+
+.contact-grid {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+  justify-content: center;
+  gap: 1.5rem; /* gap-6 */
+  flex-wrap: wrap; /* flex-wrap */
+  padding: 0 1rem; /* px-4 */
 }
 
-.project-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-5px);
+.contact-icon {
+  background-color: #ffffff; /* bg-white */
+  width: 3rem; /* w-12 */
+  height: 3rem; /* h-12 */
+  border-radius: 9999px; /* rounded-full */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* shadow-md */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition-all */
 }
-/* ... (demais estilos de project-card mantidos) ... */
 
-
-/* ==========================================================================
-   6. Animações
-   ========================================================================== */
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.dark .contact-icon {
+  background-color: #1f2937; /* dark:bg-gray-800 */
 }
+
+.contact-icon:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* hover:shadow-lg */
+  transform: scale(1.1); /* hover:scale-110 */
+}
+
+.footer {
+  padding: 1.5rem 0; /* py-6 */
+  background-color: #111827; /* bg-gray-900 */
+  color: #ffffff;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.875rem; /* text-sm */
+}
+
+/* Estilos específicos para cores dos badges */
+.badge-python { background-color: #3572a5; }
+.badge-python:hover { background-color: #2c5a87; }
+.badge-java { background-color: #dc2626; }
+.badge-java:hover { background-color: #b91c1c; }
+.badge-spring { background-color: #16a34a; }
+.badge-spring:hover { background-color: #15803d; }
+.badge-js { background-color: #facc15; color: #000000; }
+.badge-js:hover { background-color: #eab308; }
+.badge-node { background-color: #10b981; }
+.badge-node:hover { background-color: #059669; }
+.badge-react { background-color: #22d3ee; color: #000000; }
+.badge-react:hover { background-color: #06b6d4; }
+.badge-next { background-color: #000000; }
+.badge-next:hover { background-color: #1f2937; }
+.badge-typescript { background-color: #2563eb; }
+.badge-typescript:hover { background-color: #1e40af; }
+.badge-django { background-color: #15803d; }
+.badge-django:hover { background-color: #14532d; }
+.badge-docker { background-color: #60a5fa; }
+.badge-docker:hover { background-color: #3b82f6; }
+.badge-kubernetes { background-color: #4f46e5; }
+.badge-kubernetes:hover { background-color: #4338ca; }
+.badge-postgresql { background-color: #1e3a8a; }
+.badge-postgresql:hover { background-color: #1e3a8a; }
+.badge-rabbitmq { background-color: #ea580c; }
+.badge-rabbitmq:hover { background-color: #c2410c; }
+.badge-mongodb { background-color: #16a34a; }
+.badge-mongodb:hover { background-color: #15803d; }
+.badge-gcp { background-color: #2563eb; }
+.badge-gcp:hover { background-color: #1e40af; }
+.badge-linux { background-color: #eab308; color: #000000; }
+.badge-linux:hover { background-color: #ca8a04; }
+.badge-git { background-color: #f97316; }
+.badge-git:hover { background-color: #ea580c; }
