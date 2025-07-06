@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-theme="light"> <head>
+<html lang="pt-br" data-theme="light">
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Pedro Marques - Desenvolvedor Full-Stack</title>
-  
-  <link rel="stylesheet" href="Assets/dist/output.css">
-  <link rel="stylesheet" href="Assets/custom.css" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio de Pedro Marques, desenvolvedor full-stack com experiência em Java, Spring Boot, React e Node.js." />
+  <meta name="keywords" content="desenvolvedor, full-stack, Java, Spring Boot, React, Node.js, portfólio" />
+  <title>Pedro Marques - Desenvolvedor Full-Stack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="Assets/body.css" />
+  <link rel="stylesheet" href="Assets/custom.css" />
   <link rel="icon" href="Assets/favicon.png" type="image/x-icon" />
-
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7939D294QK"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,32 +20,30 @@
     gtag('js', new Date());
     gtag('config', 'G-7939D294QK');
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" defer></script>
   <script src="Assets/script.js" defer></script>
 </head>
-
-<body> <header class="sticky top-0 w-full bg-header-bg backdrop-blur-sm shadow-md z-50 transition-all duration-300">
-    <div class="max-w-5xl mx-auto p-4 flex justify-between items-center">
-      <img src="Assets/logo.png" alt="Logotipo do Portfólio" class="w-24 transform hover:scale-105 transition-transform" loading="lazy" decoding="async" />
-      <nav class="flex flex-wrap gap-4 items-center">
-        <a href="#about" class="text-sm font-medium hover:text-primary-color transition-colors">Sobre</a>
-        <a href="#tech-stack" class="text-sm font-medium hover:text-primary-color transition-colors">Tecnologias</a>
-        <a href="#projects" class="text-sm font-medium hover:text-primary-color transition-colors">Projetos</a>
-        <a href="#education" class="text-sm font-medium hover:text-primary-color transition-colors">Educação</a>
-        <a href="#contact" class="text-sm font-medium hover:text-primary-color transition-colors">Contato</a>
+<body class="theme-transition">
+  <header class="header">
+    <div class="header-content">
+      <img src="Assets/logo.png" alt="Logotipo do Portfólio" class="logo" loading="lazy" decoding="async" />
+      <nav class="nav">
+        <a href="#about" class="nav-link">Sobre</a>
+        <a href="#tech-stack" class="nav-link">Tecnologias</a>
+        <a href="#projects" class="nav-link">Projetos</a>
+        <a href="#education" class="nav-link">Educação</a>
+        <a href="#contact" class="nav-link">Contato</a>
         <button class="theme-toggle" aria-label="Alternar modo de cor" title="Alternar modo claro/escuro">
-          <i class="fas fa-moon text-white"></i>
+          <i class="fas fa-moon"></i>
         </button>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 py-5">
-
-    <section id="about" class="about-section">
-      <div class="flex flex-wrap items-center gap-6">
-        <div class="flex-1 min-w-[300px] text-content">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-left">Bem-vindo(a) ao meu espaço!</h2>
+  <main class="main">
+    <section id="about" class="section fade-in">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Bem-vindo(a) ao meu espaço!</h2>
           <p class="highlight">Tecnologia é minha linguagem para resolver desafios.</p>
           <p>
             Sou apaixonado por tecnologia e por criar soluções inteligentes que realmente fazem a diferença. Com <strong>3 anos de experiência</strong> em <strong>suporte técnico</strong> e <strong>implantação de sistemas</strong>, desenvolvi uma base sólida em <strong>infraestrutura</strong>, <strong>troubleshooting</strong> e <strong>visão sistêmica</strong>.
@@ -57,92 +56,88 @@
           </p>
           <p class="call-to-action">Vamos construir o futuro juntos?</p>
         </div>
-        <div class="flex-1 text-center min-w-[200px] photo-content">
+        <div class="about-image">
           <img src="Assets/pedro.png" alt="Foto de Pedro Marques" class="profile-photo" loading="lazy" decoding="async" />
           <p class="photo-caption"><strong>Pedro Marques - Desenvolvedor Full-Stack</strong></p>
         </div>
       </div>
     </section>
 
-    <section id="tech-stack" class="section-card">
-      <h2 class="section-title">Minhas Tecnologias</h2>
-      
-      <p class="font-semibold mb-4 pl-3 border-l-4 border-primary-color">Linguagens e Frameworks:</p>
-      <ul class="tech-stack-container">
+    <section id="tech-stack" class="section fade-in">
+      <h2>Minhas Tecnologias</h2>
+      <p>Linguagens e Frameworks:</p>
+      <ul class="tech-grid" role="list">
         <li>
-          <a href="#" class="badge python" data-tooltip="Linguagem versátil para automação e backend" style="--order: 1">
+          <a href="#" class="badge badge-python" data-tooltip="Linguagem versátil para automação e backend" style="--order: 1" role="listitem">
             <i class="fab fa-python" aria-hidden="true"></i> Python
           </a>
         </li>
         <li>
-          <a href="#" class="badge java" data-tooltip="Linguagem robusta para aplicações corporativas" style="--order: 2">
+          <a href="#" class="badge badge-java" data-tooltip="Linguagem robusta para aplicações corporativas" style="--order: 2" role="listitem">
             <i class="fab fa-java" aria-hidden="true"></i> Java
           </a>
         </li>
-        </ul>
-
-      <p class="font-semibold mb-4 pl-3 border-l-4 border-primary-color mt-6">Ferramentas e Plataformas:</p>
-      <ul class="tech-stack-container">
+      </ul>
+      <p>Ferramentas e Plataformas:</p>
+      <ul class="tech-grid" role="list">
         <li>
-          <a href="#" class="badge docker" data-tooltip="Containerização para implantação" style="--order: 1">
+          <a href="#" class="badge badge-docker" data-tooltip="Containerização para implantação" style="--order: 1" role="listitem">
             <i class="fab fa-docker" aria-hidden="true"></i> Docker
           </a>
         </li>
-        </ul>
+      </ul>
     </section>
 
-    <section id="projects" class="section-card">
-      <h2 class="section-title">Meus Projetos</h2>
-      <p class="text-center mb-6">Conheça alguns dos projetos que desenvolvi, destacando minhas habilidades em desenvolvimento full-stack:</p>
-      <ul class="projects-list">
+    <section id="projects" class="section fade-in">
+      <h2>Meus Projetos</h2>
+      <p>Conheça alguns dos projetos que desenvolvi, destacando minhas habilidades em desenvolvimento full-stack:</p>
+      <ul class="project-grid" role="list">
         <li>
           <article class="project-card">
-            <img src="https://via.placeholder.com/300x200?text=E-Commerce" alt="Tela inicial da Plataforma de E-Commerce" class="w-full h-40 object-cover rounded-md mb-3 shadow-sm" loading="lazy" decoding="async" />
-            <h3 class="project-title">Plataforma de E-Commerce</h3>
-            <p class="project-desc">
+            <img src="Assets/ecommerce.png" alt="Tela inicial da Plataforma de E-Commerce" class="project-image" loading="lazy" decoding="async" />
+            <h3>Plataforma de E-Commerce</h3>
+            <p>
               Uma solução escalável de e-commerce com autenticação de usuários, gerenciamento de produtos e integração de pagamentos.
             </p>
-            <p class="text-sm font-semibold mb-3"><strong>Tecnologias:</strong> Java, Spring Boot, React, PostgreSQL, Docker</p>
+            <p><strong>Tecnologias:</strong> Java, Spring Boot, React, PostgreSQL, Docker</p>
             <div class="project-links">
-                <a href="https://github.com/pedrolucas167/ecommerce" target="_blank" rel="noopener noreferrer" class="project-link">GitHub <i class="fab fa-github"></i></a>
+              <a href="https://github.com/pedrolucas167/ecommerce" target="_blank" rel="noopener noreferrer" class="project-link">GitHub <i class="fab fa-github"></i></a>
             </div>
           </article>
         </li>
-        </ul>
+      </ul>
     </section>
 
-    <section id="education" class="section-card">
-        <h2 class="section-title">Educação e Cursos</h2>
-        <p class="text-center mb-6">Minha formação acadêmica e jornada de aprendizado contínuo:</p>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <li>
-                <article class="bg-bg-secondary-color rounded-lg p-4 shadow-md h-full transition-transform hover:scale-105">
-                    <h3 class="text-lg font-semibold text-primary-color">Bacharelado em Ciência da Computação</h3>
-                    <p class="text-sm"><strong>Universidade:</strong> Universidade Federal do Rio de Janeiro (UFRJ)</p>
-                    <p class="text-sm"><strong>Período:</strong> 2019 - 2023</p>
-                    <p class="text-sm mt-2">Foco em engenharia de software, algoritmos e estruturas de dados.</p>
-                </article>
-            </li>
-            </ul>
+    <section id="education" class="section fade-in">
+      <h2>Educação e Cursos</h2>
+      <p>Minha formação acadêmica e jornada de aprendizado contínuo:</p>
+      <ul class="education-grid" role="list">
+        <li>
+          <article class="education-item">
+            <h3>Bacharelado em Ciência da Computação</h3>
+            <p><strong>Universidade:</strong> Universidade Federal do Rio de Janeiro (UFRJ)</p>
+            <p><strong>Período:</strong> 2019 - 2023</p>
+            <p>Foco em engenharia de software, algoritmos e estruturas de dados.</p>
+          </article>
+        </li>
+      </ul>
     </section>
 
-    <section id="contact" class="section-card max-w-3xl mx-auto">
-        <h2 class="section-title">Entre em Contato!</h2>
-        <ul class="flex justify-center gap-6 flex-wrap" aria-label="Redes de contato">
-            <li>
-                <a href="mailto:pedro_marques_dev@hotmail.com" class="contact-icon" data-tooltip="Envie-me um e-mail">
-                    <i class="fas fa-envelope text-red-500" aria-hidden="true"></i>
-                    <span class="sr-only">E-mail</span>
-                </a>
-            </li>
-            </ul>
+    <section id="contact" class="section contact-section fade-in">
+      <h2>Entre em Contato!</h2>
+      <ul class="contact-grid" role="list" aria-label="Redes de contato">
+        <li>
+          <a href="mailto:pedro_marques_dev@hotmail.com" class="contact-icon" data-tooltip="Envie-me um e-mail" role="listitem">
+            <i class="fas fa-envelope text-red-500" aria-hidden="true"></i>
+            <span class="sr-only">E-mail</span>
+          </a>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-  <footer class="py-6 bg-gray-900 text-white text-center mt-8">
-    <p class="text-sm">© 2025, Pedro Marques - Todos os direitos reservados.</p>
+  <footer class="footer">
+    <p>© 2025, Pedro Marques - Todos os direitos reservados.</p>
   </footer>
-
 </body>
 </html>
