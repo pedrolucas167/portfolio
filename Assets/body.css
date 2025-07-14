@@ -1,4 +1,4 @@
-/* Reset básico e fonte base */
+/* ===== Reset & Base Styles ===== */
 * {
   margin: 0;
   padding: 0;
@@ -37,7 +37,7 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
+/* ===== Header ===== */
 .main-header {
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
@@ -56,6 +56,8 @@ body {
 }
 
 .logo {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
 }
 
@@ -85,21 +87,28 @@ body {
   cursor: pointer;
 }
 
-/* Hero */
+/* ===== Hero Section ===== */
 .hero-section {
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
   text-align: center;
   background: linear-gradient(to right, #6366f1, #8b5cf6);
   color: #fff;
 }
 
 .hero-content h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .highlight {
   color: #e0e7ff;
+}
+
+.typing-text {
+  font-size: 1.25rem;
+  font-weight: 300;
+  min-height: 2rem;
 }
 
 .cta-button {
@@ -118,16 +127,18 @@ body {
   background-color: #e0e7ff;
 }
 
-/* Section base */
+/* ===== Section Layout ===== */
 .section-title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: var(--text);
+  text-align: center;
 }
 
 .section-subtitle {
   color: var(--primary);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .card-layout {
@@ -136,7 +147,7 @@ body {
   margin: 0 auto;
 }
 
-/* Sobre */
+/* ===== About Section ===== */
 .about-container {
   display: flex;
   flex-wrap: wrap;
@@ -160,7 +171,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Tech Stack */
+/* ===== Tech Stack ===== */
 .tech-stack-container {
   display: flex;
   flex-direction: column;
@@ -177,12 +188,14 @@ body {
 .category-title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 1rem;
+  justify-items: center;
 }
 
 .tech-badge {
@@ -200,7 +213,7 @@ body {
   background-color: #c7d2fe;
 }
 
-/* Tooltip */
+/* ===== Tooltip ===== */
 [data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -220,7 +233,7 @@ body {
   transform: translateY(-1rem);
 }
 
-/* Contato */
+/* ===== Contact Section ===== */
 .contact-icons-container {
   display: flex;
   justify-content: center;
@@ -238,7 +251,7 @@ body {
   color: var(--primary);
 }
 
-/* Footer */
+/* ===== Footer ===== */
 .main-footer {
   background: var(--card-bg);
   border-top: 1px solid var(--border);
@@ -262,7 +275,7 @@ body {
   color: var(--primary);
 }
 
-/* Acessibilidade e responsividade */
+/* ===== Acessibilidade ===== */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -275,6 +288,7 @@ body {
   border: 0;
 }
 
+/* ===== Responsividade ===== */
 @media (max-width: 768px) {
   .about-container {
     flex-direction: column;
@@ -297,11 +311,18 @@ body {
   }
 }
 
+/* ===== Animação ===== */
 .fade-in {
   animation: fadeIn 1s ease-in forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
