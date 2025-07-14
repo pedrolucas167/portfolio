@@ -1,41 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Seletores de Elementos ---
-    const header = document.querySelector('.main-header'); // Atualizado
+    const header = document.querySelector('.main-header');
+    const mainContent = document.querySelector('main');
     const fadeInSections = document.querySelectorAll('.fade-in');
     const themeToggle = document.querySelector('.theme-toggle');
     const themeIcon = themeToggle?.querySelector('i');
     const typingElement = document.querySelector('.typing-text');
+    const heroSection = document.querySelector('.hero-section');
 
-    // --- 2. Animação "Fade In" com Intersection Observer (Mais performático) ---
+    // --- 2. Solução para Telas Sobrepostas ---
+    const adjustLayout = () => {
+        // Ajusta o padding do main para o header fixo
+        if (window.innerWidth < 768) {
+            const headerHeight = header.offsetHeight;
+            mainContent.style.paddingTop = `${headerHeight + 20}px`;
+        } else {
+            mainContent.style.paddingTop = '';
+        }
+
+        // Ajusta a altura mínima da hero section
+        if (heroSection) {
+            const viewportHeight = window.innerHeight;
+            const headerHeight = header.offsetHeight;
+            heroSection.style.minHeight = `${viewportHeight - headerHeight}px`;
+        }
+    };
+
+    // Executa no carregamento e no redimensionamento
+    window.addEventListener('load', adjustLayout);
+    window.addEventListener('resize', adjustLayout);
+
+    // --- 3. Animação "Fade In" com Intersection Observer ---
     const sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            // Quando a seção estiver 15% visível na tela
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Opcional: para de observar o elemento após a animação para economizar recursos
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.15 // A animação dispara quando 15% da seção está visível
-    });
+    }, { threshold: 0.15 });
 
-    // Observa cada uma das seções com a classe .fade-in
     fadeInSections.forEach(section => {
         sectionObserver.observe(section);
     });
 
-    // --- 3. Efeito de Scroll no Header ---
+    // --- 4. Efeito de Scroll no Header ---
     const handleHeaderScroll = () => {
         if (header) {
-            header.classList.toggle('scrolled', window.scrollY > 50);
+            const shouldScrolled = window.scrollY > 50;
+            header.classList.toggle('scrolled', shouldScrolled);
+            
+            // Ajuste adicional para evitar sobreposição
+            if (shouldScrolled) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '';
+            }
         }
     };
     
-    // Adiciona o evento de scroll para o header de forma otimizada
     window.addEventListener('scroll', handleHeaderScroll, { passive: true });
 
-    // --- 4. Animação de Digitação ---
+    // --- 5. Animação de Digitação ---
     if (typingElement) {
         const typingPhrases = [
             'Engenheiro de Software.',
@@ -53,18 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const deletingSpeed = 50;
             const pauseTime = 1500;
 
-            // Define o texto atual baseado em estar digitando ou apagando
             typingElement.textContent = isDeleting 
                 ? currentPhrase.substring(0, charIndex--) 
                 : currentPhrase.substring(0, charIndex++);
 
-            // Se terminou de apagar, muda para a próxima frase
             if (isDeleting && charIndex < 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % typingPhrases.length;
             }
 
-            // Se terminou de digitar, inicia o processo de apagar
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
                 setTimeout(type, pauseTime);
@@ -74,15 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
         };
         
-        type(); // Inicia a animação
+        type();
     }
     
-    // --- 5. Alternador de Tema ---
+    // --- 6. Alternador de Tema ---
     if (themeToggle && themeIcon) {
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
             themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
-            localStorage.setItem('theme', theme); // Salva a preferência
+            localStorage.setItem('theme', theme);
+            
+            // Ajuste para garantir visibilidade no tema escuro
+            if (theme === 'dark') {
+                heroSection.style.backgroundColor = '#0f172a';
+            } else {
+                heroSection.style.backgroundColor = '';
+            }
         };
 
         themeToggle.addEventListener('click', () => {
@@ -91,34 +121,75 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTheme(newTheme);
         });
 
-        // Aplica o tema salvo ao carregar a página
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             applyTheme(savedTheme);
         }
     }
 
-    // --- 6. Inicialização do Particles.js ---
-    if (typeof particlesJS !== 'undefined') {
+    // --- 7. Inicialização do Particles.js com ajustes de camada ---
+    if (typeof particlesJS !== 'undefined' && heroSection) {
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "number": { 
+                    "value": 60, 
+                    "density": { 
+                        "enable": true, 
+                        "value_area": 800 
+                    } 
+                },
                 "color": { "value": "#ffffff" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+                "opacity": { 
+                    "value": 0.5, 
+                    "random": true 
+                },
+                "size": { 
+                    "value": 3, 
+                    "random": true 
+                },
+                "line_linked": { 
+                    "enable": false 
+                },
+                "move": { 
+                    "enable": true, 
+                    "speed": 1.5, 
+                    "direction": "none", 
+                    "random": true, 
+                    "straight": false, 
+                    "out_mode": "out" 
+                }
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": false } },
-                "modes": { "repulse": { "distance": 100, "duration": 0.4 } }
+                "events": { 
+                    "onhover": { 
+                        "enable": true, 
+                        "mode": "repulse" 
+                    }, 
+                    "onclick": { 
+                        "enable": false 
+                    } 
+                },
+                "modes": { 
+                    "repulse": { 
+                        "distance": 100, 
+                        "duration": 0.4 
+                    } 
+                }
             },
             "retina_detect": true
         });
+
+        // Garante que o particles-js fique atrás do conteúdo
+        const particlesCanvas = document.querySelector('#particles-js canvas');
+        if (particlesCanvas) {
+            particlesCanvas.style.position = 'absolute';
+            particlesCanvas.style.zIndex = '-1';
+        }
     }
 
-    // Garante que o estado inicial do header está correto
+    // Inicializa os ajustes de layout
+    adjustLayout();
     handleHeaderScroll();
 });
