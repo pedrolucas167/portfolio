@@ -62,10 +62,29 @@ body {
 }
 
 .nav-link:hover {
-  color: #0078d7; /* Substitui hover:text-primary-color (#0078d7 do tailwind.config.js anterior) */
+  color: #0078d7; /* Substitui hover:text-primary-color */
 }
 
 [data-theme="dark"] .nav-link:hover {
+  color: #60a5fa;
+}
+
+.github-link {
+  color: #24292e; /* Cor do GitHub */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .github-link {
+  color: #f3f4f6;
+}
+
+.github-link:hover {
+  color: #0366d6; /* Azul escuro do GitHub em hover */
+}
+
+[data-theme="dark"] .github-link:hover {
   color: #60a5fa;
 }
 
@@ -97,7 +116,7 @@ body {
 
 .section {
   padding: 2.5rem 0; /* Substitui py-5 */
-  background: linear-gradient(to right, #ffffff, #e5e7eb); /* Substitui bg-bg-secondary-color (assumindo gradiente) */
+  background: linear-gradient(to right, #ffffff, #e5e7eb); /* Substitui bg-bg-secondary-color */
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 1.25rem 0;
@@ -161,11 +180,19 @@ body {
   color: #0078d7; /* Substitui text-primary-color */
 }
 
+[data-theme="dark"] .highlight {
+  color: #60a5fa;
+}
+
 .call-to-action {
   font-size: 1.125rem;
   font-weight: 700;
   text-align: center;
   color: #93c5fd;
+}
+
+[data-theme="dark"] .call-to-action {
+  color: #bfdbfe;
 }
 
 p {
@@ -207,28 +234,44 @@ p {
   transform: scale(1.05);
 }
 
-.badge-python {
-  background-color: #3572a5;
+.badge-js {
+  background-color: #f7df1e; /* Cor específica para JavaScript */
 }
 
-.badge-python:hover {
-  background-color: #2c5a87;
+.badge-js:hover {
+  background-color: #e6c617;
 }
 
-.badge-java {
-  background-color: #dc2626;
+.badge-node {
+  background-color: #68a063; /* Cor específica para Node.js */
 }
 
-.badge-java:hover {
-  background-color: #b91c1c;
+.badge-node:hover {
+  background-color: #55854e;
 }
 
-.badge-docker {
-  background-color: #60a5fa;
+.badge-react {
+  background-color: #61dafb; /* Cor específica para React */
 }
 
-.badge-docker:hover {
-  background-color: #3b82f6;
+.badge-react:hover {
+  background-color: #4ac3e3;
+}
+
+.badge-mongodb {
+  background-color: #47a248; /* Cor específica para MongoDB */
+}
+
+.badge-mongodb:hover {
+  background-color: #3a823b;
+}
+
+.badge-vercel {
+  background-color: #000000; /* Cor específica para Vercel */
+}
+
+.badge-vercel:hover {
+  background-color: #333333;
 }
 
 .project-card, .education-item {
@@ -283,6 +326,29 @@ p {
   color: #0056a4;
 }
 
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #24292e; /* Cor do GitHub */
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+[data-theme="dark"] .cta-button {
+  background: #374151;
+}
+
+.cta-button:hover {
+  background: #0366d6; /* Azul escuro do GitHub em hover */
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .cta-button:hover {
+  background: #60a5fa;
+}
+
 .contact-section {
   max-width: 768px;
   margin: 0 auto;
@@ -315,6 +381,36 @@ p {
 .contact-icon:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: scale(1.1);
+}
+
+.floating-github-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #24292e; /* Cor do GitHub */
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .floating-github-button {
+  background: #374151;
+}
+
+.floating-github-button:hover {
+  transform: scale(1.1);
+  background: #0366d6; /* Azul escuro do GitHub em hover */
+}
+
+[data-theme="dark"] .floating-github-button:hover {
+  background: #60a5fa;
 }
 
 .footer {
