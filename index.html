@@ -1,208 +1,125 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-theme="light">
-
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Portfólio de Pedro Marques, desenvolvedor full-stack. Conheça o Messagelove, um projeto de cartões digitais, no GitHub: github.com/pedrolucas167/messagelove" />
-  <meta name="keywords" content="desenvolvedor, full-stack, Messagelove, React, Node.js, GitHub, portfólio" />
-  <title>Pedro Marques - Desenvolvedor Full-Stack</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="body.css" />
-  <link rel="icon" href="Assets/favicon.png" type="image/x-icon" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7939D294QK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-7939D294QK');
-  </script>
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Marques - Software Engineer</title>
+    <link rel="stylesheet" href="body.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <script src="script.js"></script>
 </head>
+<body>
 
-<body class="theme-transition">
-  <header class="header">
-    <div class="header-content">
-      <img src="Assets/logo.png" alt="Logotipo do Portfólio" class="logo" loading="lazy" decoding="async" />
-      <nav class="nav">
-        <a href="#about" class="nav-link">Sobre</a>
-        <a href="#tech-stack" class="nav-link">Tecnologias</a>
-        <a href="#projects" class="nav-link">Messagelove</a>
-        <a href="#education" class="nav-link">Formação</a>
-        <a href="#contact" class="nav-link">Contato</a>
-        <a href="https://github.com/pedrolucas167/messagelove" target="_blank" rel="noopener noreferrer" class="nav-link github-link" aria-label="Explorar Messagelove no GitHub">GitHub</a>
-        <button class="theme-toggle" aria-label="Alternar modo de cor" title="Alternar modo claro/escuro">
-          <i class="fas fa-moon"></i>
-        </button>
-      </nav>
-    </div>
-  </header>
+    <!-- Header -->
+    <header>
+        <img src="Assets/logo.png"  class="logo">
+        <nav>
+            <a href="#about">About</a>
+            <a href="#tech-stack">Tech Stack</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-  <main class="main">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h2>Seja bem-vindo</h2>
+            <p>Conheça meus projetos e realizações.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
     <section id="about" class="section fade-in">
-      <div class="hero-about">
-        <div class="about-text">
-          <h2>Bem-vindo(a) ao meu espaço!</h2>
-          <div class="about-content">
+        <h2 class="section-title">Sobre Mim</h2>
+        <div class="content">
             <p class="highlight">
-              <strong>Tecnologia é minha linguagem para resolver desafios</strong>
+                <strong>Transformando Desafios em Soluções Tecnológicas</strong>
             </p>
             <p>
-              Sou apaixonado por tecnologia e por criar soluções inteligentes que realmente fazem a diferença. Com
-              <strong>3 anos de experiência</strong> em <strong>suporte técnico</strong> e <strong>implantação de
-                sistemas</strong>, desenvolvi uma base sólida em <strong>infraestrutura</strong>,
-              <strong>troubleshooting</strong> e <strong>visão sistêmica</strong>.
+                Com ampla experiência em suporte técnico, administração de servidores e desenvolvimento de software, ofereço soluções ágeis e eficazes para atender às necessidades do mercado. Minha expertise abrange desde suporte ao usuário final até a implementação de metodologias ágeis como <strong>Scrum</strong> e <strong>Kanban</strong>.
             </p>
             <p>
-              No desenvolvimento <strong>full-stack</strong>, criei o <strong>Messagelove</strong>, uma aplicação web para
-              cartões digitais personalizados, utilizando <strong>React</strong>, <strong>Node.js</strong> e
-              <strong>PostgreSQL</strong>. Este projeto reflete minha habilidade em construir soluções completas, com código
-              limpo e documentação detalhada, disponível no meu <a href="https://github.com/pedrolucas167/messagelove" target="_blank" rel="noopener noreferrer" class="github-link">GitHub</a>.
+                Sou especialista em gerenciamento de ambientes corporativos, incluindo <strong>Active Directory</strong>, controle de acessos, <strong>Office 365</strong> e arquitetura de soluções em nuvem. Além disso, domino linguagens como <strong>Python</strong>, <strong>SQL</strong>, <strong>Java</strong> e <strong>Javascript</strong> eficiência e inovação no desenvolvimento de sistemas.
             </p>
             <p>
-              <strong>Sou motivado pelo aprendizado contínuo</strong> e acredito que a tecnologia tem o poder de
-              transformar realidades e gerar impacto positivo por meio de sistemas bem projetados e executados.
+                Seja na resolução de problemas ou na construção de novas soluções, meu compromisso é com a excelência e a evolução tecnológica.
             </p>
-          </div>
+            <p class="call-to-action"> 
+                <strong>Vamos criar o futuro juntos?</strong>
+            </p>
         </div>
-        <div class="about-image">
-          <img src="Assets/pedro.png" alt="Foto de Pedro Marques" class="profile-photo" loading="lazy" decoding="async" />
-          <p class="photo-caption"><strong>Pedro Marques - Desenvolvedor Full-Stack</strong></p>
-        </div>
-      </div>
     </section>
-
+    
+    <!-- Tech Stack Section -->
     <section id="tech-stack" class="section fade-in">
-      <h2>Minhas Tecnologias</h2>
-      <p>Domino as ferramentas usadas no <strong>Messagelove</strong>, um projeto que você pode explorar no meu <a href="https://github.com/pedrolucas167/messagelove" target="_blank" rel="noopener noreferrer" class="github-link">GitHub</a>. Veja abaixo as principais tecnologias:</p>
-      <ul class="tech-grid" role="list">
-        <li>
-          <a href="#" class="badge badge-js" data-tooltip="Script dinâmico para web" style="--order: 1" role="listitem">
-            <i class="fab fa-js-square" aria-hidden="true"></i> JavaScript
-          </a>
-        </li>
-        <li>
-          <a href="#" class="badge badge-node" data-tooltip="Runtime JavaScript para servidor" style="--order: 2"
-            role="listitem">
-            <i class="fab fa-node-js" aria-hidden="true"></i> Node.js
-          </a>
-        </li>
-        <li>
-          <a href="#" class="badge badge-react" data-tooltip="Biblioteca para interfaces interativas" style="--order: 3"
-            role="listitem">
-            <i class="fab fa-react" aria-hidden="true"></i> React
-          </a>
-        </li>
-        <li>
-          <a href="#" class="badge badge-mongodb" data-tooltip="Banco de dados NoSQL flexível" style="--order: 4"
-            role="listitem">
-            <i class="fas fa-database" aria-hidden="true"></i> MongoDB
-          </a>
-        </li>
-        <li>
-          <a href="#" class="badge badge-vercel" data-tooltip="Plataforma para hospedagem e deploy" style="--order: 5"
-            role="listitem">
-            <i class="fas fa-server" aria-hidden="true"></i> Vercel
-          </a>
-        </li>
-      </ul>
+        <h2>My Tech Stack</h2>
+        <p><strong>Languages & Frameworks:</strong></p>
+        <a href="#" class="badge">Python</a>
+        <a href="#" class="badge">Java</a>
+        <a href="#" class="badge">Node.js</a>
+        <a href="#" class="badge">React</a>
+        <a href="#" class="badge">Next.js</a>
+        <a href="#" class="badge">TypeScript</a>
+        <a href="#" class="badge">Django</a>
+
+        <p><strong>Tools & Platforms:</strong></p>
+        <a href="#" class="badge">Docker</a>
+        <a href="#" class="badge">Kubernetes</a>
+        <a href="#" class="badge">PostgreSQL</a>
+        <a href="#" class="badge">RabbitMQ</a>
+        <a href="#" class="badge">MongoDB</a>
+        <a href="#" class="badge">GCP</a>
+        <a href="#" class="badge">Linux</a>
+        <a href="#" class="badge">Git</a>
     </section>
 
-    <section id="projects" class="section fade-in">
-      <h2>Meu Projeto em Destaque</h2>
-      <p>Conheça o <strong>Messagelove</strong>, uma aplicação web que reflete minha paixão por criar soluções criativas e funcionais. Explore o código-fonte, documentação detalhada e demonstrações no meu <a href="https://github.com/pedrolucas167" target="_blank" rel="noopener noreferrer" class="github-link">GitHub</a>.</p>
-      <ul class="project-grid" role="list">
-        <li>
-          <article class="project-card">
-            <video src="Assets/messagelove.mp4" alt="Demonstração do Messagelove" class="project-video" controls muted
-              loop playsinline aria-describedby="messagelove-desc" loading="lazy" decoding="async">
-              <p id="messagelove-desc" class="sr-only">
-                Vídeo demonstrativo da aplicação web Messagelove, que permite criar cartões digitais personalizados.
-              </p>
-            </video>
-            <h3>Messagelove</h3>
-            <p>Uma aplicação web para criar cartões digitais personalizados com mensagens, imagens e música, hospedada no Vercel. O repositório inclui código limpo, README detalhado e instruções para rodar localmente.</p>
-            <p><strong>Tecnologias:</strong> React, Node.js, Express, MongoDB, Vercel</p>
-            <div class="project-links">
-              <a href="https://github.com/pedrolucas167/messagelove" target="_blank" rel="noopener noreferrer"
-                class="project-link cta-button github-link" aria-label="Explorar repositório do Messagelove no GitHub">Explorar no GitHub <i class="fab fa-github"></i></a>
-            </div>
-          </article>
-        </li>
-      </ul>
+    <!-- Contact Section -->
+    <section id="contact" class="section fade-in">
+   <!-- Contact Section -->
+<section id="contact" class="section fade-in">
+    <h2>Let’s Connect!</h2>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        <a href="mailto:poloniosh@outlook.com.br" style="text-decoration: none; color: #d93025;">
+            <i class="fas fa-envelope fa-2x"></i>
+        </a>
+        <a href="https://linkedin.com/in/pedrolucas167" target="_blank" style="text-decoration: none; color: #0077b5;">
+            <i class="fab fa-linkedin fa-2x"></i>
+        </a>
+        <a href="https://www.instagram.com/pedro.lucas.marques/" target="_blank" style="text-decoration: none; color: #e4405f;">
+            <i class="fab fa-instagram fa-2x"></i>
+        </a>
+        <a href="https://github.com/pedrolucas167" target="_blank" style="text-decoration: none; color: #333;">
+            <i class="fab fa-github fa-2x"></i>
+        </a>
+    </div>
+</section>
+
+</section>
+
     </section>
 
-    <section id="education" class="section fade-in">
-      <h2>Formação e Cursos</h2>
-      <p>Minha formação acadêmica e jornada de aprendizado contínuo, que me capacitaram a desenvolver projetos como o <strong>Messagelove</strong>:</p>
-      <ul class="education-grid" role="list">
-        <li>
-          <article class="education-item">
-            <h3>MBA em Engenharia de Software</h3>
-            <p><strong>Instituição:</strong> Impacta Tecnologia</p>
-            <p><strong>Período:</strong> Em andamento</p>
-            <p><strong>Ênfase:</strong> Arquitetura de software, desenvolvimento full-stack e boas práticas aplicadas no Messagelove.</p>
-          </article>
-        </li>
-        <li>
-          <article class="education-item">
-            <h3>Tecnólogo em Ciência de Dados</h3>
-            <p><strong>Instituição:</strong> Universidade Anhanguera</p>
-            <p><strong>Período:</strong> 2023 – 2025</p>
-            <p><strong>Ênfase:</strong> Engenharia de software, algoritmos e estruturas de dados.</p>
-          </article>
-        </li>
-        <li>
-          <article class="education-item">
-            <h3>React e Next.js</h3>
-            <p><strong>Plataforma:</strong> Coursera</p>
-            <p><strong>Concluído:</strong> 2024</p>
-            <p>Desenvolvimento front-end avançado com React e renderização server-side com Next.js, aplicado no Messagelove.</p>
-          </article>
-        </li>
-      </ul>
-    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024, Pedro Marques - All rights reserved.</p>
+    </footer>
 
-    <section id="contact" class="section contact-section fade-in">
-      <h2>Entre em Contato!</h2>
-      <p>Quer explorar meu trabalho? Veja o código-fonte do <strong>Messagelove</strong> e outros projetos no meu <a href="https://github.com/pedrolucas167" target="_blank" rel="noopener noreferrer" class="github-link">GitHub</a>.</p>
-      <ul class="contact-grid" role="list" aria-label="Redes de contato">
-        <li>
-          <a href="mailto:pedro_marques_dev@hotmail.com" class="contact-icon" data-tooltip="Envie-me um e-mail"
-            role="listitem">
-            <i class="fas fa-envelope text-red-500" aria-hidden="true"></i>
-            <span class="sr-only">E-mail</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon"
-            data-tooltip="Conecte-se no LinkedIn" role="listitem">
-            <i class="fab fa-linkedin text-blue-700" aria-hidden="true"></i>
-            <span class="sr-only">LinkedIn</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon"
-            data-tooltip="Veja o Messagelove no GitHub" role="listitem">
-            <i class="fab fa-github" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span>
-          </a>
-        </li>
-      </ul>
-    </section>
-  </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('.fade-in');
+            const revealSection = () => {
+                const scrollY = window.pageYOffset;
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - window.innerHeight / 1.3;
+                    if (scrollY > sectionTop) {
+                        section.classList.add('visible');
+                    }
+                });
+            };
+            window.addEventListener('scroll', revealSection);
+            revealSection();
+        });
+    </script>
 
-  <footer class="footer">
-    <p>© 2025, Pedro Marques - Todos os direitos reservados.</p>
-  </footer>
-
-  <a href="https://github.com/pedrolucas167/messagelove" target="_blank" rel="noopener noreferrer" class="floating-github-button" aria-label="Explorar Messagelove no GitHub">
-    <i class="fab fa-github"></i> Messagelove
-  </a>
 </body>
-
 </html>
