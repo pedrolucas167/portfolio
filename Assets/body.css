@@ -403,132 +403,59 @@ section {
   max-width: 65ch;
 }
 
-/* Tech Stack */
+/* Teck Stack
+
+/* 1. Garantir que as seções estejam visíveis */
+.about-section,
 .tech-stack-section {
-  background-color: var(--color-card);
-}
-
-.tech-category {
-  margin-bottom: var(--space-xl);
-}
-
-.tech-category:last-child {
-  margin-bottom: 0;
-}
-
-.category-title {
-  font-size: 1.3rem;
-  font-weight: var(--font-weight-medium);
-  margin: var(--space-lg) 0 var(--space-md);
-  padding-left: var(--space-sm);
-  border-left: 4px solid var(--color-primary);
-}
-
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  gap: var(--space-md);
-  justify-items: center;
-}
-
-.tech-badge {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  background-color: var(--color-bg);
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition-base);
+  z-index: 20; /* Acima do particles.js */
+  opacity: 1 !important; /* Forçar visibilidade */
+  transform: none !important; /* Remover transformações */
+  visibility: visible !important;
 }
 
-.tech-badge i {
-  font-size: 2rem;
-  transition: var(--transition-base);
-}
-
-.tech-badge:hover {
-  transform: translateY(-5px) scale(1.1);
-  background-color: var(--color-primary);
-}
-
-.tech-badge:hover i {
-  color: white;
-}
-
-/* Tooltips */
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: var(--space-2xs) var(--space-xs);
-  background-color: #27272a;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transition-fast);
+/* 2. Corrigir o container das seções */
+.about-container,
+.tech-stack-container {
+  position: relative;
   z-index: 10;
 }
 
-[data-tooltip]:hover::after {
-  opacity: 1;
-  visibility: visible;
+/* 3. Ajustar o fluxo do layout */
+.card-layout {
+  overflow: visible; /* Permitir que conteúdo vaze se necessário */
+  min-height: auto; /* Não forçar altura mínima */
 }
 
-/* Contato */
-.contact-icons-container {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
-  flex-wrap: wrap;
-  margin-top: var(--space-xl);
+/* 4. Corrigir animações */
+.fade-in {
+  opacity: 1; /* Tornar visível por padrão */
+  transform: translateY(0); /* Posição normal por padrão */
+  transition: none; /* Remover transição inicial */
 }
 
-.contact-icon {
+/* 5. Garantir que o conteúdo não esteja atrás de outros elementos */
+.about-content,
+.tech-grid {
   position: relative;
-  display: flex;
-  font-size: 2.5rem;
-  color: var(--color-text);
-  transition: var(--transition-base);
+  z-index: 15;
 }
 
-.contact-icon:hover {
-  transform: translateY(-5px) scale(1.15);
-}
-
-/* Rodapé */
-.main-footer {
-  background-color: var(--color-footer);
-  color: var(--color-footer-text);
-  padding: var(--space-xl) 0;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.footer-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.back-to-top {
-  color: var(--color-footer-text);
-  font-size: 1.2rem;
-  transition: var(--transition-base);
-}
-
-.back-to-top:hover {
-  color: var(--color-primary);
-  transform: scale(1.1);
+/* 6. Correção específica para mobile */
+@media (max-width: 768px) {
+  .about-section,
+  .tech-stack-section {
+    padding: var(--space-xl) 0;
+  }
+  
+  .about-container {
+    flex-direction: column;
+  }
+  
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
 }
 
 /* ==============================================

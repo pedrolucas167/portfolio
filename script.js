@@ -7,8 +7,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeIcon = themeToggle?.querySelector('i');
     const typingElement = document.querySelector('.typing-text');
     const heroSection = document.querySelector('.hero-section');
+    const aboutSection = document.querySelector('.about-section');
+    const techStackSection = document.querySelector('.tech-stack-section');
 
-    // --- 2. Solução para Telas Sobrepostas ---
+    // --- 2. Solução para Seções Escondidas ---
+    const fixHiddenSections = () => {
+        // Forçar exibição das seções problemáticas
+        if (aboutSection) {
+            aboutSection.style.opacity = '1';
+            aboutSection.style.visibility = 'visible';
+            aboutSection.style.transform = 'none';
+            aboutSection.style.zIndex = '20';
+        }
+
+        if (techStackSection) {
+            techStackSection.style.opacity = '1';
+            techStackSection.style.visibility = 'visible';
+            techStackSection.style.transform = 'none';
+            techStackSection.style.zIndex = '20';
+        }
+
+        // Corrigir z-index dos containers
+        const aboutContainer = document.querySelector('.about-container');
+        const techStackContainer = document.querySelector('.tech-stack-container');
+        
+        if (aboutContainer) aboutContainer.style.zIndex = '10';
+        if (techStackContainer) techStackContainer.style.zIndex = '10';
+    };
+
+    // --- 3. Solução para Telas Sobrepostas ---
     const adjustLayout = () => {
         // Ajusta o padding do main para o header fixo
         if (window.innerWidth < 768) {
@@ -24,44 +51,74 @@ document.addEventListener('DOMContentLoaded', () => {
             const headerHeight = header.offsetHeight;
             heroSection.style.minHeight = `${viewportHeight - headerHeight}px`;
         }
+
+        // Garantir que as seções tenham altura adequada
+        if (aboutSection) aboutSection.style.minHeight = 'auto';
+        if (techStackSection) techStackSection.style.minHeight = 'auto';
     };
 
-    // Executa no carregamento e no redimensionamento
-    window.addEventListener('load', adjustLayout);
-    window.addEventListener('resize', adjustLayout);
-
-    // --- 3. Animação "Fade In" com Intersection Observer ---
+    // --- 4. Animação "Fade In" com Intersection Observer Modificado ---
     const sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                entry.target.style.opacity = '1';
+                entry.target.style.visibility = 'visible';
+                entry.target.style.transform = 'none';
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { 
+        threshold: 0.1, // Threshold mais sensível
+        rootMargin: '0px 0px -50px 0px' // Margem inferior para disparar antes
+    });
 
+    // Observar seções com configuração mais sensível
     fadeInSections.forEach(section => {
+        // Forçar estilos iniciais
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+        section.style.transform = 'none';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        
+        // Observar a seção
         sectionObserver.observe(section);
     });
 
-    // --- 4. Efeito de Scroll no Header ---
+    // --- 5. Efeito de Scroll no Header ---
     const handleHeaderScroll = () => {
         if (header) {
             const shouldScrolled = window.scrollY > 50;
             header.classList.toggle('scrolled', shouldScrolled);
             
-            // Ajuste adicional para evitar sobreposição
             if (shouldScrolled) {
                 header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             } else {
                 header.style.boxShadow = '';
             }
         }
-    };
-    
-    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
 
-    // --- 5. Animação de Digitação ---
+        // Verificar visibilidade das seções durante o scroll
+        if (aboutSection) checkSectionVisibility(aboutSection);
+        if (techStackSection) checkSectionVisibility(techStackSection);
+    };
+
+    // Função para verificar visibilidade das seções
+    const checkSectionVisibility = (section) => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = (
+            rect.top <= window.innerHeight * 0.75 && 
+            rect.bottom >= 0
+        );
+        
+        if (isVisible) {
+            section.style.opacity = '1';
+            section.style.visibility = 'visible';
+            section.style.transform = 'none';
+        }
+    };
+
+    // --- 6. Animação de Digitação ---
     if (typingElement) {
         const typingPhrases = [
             'Engenheiro de Software.',
@@ -100,19 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
     
-    // --- 6. Alternador de Tema ---
+    // --- 7. Alternador de Tema ---
     if (themeToggle && themeIcon) {
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
             themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
             localStorage.setItem('theme', theme);
             
-            // Ajuste para garantir visibilidade no tema escuro
             if (theme === 'dark') {
-                heroSection.style.backgroundColor = '#0f172a';
+                if (heroSection) heroSection.style.backgroundColor = '#0f172a';
             } else {
-                heroSection.style.backgroundColor = '';
+                if (heroSection) heroSection.style.backgroundColor = '';
             }
+
+            // Forçar redesenho das seções após mudança de tema
+            if (aboutSection) aboutSection.style.display = 'none';
+            if (techStackSection) techStackSection.style.display = 'none';
+            
+            setTimeout(() => {
+                if (aboutSection) aboutSection.style.display = '';
+                if (techStackSection) techStackSection.style.display = '';
+            }, 10);
         };
 
         themeToggle.addEventListener('click', () => {
@@ -127,61 +192,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 7. Inicialização do Particles.js com ajustes de camada ---
+    // --- 8. Inicialização do Particles.js ---
     if (typeof particlesJS !== 'undefined' && heroSection) {
         particlesJS('particles-js', {
             "particles": {
-                "number": { 
-                    "value": 60, 
-                    "density": { 
-                        "enable": true, 
-                        "value_area": 800 
-                    } 
-                },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
                 "shape": { "type": "circle" },
-                "opacity": { 
-                    "value": 0.5, 
-                    "random": true 
-                },
-                "size": { 
-                    "value": 3, 
-                    "random": true 
-                },
-                "line_linked": { 
-                    "enable": false 
-                },
-                "move": { 
-                    "enable": true, 
-                    "speed": 1.5, 
-                    "direction": "none", 
-                    "random": true, 
-                    "straight": false, 
-                    "out_mode": "out" 
-                }
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": { 
-                    "onhover": { 
-                        "enable": true, 
-                        "mode": "repulse" 
-                    }, 
-                    "onclick": { 
-                        "enable": false 
-                    } 
-                },
-                "modes": { 
-                    "repulse": { 
-                        "distance": 100, 
-                        "duration": 0.4 
-                    } 
-                }
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": false } },
+                "modes": { "repulse": { "distance": 100, "duration": 0.4 } }
             },
             "retina_detect": true
         });
 
-        // Garante que o particles-js fique atrás do conteúdo
         const particlesCanvas = document.querySelector('#particles-js canvas');
         if (particlesCanvas) {
             particlesCanvas.style.position = 'absolute';
@@ -189,7 +219,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializa os ajustes de layout
+    // --- 9. Inicialização ---
+    fixHiddenSections();
     adjustLayout();
     handleHeaderScroll();
+    
+    // Verificar seções novamente após um pequeno delay
+    setTimeout(() => {
+        if (aboutSection) checkSectionVisibility(aboutSection);
+        if (techStackSection) checkSectionVisibility(techStackSection);
+    }, 500);
+
+    // Disparar evento de scroll inicial
+    window.dispatchEvent(new Event('scroll'));
 });
