@@ -1,125 +1,115 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Pedro Marques, Engenheiro de Software especializado em Python, Java, Javascript e soluções em nuvem.">
     <title>Pedro Marques - Software Engineer</title>
     <link rel="stylesheet" href="Assets/body.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-     <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-
     <!-- Header -->
     <header>
-        <img src="Assets/logo.png"  class="logo">
-        <nav>
-            <a href="#about">About</a>
-            <a href="#tech-stack">Tech Stack</a>
-            <a href="#contact">Contact</a>
+        <img src="Assets/logo.png" class="logo" alt="Pedro Marques Logo">
+        <nav role="navigation">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#tech-stack" class="nav-link">Tech Stack</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div>
-            <h2>Seja bem-vindo</h2>
-            <p>Conheça meus projetos e realizações.</p>
-        </div>
-    </section>
+    <main role="main">
+        <section class="hero section fade-in">
+            <div class="hero-about">
+                <div class="text-content">
+                    <h2>Seja bem-vindo</h2>
+                    <p>Conheça meus projetos e realizações.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="section fade-in">
-        <h2 class="section-title">Sobre Mim</h2>
-        <div class="content">
-            <p class="highlight">
-                <strong>Transformando Desafios em Soluções Tecnológicas</strong>
-            </p>
-            <p>
-                Com ampla experiência em suporte técnico, administração de servidores e desenvolvimento de software, ofereço soluções ágeis e eficazes para atender às necessidades do mercado. Minha expertise abrange desde suporte ao usuário final até a implementação de metodologias ágeis como <strong>Scrum</strong> e <strong>Kanban</strong>.
-            </p>
-            <p>
-                Sou especialista em gerenciamento de ambientes corporativos, incluindo <strong>Active Directory</strong>, controle de acessos, <strong>Office 365</strong> e arquitetura de soluções em nuvem. Além disso, domino linguagens como <strong>Python</strong>, <strong>SQL</strong>, <strong>Java</strong> e <strong>Javascript</strong> eficiência e inovação no desenvolvimento de sistemas.
-            </p>
-            <p>
-                Seja na resolução de problemas ou na construção de novas soluções, meu compromisso é com a excelência e a evolução tecnológica.
-            </p>
-            <p class="call-to-action"> 
-                <strong>Vamos criar o futuro juntos?</strong>
-            </p>
-        </div>
-    </section>
-    
-    <!-- Tech Stack Section -->
-    <section id="tech-stack" class="section fade-in">
-        <h2>My Tech Stack</h2>
-        <p><strong>Languages & Frameworks:</strong></p>
-        <a href="#" class="badge">Python</a>
-        <a href="#" class="badge">Java</a>
-        <a href="#" class="badge">Node.js</a>
-        <a href="#" class="badge">React</a>
-        <a href="#" class="badge">Next.js</a>
-        <a href="#" class="badge">TypeScript</a>
-        <a href="#" class="badge">Django</a>
+        <!-- About Section -->
+        <section id="about" class="section fade-in">
+            <div class="hero-about">
+                <div class="text-content">
+                    <h2 class="section-title">Sobre Mim</h2>
+                    <p class="highlight">
+                        <strong>Transformando Desafios em Soluções Tecnológicas</strong>
+                    </p>
+                    <p>
+                        Com ampla experiência em suporte técnico, administração de servidores e desenvolvimento de software, ofereço soluções ágeis e eficazes para atender às necessidades do mercado. Minha expertise abrange desde suporte ao usuário final até a implementação de metodologias ágeis como <strong>Scrum</strong> e <strong>Kanban</strong>.
+                    </p>
+                    <p>
+                        Sou especialista em gerenciamento de ambientes corporativos, incluindo <strong>Active Directory</strong>, controle de acessos, <strong>Office 365</strong> e arquitetura de soluções em nuvem. Além disso, domino linguagens como <strong>Python</strong>, <strong>SQL</strong>, <strong>Java</strong> e <strong>Javascript</strong> eficiência e inovação no desenvolvimento de sistemas.
+                    </p>
+                    <p>
+                        Seja na resolução de problemas ou na construção de novas soluções, meu compromisso é com a excelência e a evolução tecnológica.
+                    </p>
+                    <p class="call-to-action">
+                        <strong>Vamos criar o futuro juntos?</strong>
+                    </p>
+                </div>
+                <div class="photo-content">
+                    <img src="Assets/profile.jpg" class="profile-photo" alt="Pedro Marques" loading="lazy">
+                    <p class="photo-caption">Pedro Marques</p>
+                </div>
+            </div>
+        </section>
 
-        <p><strong>Tools & Platforms:</strong></p>
-        <a href="#" class="badge">Docker</a>
-        <a href="#" class="badge">Kubernetes</a>
-        <a href="#" class="badge">PostgreSQL</a>
-        <a href="#" class="badge">RabbitMQ</a>
-        <a href="#" class="badge">MongoDB</a>
-        <a href="#" class="badge">GCP</a>
-        <a href="#" class="badge">Linux</a>
-        <a href="#" class="badge">Git</a>
-    </section>
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" class="section fade-in">
+            <h2 class="section-title">My Tech Stack</h2>
+            <div class="tech-stack-container">
+                <p><strong>Languages & Frameworks:</strong></p>
+                <a href="#" class="badge python" data-tooltip="Python" style="--order: 1;"><i class="fab fa-python"></i> Python</a>
+                <a href="#" class="badge java" data-tooltip="Java" style="--order: 2;"><i class="fab fa-java"></i> Java</a>
+                <a href="#" class="badge nodejs" data-tooltip="Node.js" style="--order: 3;"><i class="fab fa-node-js"></i> Node.js</a>
+                <a href="#" class="badge react" data-tooltip="React" style="--order: 4;"><i class="fab fa-react"></i> React</a>
+                <a href="#" class="badge nextjs" data-tooltip="Next.js" style="--order: 5;"><i class="fab fa-js"></i> Next.js</a>
+                <a href="#" class="badge typescript" data-tooltip="TypeScript" style="--order: 6;"><i class="fab fa-js-square"></i> TypeScript</a>
+                <a href="#" class="badge django" data-tooltip="Django" style="--order: 7;"><i class="fab fa-python"></i> Django</a>
+                <p><strong>Tools & Platforms:</strong></p>
+                <a href="#" class="badge docker" data-tooltip="Docker" style="--order: 8;"><i class="fab fa-docker"></i> Docker</a>
+                <a href="#" class="badge kubernetes" data-tooltip="Kubernetes" style="--order: 9;"><i class="fab fa-kubernetes"></i> Kubernetes</a>
+                <a href="#" class="badge postgresql" data-tooltip="PostgreSQL" style="--order: 10;"><i class="fas fa-database"></i> PostgreSQL</a>
+                <a href="#" class="badge rabbitmq" data-tooltip="RabbitMQ" style="--order: 11;"><i class="fas fa-server"></i> RabbitMQ</a>
+                <a href="#" class="badge mongodb" data-tooltip="MongoDB" style="--order: 12;"><i class="fas fa-database"></i> MongoDB</a>
+                <a href="#" class="badge gcp" data-tooltip="Google Cloud Platform" style="--order: 13;"><i class="fas fa-cloud"></i> GCP</a>
+                <a href="#" class="badge linux" data-tooltip="Linux" style="--order: 14;"><i class="fab fa-linux"></i> Linux</a>
+                <a href="#" class="badge git" data-tooltip="Git" style="--order: 15;"><i class="fab fa-git-alt"></i> Git</a>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section fade-in">
-   <!-- Contact Section -->
-<section id="contact" class="section fade-in">
-    <h2>Let’s Connect!</h2>
-    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-        <a href="mailto:poloniosh@outlook.com.br" style="text-decoration: none; color: #d93025;">
-            <i class="fas fa-envelope fa-2x"></i>
-        </a>
-        <a href="https://linkedin.com/in/pedrolucas167" target="_blank" style="text-decoration: none; color: #0077b5;">
-            <i class="fab fa-linkedin fa-2x"></i>
-        </a>
-        <a href="https://www.instagram.com/pedro.lucas.marques/" target="_blank" style="text-decoration: none; color: #e4405f;">
-            <i class="fab fa-instagram fa-2x"></i>
-        </a>
-        <a href="https://github.com/pedrolucas167" target="_blank" style="text-decoration: none; color: #333;">
-            <i class="fab fa-github fa-2x"></i>
-        </a>
-    </div>
-</section>
-
-</section>
-
-    </section>
+        <!-- Contact Section -->
+        <section id="contact" class="section fade-in">
+            <h2 class="section-title">Let’s Connect!</h2>
+            <div class="contact-container">
+                <a href="mailto:poloniosh@outlook.com.br" class="contact-icon email" data-tooltip="Email" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/pedrolucas167" target="_blank" class="contact-icon linkedin" data-tooltip="LinkedIn" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/pedro.lucas.marques/" target="_blank" class="contact-icon instagram" data-tooltip="Instagram" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/pedrolucas167" target="_blank" class="contact-icon github" data-tooltip="GitHub" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024, Pedro Marques - All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const sections = document.querySelectorAll('.fade-in');
-            const revealSection = () => {
-                const scrollY = window.pageYOffset;
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - window.innerHeight / 1.3;
-                    if (scrollY > sectionTop) {
-                        section.classList.add('visible');
-                    }
-                });
-            };
-            window.addEventListener('scroll', revealSection);
-            revealSection();
-        });
-    </script>
-
+        <p>© 2024, Pedro Marques - All rights reserved.</p>
+    </p>
 </body>
 </html>

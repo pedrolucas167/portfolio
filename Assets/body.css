@@ -52,7 +52,7 @@ html, body {
    Header
 ==================================== */
 header {
-    position: fixed;
+    position: relative;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -124,7 +124,7 @@ nav {
     padding: 80px 20px;
     text-align: center;
     background: var(--section-bg);
-    margin: 120px auto 20px;
+    margin: 20px auto;
     max-width: 1200px;
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-light);
@@ -161,12 +161,11 @@ nav {
 ==================================== */
 #about {
     padding: 50px 15px;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7)),
-        url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=') no-repeat center/cover;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.7), rgba(0, 255, 123, 0.7));
     border-radius: 15px;
     box-shadow: 0 6px 20px var(--shadow-heavy);
     color: white;
-    margin: 30px auto;
+    margin: 20px auto;
     max-width: 1200px;
     transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
@@ -232,6 +231,11 @@ nav {
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
+    color: #fff;
+}
+
+[data-theme="dark"] .highlight {
+    color: #e0e0e0;
 }
 
 .call-to-action {
@@ -240,6 +244,11 @@ nav {
     font-size: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
+    color: #fff;
+}
+
+[data-theme="dark"] .call-to-action {
+    color: #e0e0e0;
 }
 
 /* ====================================
@@ -249,7 +258,7 @@ nav {
     padding: 60px 20px;
     background: linear-gradient(135deg, #ffffff, var(--tech-bg));
     border-radius: 15px;
-    margin: 30px auto;
+    margin: 20px auto;
     max-width: 1200px;
     box-shadow: 0 6px 20px var(--shadow-medium);
     position: relative;
@@ -324,6 +333,16 @@ nav {
     animation-delay: calc(var(--order) * 0.1s);
 }
 
+.badge i {
+    margin-right: 8px;
+    font-size: 1.3em;
+    transition: transform 0.3s ease;
+}
+
+.badge:hover i {
+    transform: scale(1.2);
+}
+
 .badge::before {
     content: '';
     position: absolute;
@@ -393,7 +412,7 @@ nav {
     padding: 60px 20px;
     background: linear-gradient(135deg, #ffffff, var(--tech-bg));
     border-radius: 15px;
-    margin: 30px auto;
+    margin: 20px auto;
     max-width: 800px;
     box-shadow: 0 6px 20px var(--shadow-medium);
     position: relative;
@@ -590,6 +609,9 @@ footer p {
         font-size: 1em;
         min-width: 120px;
     }
+    .badge i {
+        font-size: 1.2em;
+    }
     .contact-container {
         gap: 20px;
     }
@@ -616,8 +638,8 @@ footer p {
         align-items: center;
         gap: 10px;
     }
-    .hero {
-        margin-top: 100px;
+    .hero, #about, #tech-stack, #contact {
+        padding: 40px 15px;
     }
     .hero-about {
         flex-direction: column;
@@ -638,6 +660,9 @@ footer p {
         padding: 10px 20px;
         font-size: 1em;
         min-width: 120px;
+    }
+    .badge i {
+        font-size: 1.2em;
     }
     .badge::after {
         font-size: 0.8em;
@@ -689,6 +714,9 @@ footer p {
         padding: 8px 16px;
         font-size: 0.9em;
         min-width: 100px;
+    }
+    .badge i {
+        font-size: 1.1em;
     }
     .badge::after {
         font-size: 0.7em;
