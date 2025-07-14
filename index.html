@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedro Marques - Engenheiro de Software</title>
+    <meta name="description" content="Portfólio de Pedro Marques, Engenheiro de Software especializado em desenvolvimento full stack e soluções em nuvem">
+    <meta name="keywords" content="Engenheiro de Software, Desenvolvedor, Python, Java, JavaScript, Cloud, Pedro Marques">
+    <meta name="author" content="Pedro Marques">
+    <title>Pedro Marques - Engenheiro de Software | Desenvolvedor Full Stack</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -11,82 +14,106 @@
     <link rel="stylesheet" href="Assets/body.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
     <header class="main-header">
-        <a href="#" class="logo-link">
-            <img src="Assets/logo.png" class="logo" alt="Logo de Pedro Marques">
-        </a>
-        <nav class="main-nav" role="navigation" aria-label="Navegação principal">
-            <a href="#about" class="nav-link">Sobre</a>
-            <a href="#tech-stack" class="nav-link">Tech Stack</a>
-            <a href="#contact" class="nav-link">Contato</a>
-            <button class="theme-toggle" aria-label="Alternar tema">
-                <i class="fas fa-moon" aria-hidden="true"></i>
+        <div class="header-container">
+            <a href="#" class="logo-link" aria-label="Página inicial - Pedro Marques">
+                <img src="Assets/logo.png" class="logo" alt="Logo de Pedro Marques" width="50" height="50">
+            </a>
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation">
+                <span class="sr-only">Menu</span>
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
-        </nav>
+            <nav class="main-nav" id="primary-navigation" role="navigation" aria-label="Navegação principal">
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">Sobre</a></li>
+                    <li><a href="#tech-stack" class="nav-link">Tech Stack</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                    <li>
+                        <button class="theme-toggle" aria-label="Alternar tema" aria-pressed="false">
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                            <span class="sr-only">Alternar tema claro/escuro</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main role="main">
-
-        <section class="hero-section" id="particles-js">
+    <main id="main-content" role="main">
+        <section class="hero-section" id="particles-js" aria-labelledby="hero-heading">
             <div class="hero-content fade-in">
-                <h1>Olá, eu sou <span class="highlight">Pedro Marques</span></h1>
-                <p class="typing-text"></p>
+                <h1 id="hero-heading">Olá, eu sou <span class="highlight">Pedro Marques</span></h1>
+                <p class="typing-text" aria-live="polite"></p>
                 <a href="#contact" class="cta-button">Entre em Contato</a>
             </div>
         </section>
 
-        <section id="about" class="about-section card-layout fade-in">
+        <article id="about" class="about-section card-layout fade-in" aria-labelledby="about-heading">
             <div class="about-container">
                 <div class="about-image">
-                    <img src="Assets/pedro.png" class="profile-photo" alt="Foto de perfil de Pedro Marques" loading="lazy">
+                    <img src="Assets/pedro.png" class="profile-photo" alt="Foto de perfil de Pedro Marques" loading="lazy" width="300" height="300">
                 </div>
                 <div class="about-content">
-                    <h2 class="section-title">Sobre Mim</h2>
-                    <p class="section-subtitle">Transformando Desafios em Soluções de Software</p>
-                    <p>Como Engenheiro de Software, sou apaixonado por criar soluções ágeis e inovadoras. Com experiência que vai do suporte técnico à administração de servidores e ao desenvolvimento full stack, possuo um domínio prático de ferramentas como <strong>Active Directory</strong> e arquiteturas em nuvem.</p>
-                    <p>Minhas habilidades em <strong>Python</strong>, <strong>Java</strong>, <strong>JavaScript</strong>, e metodologias ágeis como <strong>Scrum</strong> e <strong>Kanban</strong>, me permitem entregar projetos de alta qualidade, sempre com foco em performance e inovação.</p>
+                    <header>
+                        <h2 id="about-heading" class="section-title">Sobre Mim</h2>
+                        <p class="section-subtitle">Transformando Desafios em Soluções de Software</p>
+                    </header>
+                    <div class="about-text">
+                        <p>Como Engenheiro de Software, sou apaixonado por criar soluções ágeis e inovadoras. Com experiência que vai do suporte técnico à administração de servidores e ao desenvolvimento full stack, possuo um domínio prático de ferramentas como <strong>Active Directory</strong> e arquiteturas em nuvem.</p>
+                        <p>Minhas habilidades em <strong>Python</strong>, <strong>Java</strong>, <strong>JavaScript</strong>, e metodologias ágeis como <strong>Scrum</strong> e <strong>Kanban</strong>, me permitem entregar projetos de alta qualidade, sempre com foco em performance e inovação.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </article>
 
-        <section id="tech-stack" class="tech-stack-section card-layout fade-in">
-            <h2 class="section-title">Minha Stack Tecnológica</h2>
+        <section id="tech-stack" class="tech-stack-section card-layout fade-in" aria-labelledby="tech-stack-heading">
+            <h2 id="tech-stack-heading" class="section-title">Minha Stack Tecnológica</h2>
             <div class="tech-stack-container">
-                <h3 class="category-title">Linguagens & Frameworks</h3>
-                <div class="tech-grid">
-                    <div class="tech-badge" data-tooltip="Python"><i class="fab fa-python"></i></div>
-                    <div class="tech-badge" data-tooltip="Java"><i class="fab fa-java"></i></div>
-                    <div class="tech-badge" data-tooltip="Node.js"><i class="fab fa-node-js"></i></div>
-                    <div class="tech-badge" data-tooltip="React"><i class="fab fa-react"></i></div>
-                    <div class="tech-badge" data-tooltip="TypeScript"><i class="fab fa-js-square"></i></div>
-                    <div class="tech-badge" data-tooltip="Django"><i class="fab fa-python"></i></div>
-                </div>
-                <h3 class="category-title">Ferramentas & Plataformas</h3>
-                <div class="tech-grid">
-                    <div class="tech-badge" data-tooltip="Docker"><i class="fab fa-docker"></i></div>
-                    <div class="tech-badge" data-tooltip="Kubernetes"><i class="fab fa-kubernetes"></i></div>
-                    <div class="tech-badge" data-tooltip="PostgreSQL"><i class="fas fa-database"></i></div>
-                    <div class="tech-badge" data-tooltip="MongoDB"><i class="fas fa-database"></i></div>
-                    <div class="tech-badge" data-tooltip="GCP"><i class="fas fa-cloud"></i></div>
-                    <div class="tech-badge" data-tooltip="Git"><i class="fab fa-git-alt"></i></div>
-                </div>
+                <article class="tech-category" aria-labelledby="languages-heading">
+                    <h3 id="languages-heading" class="category-title">Linguagens & Frameworks</h3>
+                    <div class="tech-grid" role="list">
+                        <div class="tech-badge" role="listitem" data-tooltip="Python" aria-label="Python"><i class="fab fa-python"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="Java" aria-label="Java"><i class="fab fa-java"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="Node.js" aria-label="Node.js"><i class="fab fa-node-js"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="React" aria-label="React"><i class="fab fa-react"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="TypeScript" aria-label="TypeScript"><i class="fab fa-js-square"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="Django" aria-label="Django"><i class="fab fa-python"></i></div>
+                    </div>
+                </article>
+                <article class="tech-category" aria-labelledby="tools-heading">
+                    <h3 id="tools-heading" class="category-title">Ferramentas & Plataformas</h3>
+                    <div class="tech-grid" role="list">
+                        <div class="tech-badge" role="listitem" data-tooltip="Docker" aria-label="Docker"><i class="fab fa-docker"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="Kubernetes" aria-label="Kubernetes"><i class="fab fa-kubernetes"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="PostgreSQL" aria-label="PostgreSQL"><i class="fas fa-database"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="MongoDB" aria-label="MongoDB"><i class="fas fa-database"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="GCP" aria-label="Google Cloud Platform"><i class="fas fa-cloud"></i></div>
+                        <div class="tech-badge" role="listitem" data-tooltip="Git" aria-label="Git"><i class="fab fa-git-alt"></i></div>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <section id="contact" class="contact-section card-layout fade-in">
-            <h2 class="section-title">Vamos Conectar!</h2>
-            <div class="contact-icons-container">
-                <a href="mailto:poloniosh@outlook.com.br" class="contact-icon" data-tooltip="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://linkedin.com/in/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/pedro.lucas.marques/" target="_blank" rel="noopener noreferrer" class="contact-icon" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+        <section id="contact" class="contact-section card-layout fade-in" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="section-title">Vamos Conectar!</h2>
+            <div class="contact-icons-container" role="list">
+                <a href="mailto:poloniosh@outlook.com.br" class="contact-icon" role="listitem" data-tooltip="Email" aria-label="Enviar email"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon" role="listitem" data-tooltip="LinkedIn" aria-label="Perfil no LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/pedro.lucas.marques/" target="_blank" rel="noopener noreferrer" class="contact-icon" role="listitem" data-tooltip="Instagram" aria-label="Perfil no Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/pedrolucas167" target="_blank" rel="noopener noreferrer" class="contact-icon" role="listitem" data-tooltip="GitHub" aria-label="Perfil no GitHub"><i class="fab fa-github"></i></a>
             </div>
         </section>
     </main>
 
-    <footer class="main-footer">
-        <p>&copy; 2024, Pedro Marques - Todos os direitos reservados.</p>
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-container">
+            <p>&copy; <span id="current-year">2024</span>, Pedro Marques - Todos os direitos reservados.</p>
+            <a href="#" class="back-to-top" aria-label="Voltar ao topo da página">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
