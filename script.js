@@ -1,9 +1,7 @@
-// Assets/script.js
 document.addEventListener('DOMContentLoaded', () => {
+  // Alternar tema
   const themeToggle = document.querySelector('.theme-toggle');
   const html = document.documentElement;
-
-  // Alternar tema
   themeToggle.addEventListener('click', () => {
     const isDark = html.getAttribute('data-theme') === 'dark';
     html.setAttribute('data-theme', isDark ? 'light' : 'dark');
@@ -29,4 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, appearOptions);
   faders.forEach(fader => appearOnScroll.observe(fader));
+
+  // Rastrear cliques no GitHub
+  document.querySelectorAll('.github-link[href*="messagelove"]').forEach(link => {
+    link.addEventListener('click', () => {
+      gtag('event', 'click_messagelove_github', {
+        'event_category': 'GitHub Links',
+        'event_label': 'Messagelove Repository'
+      });
+    });
+  });
 });

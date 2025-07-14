@@ -1,13 +1,14 @@
-/* Assets/body.css */
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f3f4f6; /* Substitui bg-gray-100 */
-  color: #111827; /* Substitui text-gray-900 */
+  background-color: #f3f4f6;
+  color: #111827;
+  margin: 0;
+  line-height: 1.6;
 }
 
 [data-theme="dark"] body {
-  background-color: #111827; /* Substitui dark:bg-gray-900 */
-  color: #f3f4f6; /* Substitui dark:text-gray-100 */
+  background-color: #111827;
+  color: #f3f4f6;
 }
 
 .theme-transition {
@@ -18,51 +19,53 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: #ffffff; /* Substitui bg-header-bg (assumindo branco) */
-  backdrop-filter: blur(4px); /* Substitui backdrop-blur-sm */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Substitui shadow-md */
+  background-color: #ffffff;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 50;
   transition: background-color 0.3s ease;
 }
 
 [data-theme="dark"] .header {
-  background-color: #1f2937; /* Substitui dark:bg-gray-800 */
+  background-color: #1f2937;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .header-content {
-  max-width: 1280px; /* Substitui max-w-5xl */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem; /* Substitui p-4 */
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  width: 6rem; /* Substitui w-24 */
+  width: 5rem;
+  height: auto;
 }
 
 .logo:hover {
-  transform: scale(1.05); /* Substitui hover:scale-105 */
+  transform: scale(1.05);
   transition: transform 0.3s ease;
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* Substitui gap-4 */
+  gap: 1.25rem;
   align-items: center;
 }
 
 .nav-link {
-  font-size: 0.875rem; /* Substitui text-sm */
-  font-weight: 500; /* Substitui font-medium */
+  font-size: 1rem;
+  font-weight: 500;
   color: inherit;
+  text-decoration: none;
 }
 
 .nav-link:hover {
-  color: #0078d7; /* Substitui hover:text-primary-color */
+  color: #0078d7;
 }
 
 [data-theme="dark"] .nav-link:hover {
@@ -70,7 +73,7 @@ body {
 }
 
 .github-link {
-  color: #24292e; /* Cor do GitHub */
+  color: #24292e;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -81,7 +84,7 @@ body {
 }
 
 .github-link:hover {
-  color: #0366d6; /* Azul escuro do GitHub em hover */
+  color: #0366d6;
 }
 
 [data-theme="dark"] .github-link:hover {
@@ -89,10 +92,10 @@ body {
 }
 
 .theme-toggle {
-  width: 2.25rem;
-  height: 2.25rem;
-  background-color: #0078d7; /* Substitui bg-primary-color */
-  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  background-color: #0078d7;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,26 +104,26 @@ body {
 }
 
 .theme-toggle:hover {
-  background-color: #0056a4; /* Substitui hover:bg-primaryHover */
+  background-color: #0056a4;
 }
 
 .theme-toggle i {
   color: #ffffff;
+  font-size: 1rem;
 }
 
 .main {
-  max-width: 1280px; /* Substitui max-w-5xl */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem; /* Substitui px-4 py-5 */
+  padding: 1.5rem;
 }
 
 .section {
-  padding: 2.5rem 0; /* Substitui py-5 */
-  background: linear-gradient(to right, #ffffff, #e5e7eb); /* Substitui bg-bg-secondary-color */
+  padding: 2rem 0;
+  background: linear-gradient(to right, #ffffff, #e5e7eb);
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1.25rem 0;
-  transform: translateY(0);
+  margin: 1.5rem 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -134,50 +137,57 @@ body {
 }
 
 .section-title {
-  font-size: 1.5rem; /* Substitui text-2xl */
-  font-weight: 700; /* Substitui font-bold */
-  margin-bottom: 1.5rem; /* Substitui mb-6 */
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .section-title {
-    font-size: 1.875rem; /* Substitui sm:text-3xl */
+    font-size: 2rem;
   }
 }
 
-.about-content {
+.hero-about {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem; /* Substitui gap-6 */
+  gap: 2rem;
+  align-items: center;
 }
 
 .about-text {
-  flex: 1 1 300px; /* Substitui flex-1 min-w-[300px] */
+  flex: 1 1 60%;
+  min-width: 280px;
 }
 
 .about-image {
-  flex: 1 1 200px; /* Substitui flex-1 min-w-[200px] */
+  flex: 1 1 35%;
+  min-width: 200px;
   text-align: center;
 }
 
 .profile-photo {
   width: 100%;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .photo-caption {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .highlight {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
-  color: #0078d7; /* Substitui text-primary-color */
+  color: #0078d7;
 }
 
 [data-theme="dark"] .highlight {
@@ -197,6 +207,7 @@ body {
 
 p {
   margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 .tech-grid, .project-grid, .education-grid {
@@ -206,8 +217,11 @@ p {
   padding: 0 1rem;
 }
 
-@media (min-width: 640px) {
-  .tech-grid, .project-grid, .education-grid {
+@media (min-width: 768px) {
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .project-grid, .education-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -228,6 +242,7 @@ p {
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 0.875rem;
 }
 
 .badge:hover {
@@ -235,7 +250,7 @@ p {
 }
 
 .badge-js {
-  background-color: #f7df1e; /* Cor específica para JavaScript */
+  background-color: #f7df1e;
 }
 
 .badge-js:hover {
@@ -243,7 +258,7 @@ p {
 }
 
 .badge-node {
-  background-color: #68a063; /* Cor específica para Node.js */
+  background-color: #68a063;
 }
 
 .badge-node:hover {
@@ -251,7 +266,7 @@ p {
 }
 
 .badge-react {
-  background-color: #61dafb; /* Cor específica para React */
+  background-color: #61dafb;
 }
 
 .badge-react:hover {
@@ -259,7 +274,7 @@ p {
 }
 
 .badge-mongodb {
-  background-color: #47a248; /* Cor específica para MongoDB */
+  background-color: #47a248;
 }
 
 .badge-mongodb:hover {
@@ -267,7 +282,7 @@ p {
 }
 
 .badge-vercel {
-  background-color: #000000; /* Cor específica para Vercel */
+  background-color: #000000;
 }
 
 .badge-vercel:hover {
@@ -277,7 +292,7 @@ p {
 .project-card, .education-item {
   background-color: #ffffff;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -288,21 +303,24 @@ p {
 
 .project-card:hover, .education-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-.project-image {
+.project-video {
   width: 100%;
-  height: 10rem;
-  object-fit: cover;
-  border-radius: 0.375rem;
-  margin-bottom: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin: 0 auto 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  display: block;
 }
 
 .project-title {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
 .project-desc {
@@ -311,7 +329,7 @@ p {
 }
 
 .project-links {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .project-link {
@@ -328,10 +346,10 @@ p {
 
 .cta-button {
   display: inline-block;
-  padding: 10px 20px;
-  background: #24292e; /* Cor do GitHub */
+  padding: 0.75rem 1.5rem;
+  background: #24292e;
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 0.375rem;
   text-decoration: none;
   transition: transform 0.3s ease, background 0.3s ease;
 }
@@ -341,7 +359,7 @@ p {
 }
 
 .cta-button:hover {
-  background: #0366d6; /* Azul escuro do GitHub em hover */
+  background: #0366d6;
   transform: scale(1.05);
 }
 
@@ -350,7 +368,7 @@ p {
 }
 
 .contact-section {
-  max-width: 768px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -364,9 +382,9 @@ p {
 
 .contact-icon {
   background-color: #ffffff;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -385,18 +403,18 @@ p {
 
 .floating-github-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #24292e; /* Cor do GitHub */
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #24292e;
   color: #ffffff;
-  padding: 10px 15px;
-  border-radius: 25px;
+  padding: 0.75rem 1rem;
+  border-radius: 1.5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
   transition: transform 0.3s ease;
 }
 
@@ -406,7 +424,7 @@ p {
 
 .floating-github-button:hover {
   transform: scale(1.1);
-  background: #0366d6; /* Azul escuro do GitHub em hover */
+  background: #0366d6;
 }
 
 [data-theme="dark"] .floating-github-button:hover {
