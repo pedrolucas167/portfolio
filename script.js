@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typingElement) {
     const phrases = [
       'Engenheiro de Software.',
-      'Especialista em Nuvem.',
       'Desenvolvedor Full-Stack.',
       'Apaixonado por Tecnologia.'
     ];
