@@ -9,27 +9,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeIcon = themeToggle?.querySelector('i');
   const typingElement = $('.typing-text');
   const heroSection = $('.hero-section');
-  const aboutSection = $('.about-section');
-  const techStackSection = $('.tech-stack-section');
+  const mobileMenuToggle = $('.mobile-menu-toggle');
+  const primaryNav = $('#primary-navigation');
 
+  // Atualizar ano no footer
+  $('#current-year').textContent = new Date().getFullYear();
+
+  // Função para forçar visibilidade
   const forceVisible = (el) => {
     if (!el) return;
     Object.assign(el.style, {
       opacity: '1',
       visibility: 'visible',
-      transform: 'none',
-      zIndex: '20'
+      transform: 'none'
     });
   };
 
+  // Corrigir seções ocultas
   const fixHiddenSections = () => {
-    forceVisible(aboutSection);
-    forceVisible(techStackSection);
+    const aboutSection = $('.about-section');
+    const techStackSection = $('.tech-stack-section');
+    const aboutContainer = $('.about-container');
+    const techStackContainer = $('.tech-stack-container');
 
-    $('.about-container')?.style.setProperty('z-index', '10');
-    $('.tech-stack-container')?.style.setProperty('z-index', '10');
+    if (aboutSection) forceVisible(aboutSection);
+    if (techStackSection) forceVisible(techStackSection);
+    if (aboutContainer) aboutContainer.style.setProperty('z-index', '10');
+    if (techStackContainer) techStackContainer.style.setProperty('z-index', '10');
   };
 
+  // Ajustar layout
   const adjustLayout = () => {
     if (window.innerWidth < 768 && header && mainContent) {
       mainContent.style.paddingTop = `${header.offsetHeight + 20}px`;
@@ -40,11 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroSection && header) {
       heroSection.style.minHeight = `${window.innerHeight - header.offsetHeight}px`;
     }
-
-    aboutSection && (aboutSection.style.minHeight = 'auto');
-    techStackSection && (techStackSection.style.minHeight = 'auto');
   };
 
+  // Intersection Observer para animações
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -60,30 +67,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fadeInSections.forEach(section => {
     Object.assign(section.style, {
-      opacity: '1',
+      opacity: '0',
       visibility: 'visible',
-      transform: 'none',
+      transform: 'translateY(20px)',
       transition: 'opacity 0.6s ease-out, transform 0.6s ease-out'
     });
     observer.observe(section);
   });
 
+  // Manipular scroll do header
   const handleHeaderScroll = () => {
     if (header) {
       const isScrolled = window.scrollY > 50;
       header.classList.toggle('scrolled', isScrolled);
       header.style.boxShadow = isScrolled ? '0 4px 12px rgba(0, 0, 0, 0.1)' : '';
     }
-    aboutSection && checkVisibility(aboutSection);
-    techStackSection && checkVisibility(techStackSection);
   };
 
-  const checkVisibility = (el) => {
-    const rect = el.getBoundingClientRect();
-    const visible = rect.top <= window.innerHeight * 0.75 && rect.bottom >= 0;
-    if (visible) forceVisible(el);
-  };
-
+  // Efeito de digitação
   if (typingElement) {
     const phrases = [
       'Engenheiro de Software.',
@@ -113,22 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
+  // Alternar tema
   if (themeToggle && themeIcon) {
     const applyTheme = (theme) => {
       document.documentElement.setAttribute('data-theme', theme);
       themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
       localStorage.setItem('theme', theme);
-
       if (heroSection) {
         heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
       }
-
-      [aboutSection, techStackSection].forEach(el => {
-        if (el) {
-          el.style.display = 'none';
-          setTimeout(() => el.style.display = '', 10);
-        }
-      });
     };
 
     themeToggle.addEventListener('click', () => {
@@ -140,6 +134,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved) applyTheme(saved);
   }
 
+  // Menu mobile
+  if (mobileMenuToggle && primaryNav) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+      primaryNav.classList.toggle('open');
+      mobileMenuToggle.querySelector('i').className = `fas fa-${isExpanded ? 'bars' : 'times'}`;
+    });
+  }
+
+  // Configuração do Particles.js
   if (typeof particlesJS !== 'undefined' && heroSection) {
     particlesJS('particles-js', {
       particles: {
@@ -163,15 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) canvas.style.zIndex = '-1';
   }
 
+  // Debounce para eventos de resize
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  };
+
   fixHiddenSections();
   adjustLayout();
   handleHeaderScroll();
 
-  setTimeout(() => {
-    aboutSection && checkVisibility(aboutSection);
-    techStackSection && checkVisibility(techStackSection);
-  }, 500);
-
   window.addEventListener('scroll', handleHeaderScroll);
-  window.addEventListener('resize', adjustLayout);
+  window.addEventListener('resize', debounce(adjustLayout, 100));
 });

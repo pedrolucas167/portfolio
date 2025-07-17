@@ -15,14 +15,13 @@
     <link rel="stylesheet" href="Assets/body.css">
 </head>
 <body>
-    <a class="skip-link" href="#main-content"></a>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
-    
     <div class="page-wrapper">
         <header class="main-header">
             <div class="header-container">
                 <a href="#" class="logo-link" aria-label="Página inicial - Pedro Marques">
-                    <img src="Assets/logo.png" class="logo" alt="Logo de Pedro Marques" width="50" height="50">
+                    <img src="Assets/logo.png" class="logo" alt="Logo de Pedro Marques" width="50" height="50" loading="lazy">
                 </a>
                 <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation">
                     <span class="sr-only">Menu</span>
@@ -44,7 +43,6 @@
             </div>
         </header>
 
-     
         <div class="content-wrapper">
             <main id="main-content" role="main">
                 <section class="hero-section" id="particles-js" aria-labelledby="hero-heading">
@@ -83,7 +81,7 @@
                                 <div class="tech-badge" role="listitem" data-tooltip="Java" aria-label="Java"><i class="fab fa-java"></i></div>
                                 <div class="tech-badge" role="listitem" data-tooltip="Node.js" aria-label="Node.js"><i class="fab fa-node-js"></i></div>
                                 <div class="tech-badge" role="listitem" data-tooltip="React" aria-label="React"><i class="fab fa-react"></i></div>
-                                <div class="tech-badge" role="listitem" data-tooltip="TypeScript" aria-label="TypeScript"><i class="fab fa-js-square"></i></div>
+                                <div class="tech-badge" role="listitem" data-tooltip="TypeScript" aria-label="TypeScript"><i class="fas fa-code"></i></div>
                                 <div class="tech-badge" role="listitem" data-tooltip="Django" aria-label="Django"><i class="fab fa-python"></i></div>
                             </div>
                         </article>
@@ -114,7 +112,7 @@
 
             <footer class="main-footer" role="contentinfo">
                 <div class="footer-container">
-                    <p>&copy; <span id="current-year">2024</span>, Pedro Marques - Todos os direitos reservados.</p>
+                    <p>© <span id="current-year">2024</span>, Pedro Marques - Todos os direitos reservados.</p>
                     <a href="#" class="back-to-top" aria-label="Voltar ao topo da página">
                         <i class="fas fa-arrow-up"></i>
                     </a>
@@ -123,6 +121,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
