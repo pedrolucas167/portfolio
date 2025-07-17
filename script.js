@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Função para forçar visibilidade
   const forceVisible = (el) => {
     if (!el) return;
+    el.classList.add('visible');
     Object.assign(el.style, {
       opacity: '1',
       visibility: 'visible',
@@ -29,11 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const fixHiddenSections = () => {
     const aboutSection = $('.about-section');
     const techStackSection = $('.tech-stack-section');
+    const contactSection = $('.contact-section');
     const aboutContainer = $('.about-container');
     const techStackContainer = $('.tech-stack-container');
 
-    if (aboutSection) forceVisible(aboutSection);
-    if (techStackSection) forceVisible(techStackSection);
+    [aboutSection, techStackSection, contactSection].forEach(section => {
+      if (section) forceVisible(section);
+    });
     if (aboutContainer) aboutContainer.style.setProperty('z-index', '10');
     if (techStackContainer) techStackContainer.style.setProperty('z-index', '10');
   };
@@ -66,14 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   fadeInSections.forEach(section => {
-    Object.assign(section.style, {
-      opacity: '0',
-      visibility: 'visible',
-      transform: 'translateY(20px)',
-      transition: 'opacity 0.6s ease-out, transform 0.6s ease-out'
-    });
     observer.observe(section);
   });
+
+  // Forçar visibilidade após 1s como fallback
+  setTimeout(fixHiddenSections, 1000);
 
   // Manipular scroll do header
   const handleHeaderScroll = () => {
@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (heroSection) {
         heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
       }
+      fixHiddenSections(); // Garantir que seções estejam visíveis após mudança de tema
     };
 
     themeToggle.addEventListener('click', () => {
