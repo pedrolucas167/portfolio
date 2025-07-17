@@ -143,6 +143,17 @@ document.addEventListener('DOMContentLoaded', () => {
       primaryNav.classList.toggle('open');
       mobileMenuToggle.querySelector('i').className = `fas fa-${isExpanded ? 'bars' : 'times'}`;
     });
+
+    // Fechar menu ao clicar em um link
+    $$('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (primaryNav.classList.contains('open')) {
+          primaryNav.classList.remove('open');
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
+        }
+      });
+    });
   }
 
   // Configuração do Particles.js
