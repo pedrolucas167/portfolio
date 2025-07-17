@@ -116,15 +116,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Alternar tema
   if (themeToggle && themeIcon) {
-    const applyTheme = (theme) => {
-      document.documentElement.setAttribute('data-theme', theme);
-      themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
-      localStorage.setItem('theme', theme);
-      if (heroSection) {
-        heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
-      }
-      fixHiddenSections(); // Garantir que seções estejam visíveis após mudança de tema
-    };
+    const $ = (el) => document.querySelector(el);
+const $$ = (el) => document.querySelectorAll(el);
+
+const themeToggle = $('#theme-toggle');
+const themeIcon = $('#theme-icon');
+const heroSection = $('.hero');
+
+const applyTheme = (theme) => {
+  document.documentElement.setAttribute('data-theme', theme);
+  themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
+  localStorage.setItem('theme', theme);
+
+  // Corrigir cor dos ícones Devicon no modo escuro
+  $$('.tech-badge i[class^="devicon-"]').forEach(icon => {
+    icon.style.color = theme === 'dark' ? '#ffffff' : '';
+  });
+
+  // Ajustar cor de fundo da seção hero
+  if (heroSection) {
+    heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
+  }
+
+  // Garantir que seções estejam visíveis após mudança de tema
+  fixHiddenSections();
+};
+
+const fixHiddenSections = () => {
+  const sections = $$('section');
+  sections.forEach((section) => {
+    if (section.classList.contains('hidden')) {
+      section.classList.remove('hidden');
+    }
+  });
+};
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+  applyTheme(storedTheme);
+});
+
 
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
