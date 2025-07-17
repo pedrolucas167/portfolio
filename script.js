@@ -114,62 +114,48 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
+  // Função para aplicar filtro aos ícones Devicon
+  const applyIconFilter = (theme) => {
+    const devIcons = $$('.tech-badge i[class^="devicon-"]');
+    devIcons.forEach(icon => {
+      // Remove qualquer filtro existente
+      icon.style.filter = '';
+      
+      // Aplica filtro apenas no tema escuro
+      if (theme === 'dark') {
+        // Filtro para inverter cores e ajustar brilho
+        icon.style.filter = 'invert(1) brightness(1.5)';
+      }
+    });
+  };
+
   // Alternar tema
   if (themeToggle && themeIcon) {
-    const $ = (el) => document.querySelector(el);
-const $$ = (el) => document.querySelectorAll(el);
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
+      localStorage.setItem('theme', theme);
 
-const themeToggle = $('#theme-toggle');
-const themeIcon = $('#theme-icon');
-const heroSection = $('.hero');
+      // Aplicar filtro aos ícones Devicon
+      applyIconFilter(theme);
 
-const applyTheme = (theme) => {
-  document.documentElement.setAttribute('data-theme', theme);
-  themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
-  localStorage.setItem('theme', theme);
+      // Ajustar cor de fundo da seção hero
+      if (heroSection) {
+        heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
+      }
 
-  // Corrigir cor dos ícones Devicon no modo escuro
-  $$('.tech-badge i[class^="devicon-"]').forEach(icon => {
-    icon.style.color = theme === 'dark' ? '#ffffff' : '';
-  });
-
-  // Ajustar cor de fundo da seção hero
-  if (heroSection) {
-    heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
-  }
-
-  // Garantir que seções estejam visíveis após mudança de tema
-  fixHiddenSections();
-};
-
-const fixHiddenSections = () => {
-  const sections = $$('section');
-  sections.forEach((section) => {
-    if (section.classList.contains('hidden')) {
-      section.classList.remove('hidden');
-    }
-  });
-};
-
-themeToggle.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  applyTheme(newTheme);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const storedTheme = localStorage.getItem('theme') || 'dark';
-  applyTheme(storedTheme);
-});
-
+      // Garantir que seções estejam visíveis após mudança de tema
+      fixHiddenSections();
+    };
 
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       applyTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    const saved = localStorage.getItem('theme');
-    if (saved) applyTheme(saved);
+    // Aplicar tema salvo ou padrão
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
   }
 
   // Menu mobile
