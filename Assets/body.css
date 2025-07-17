@@ -17,9 +17,36 @@ body {
   background-color: #1a1a1a;
 }
 
-/* Corrige ícones Devicon no modo escuro */
+/* Melhorias para Ícones no Modo Escuro */
+.tech-badge i {
+  transition: all 0.3s ease;
+}
+
+/* Ícones Font Awesome */
+[data-theme="dark"] .tech-badge i.fab,
+[data-theme="dark"] .tech-badge i.fas {
+  color: #e2e8f0;
+}
+
+/* Ícones Devicon - mantém cores originais com melhor contraste */
 [data-theme="dark"] .tech-badge i[class^="devicon-"] {
-  color: #ffffff;
+  filter: brightness(1.2) saturate(1.1);
+}
+
+/* Ícones coloridos (com classe colored) */
+[data-theme="dark"] .tech-badge i[class^="devicon-"].colored {
+  opacity: 0.9;
+  filter: brightness(1.1);
+}
+
+/* Ícones de contato */
+[data-theme="dark"] .contact-icon i {
+  color: #e2e8f0;
+}
+
+/* Ícones no footer */
+[data-theme="dark"] .back-to-top i {
+  color: #e2e8f0;
 }
 
 /* Acessibilidade */
@@ -234,10 +261,12 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
+  position: relative;
 }
 
 [data-theme="dark"] .tech-badge {
   background: #2a2a2a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .tech-badge:hover {
@@ -256,6 +285,11 @@ body {
   border-radius: 4px;
   font-size: 0.9rem;
   display: none;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .tech-badge[aria-label]::after {
+  background: #444;
 }
 
 .tech-badge:hover::after {
@@ -272,6 +306,7 @@ body {
   font-size: 2rem;
   color: #333;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 [data-theme="dark"] .contact-icon {

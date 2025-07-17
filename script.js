@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => document.querySelectorAll(selector);
 
+  // Elementos principais
   const header = $('.main-header');
   const mainContent = $('main');
   const fadeInSections = $$('.fade-in');
@@ -28,20 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Corrigir seções ocultas
   const fixHiddenSections = () => {
-    const aboutSection = $('.about-section');
-    const techStackSection = $('.tech-stack-section');
-    const contactSection = $('.contact-section');
-    const aboutContainer = $('.about-container');
-    const techStackContainer = $('.tech-stack-container');
+    const sections = ['.about-section', '.tech-stack-section', '.contact-section']
+      .map(selector => $(selector))
+      .filter(section => section);
 
-    [aboutSection, techStackSection, contactSection].forEach(section => {
-      if (section) forceVisible(section);
-    });
-    if (aboutContainer) aboutContainer.style.setProperty('z-index', '10');
-    if (techStackContainer) techStackContainer.style.setProperty('z-index', '10');
+    sections.forEach(section => forceVisible(section));
   };
 
-  // Ajustar layout
+  // Ajustar layout responsivo
   const adjustLayout = () => {
     if (window.innerWidth < 768 && header && mainContent) {
       mainContent.style.paddingTop = `${header.offsetHeight + 20}px`;
@@ -54,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Intersection Observer para animações
+  // Observer para animações
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -68,14 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     rootMargin: '0px 0px -50px 0px'
   });
 
-  fadeInSections.forEach(section => {
-    observer.observe(section);
-  });
+  fadeInSections.forEach(section => observer.observe(section));
 
-  // Forçar visibilidade após 1s como fallback
+  // Fallback para animações
   setTimeout(fixHiddenSections, 1000);
 
-  // Manipular scroll do header
+  // Controle de scroll do header
   const handleHeaderScroll = () => {
     if (header) {
       const isScrolled = window.scrollY > 50;
@@ -114,47 +107,28 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
-  // Função para aplicar filtro aos ícones Devicon
-  const applyIconFilter = (theme) => {
-    const devIcons = $$('.tech-badge i[class^="devicon-"]');
-    devIcons.forEach(icon => {
-      // Remove qualquer filtro existente
-      icon.style.filter = '';
-      
-      // Aplica filtro apenas no tema escuro
-      if (theme === 'dark') {
-        // Filtro para inverter cores e ajustar brilho
-        icon.style.filter = 'invert(1) brightness(1.5)';
-      }
-    });
-  };
-
-  // Alternar tema
+  // Controle de tema
   if (themeToggle && themeIcon) {
     const applyTheme = (theme) => {
       document.documentElement.setAttribute('data-theme', theme);
       themeIcon.className = `fas fa-${theme === 'dark' ? 'sun' : 'moon'}`;
       localStorage.setItem('theme', theme);
-
-      // Aplicar filtro aos ícones Devicon
-      applyIconFilter(theme);
-
-      // Ajustar cor de fundo da seção hero
+      
+      // Ajuste adicional para o hero section
       if (heroSection) {
         heroSection.style.backgroundColor = theme === 'dark' ? '#0f172a' : '';
       }
-
-      // Garantir que seções estejam visíveis após mudança de tema
+      
       fixHiddenSections();
     };
 
     themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
     // Aplicar tema salvo ou padrão
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
   }
 
@@ -167,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuToggle.querySelector('i').className = `fas fa-${isExpanded ? 'bars' : 'times'}`;
     });
 
-    // Fechar menu ao clicar em um link
+    // Fechar menu ao clicar em links
     $$('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         if (primaryNav.classList.contains('open')) {
@@ -179,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Configuração do Particles.js
+  // Particles.js
   if (typeof particlesJS !== 'undefined' && heroSection) {
     particlesJS('particles-js', {
       particles: {
@@ -203,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) canvas.style.zIndex = '-1';
   }
 
-  // Debounce para eventos de resize
+  // Debounce para resize
   const debounce = (func, wait) => {
     let timeout;
     return (...args) => {
@@ -212,10 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  fixHiddenSections();
+  // Inicialização
   adjustLayout();
   handleHeaderScroll();
 
+  // Event listeners
   window.addEventListener('scroll', handleHeaderScroll);
   window.addEventListener('resize', debounce(adjustLayout, 100));
 });
