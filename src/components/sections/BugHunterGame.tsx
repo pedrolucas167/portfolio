@@ -1,5 +1,111 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { FaBug, FaPlay, FaPause, FaTrophy, FaHeart, FaStar, FaCode } from 'react-icons/fa';
+import { FaBug, FaPlay, FaPause, FaTrophy, FaHeart, FaStar, FaCode, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
+
+const useGameSounds = () => {
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  const getContext = () => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    return audioContextRef.current;
+  };
+
+  const playSound = useCallback((type: 'bug' | 'feature' | 'coffee' | 'levelUp' | 'gameOver' | 'combo' | 'miss') => {
+    const ctx = getContext();
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    const now = ctx.currentTime;
+    
+    switch (type) {
+      case 'bug':
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(200, now);
+        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.1);
+        gainNode.gain.setValueAtTime(0.15, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        oscillator.start(now);
+        oscillator.stop(now + 0.1);
+        break;
+      case 'feature':
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(400, now);
+        oscillator.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+        gainNode.gain.setValueAtTime(0.12, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        oscillator.start(now);
+        oscillator.stop(now + 0.15);
+        break;
+      case 'coffee':
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(523, now);
+        gainNode.gain.setValueAtTime(0.1, now);
+        oscillator.start(now);
+        setTimeout(() => {
+          const osc2 = ctx.createOscillator();
+          const gain2 = ctx.createGain();
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(659, ctx.currentTime);
+          gain2.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+          osc2.start(ctx.currentTime);
+          osc2.stop(ctx.currentTime + 0.1);
+        }, 100);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+        oscillator.stop(now + 0.1);
+        break;
+      case 'levelUp':
+        [523, 659, 784, 1047].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + i * 0.1);
+          gain.gain.setValueAtTime(0.1, now + i * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.15);
+          osc.start(now + i * 0.1);
+          osc.stop(now + i * 0.1 + 0.15);
+        });
+        return;
+      case 'gameOver':
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(200, now);
+        oscillator.frequency.exponentialRampToValueAtTime(50, now + 0.5);
+        gainNode.gain.setValueAtTime(0.15, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+        oscillator.start(now);
+        oscillator.stop(now + 0.5);
+        break;
+      case 'combo':
+        oscillator.type = 'triangle';
+        oscillator.frequency.setValueAtTime(600, now);
+        oscillator.frequency.exponentialRampToValueAtTime(900, now + 0.08);
+        gainNode.gain.setValueAtTime(0.08, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+        oscillator.start(now);
+        oscillator.stop(now + 0.08);
+        break;
+      case 'miss':
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(150, now);
+        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.2);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        oscillator.start(now);
+        oscillator.stop(now + 0.2);
+        break;
+    }
+  }, []);
+
+  return playSound;
+};
 
 interface Bug {
   id: number;
@@ -27,6 +133,7 @@ export const BugHunterGame = () => {
   const [combo, setCombo] = useState(0);
   const [showCombo, setShowCombo] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const [stats, setStats] = useState<GameStats>(() => {
     const saved = localStorage.getItem('bugHunterStats');
     return saved ? JSON.parse(saved) : { bugsSquashed: 0, featuresAdded: 0, coffeesCollected: 0, highScore: 0 };
@@ -36,6 +143,12 @@ export const BugHunterGame = () => {
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const gameLoopRef = useRef<number | null>(null);
   const spawnIntervalRef = useRef<number | null>(null);
+  
+  const playSound = useGameSounds();
+  
+  const playSoundIfEnabled = useCallback((type: 'bug' | 'feature' | 'coffee' | 'levelUp' | 'gameOver' | 'combo' | 'miss') => {
+    if (soundEnabled) playSound(type);
+  }, [soundEnabled, playSound]);
 
   const bugTypes = {
     bug: { emoji: '🐛', points: 10, message: 'Bug Squashed!' },
@@ -79,7 +192,7 @@ export const BugHunterGame = () => {
       setBugs(prev => {
         const bugStillExists = prev.find(b => b.id === newBug.id);
         if (bugStillExists && bugStillExists.type === 'bug') {
-          
+          playSoundIfEnabled('miss');
           setLives(l => Math.max(0, l - 1));
           setCombo(0);
         }
@@ -90,6 +203,8 @@ export const BugHunterGame = () => {
 
   const handleBugClick = (bug: Bug, e: React.MouseEvent) => {
     e.stopPropagation();
+    
+    playSoundIfEnabled(bug.type);
     
     const rect = (e.target as HTMLElement).getBoundingClientRect();
     setClickEffect({ 
@@ -109,8 +224,11 @@ export const BugHunterGame = () => {
     setCombo(prev => prev + 1);
     setShowCombo(true);
     setTimeout(() => setShowCombo(false), 800);
-
     
+    if (combo > 2) {
+      playSoundIfEnabled('combo');
+    }
+
     setStats(prev => {
       const updated = { ...prev };
       if (bug.type === 'bug') updated.bugsSquashed++;
@@ -125,6 +243,7 @@ export const BugHunterGame = () => {
     
     if (score + points >= level * 100) {
       setLevel(prev => prev + 1);
+      playSoundIfEnabled('levelUp');
     }
   };
 
@@ -169,7 +288,7 @@ export const BugHunterGame = () => {
     if (lives <= 0 && isPlaying) {
       setGameOver(true);
       setIsPlaying(false);
-      
+      playSoundIfEnabled('gameOver');
       
       if (score > stats.highScore) {
         const newStats = { ...stats, highScore: score };
@@ -254,6 +373,13 @@ export const BugHunterGame = () => {
 
             {}
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => setSoundEnabled(prev => !prev)}
+                className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white transition-colors"
+                aria-label={soundEnabled ? 'Desativar som' : 'Ativar som'}
+              >
+                {soundEnabled ? <FaVolumeUp /> : <FaVolumeMute />}
+              </button>
               {isPlaying && !gameOver && (
                 <button
                   onClick={togglePause}
