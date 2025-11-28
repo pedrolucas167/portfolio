@@ -1,0 +1,7 @@
+{
+  "name": "portfolio-server",
+  "version": "1.0.0",
+  "description": "Backend API para o portfolio",
+  "main": "index.js",
+  "type": "commonjs"
+}

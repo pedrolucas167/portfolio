@@ -1,0 +1,50 @@
+{
+  "name": "portfolio",
+  "version": "2.0.0",
+  "description": "Portfólio profissional de Pedro Marques - Engenheiro de Software Full-Stack",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "node server/index.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "build": "tsc && vite build",
+    "start": "NODE_ENV=production node server/index.js",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules/.vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrolucas167/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "typescript",
+    "tailwindcss",
+    "vite"
+  ],
+  "author": "Pedro Marques <poloniosh@outlook.com.br>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pedrolucas167/portfolio/issues"
+  },
+  "homepage": "https://pedrolucas167.github.io/portfolio/",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/node": "^24.10.1",
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "nodemailer": "^7.0.11"
+  }
+}

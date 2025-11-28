@@ -65,10 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fadeInSections.forEach(section => observer.observe(section));
 
-  // Fallback para animações
   setTimeout(fixHiddenSections, 1000);
 
-  // Controle de scroll do header
   const handleHeaderScroll = () => {
     if (header) {
       const isScrolled = window.scrollY > 50;
@@ -77,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Efeito de digitação
   if (typingElement) {
     const phrases = [
       'Engenheiro de Software.',
@@ -107,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     type();
   }
 
-  // Controle de tema
   if (themeToggle && themeIcon) {
     const applyTheme = (theme) => {
       document.documentElement.setAttribute('data-theme', theme);
@@ -132,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(savedTheme);
   }
 
-  // Menu mobile
   if (mobileMenuToggle && primaryNav) {
     mobileMenuToggle.addEventListener('click', () => {
       const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
@@ -141,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuToggle.querySelector('i').className = `fas fa-${isExpanded ? 'bars' : 'times'}`;
     });
 
-    // Fechar menu ao clicar em links
     $$('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         if (primaryNav.classList.contains('open')) {
@@ -153,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Particles.js
   if (typeof particlesJS !== 'undefined' && heroSection) {
     particlesJS('particles-js', {
       particles: {
@@ -177,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) canvas.style.zIndex = '-1';
   }
 
-  // Debounce para resize
   const debounce = (func, wait) => {
     let timeout;
     return (...args) => {
@@ -186,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  // Inicialização
   adjustLayout();
   handleHeaderScroll();
 
