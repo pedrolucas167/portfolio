@@ -1,51 +1,42 @@
-/**
- * Rate Limiter Middleware
- * Previne spam e abuso da API
- */
-
 const rateLimit = new Map();
 
-const rateLimiter = (options = {}) => {
-  const {
-    windowMs = 60 * 1000, // 1 minuto
-    maxRequests = 5,       // 5 requisições por minuto
-    message = 'Muitas tentativas. Aguarde um momento antes de tentar novamente.'
-  } = options;
+const WINDOW_MS = 15 * 60 * 1000;
+const MAX_REQUESTS = 5;
 
-  return (req, res, next) => {
-    const ip = req.ip || req.connection.remoteAddress || 'unknown';
-    const now = Date.now();
+const rateLimiter = (req, res, next) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const now = Date.now();
+  const windowStart = now - WINDOW_MS;
 
-    // Limpar entradas antigas
-    if (rateLimit.has(ip)) {
-      const userData = rateLimit.get(ip);
-      if (now - userData.firstRequest > windowMs) {
-        rateLimit.delete(ip);
-      }
-    }
+  if (!rateLimit.has(ip)) {
+    rateLimit.set(ip, []);
+  }
 
-    // Verificar rate limit
-    if (rateLimit.has(ip)) {
-      const userData = rateLimit.get(ip);
-      userData.count++;
+  const requests = rateLimit.get(ip).filter(time => time > windowStart);
+  requests.push(now);
+  rateLimit.set(ip, requests);
 
-      if (userData.count > maxRequests) {
-        const timeLeft = Math.ceil((userData.firstRequest + windowMs - now) / 1000);
-        return res.status(429).json({
-          success: false,
-          message,
-          retryAfter: timeLeft
-        });
-      }
-    } else {
-      rateLimit.set(ip, {
-        count: 1,
-        firstRequest: now
-      });
-    }
+  if (requests.length > MAX_REQUESTS) {
+    return res.status(429).json({
+      success: false,
+      message: 'Muitas requisições. Tente novamente em alguns minutos.'
+    });
+  }
 
-    next();
-  };
+  next();
 };
+
+setInterval(() => {
+  const now = Date.now();
+  const windowStart = now - WINDOW_MS;
+  for (const [ip, requests] of rateLimit.entries()) {
+    const valid = requests.filter(time => time > windowStart);
+    if (valid.length === 0) {
+      rateLimit.delete(ip);
+    } else {
+      rateLimit.set(ip, valid);
+    }
+  }
+}, WINDOW_MS);
 
 module.exports = rateLimiter;

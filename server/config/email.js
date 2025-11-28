@@ -1,34 +1,26 @@
-/**
- * Email Configuration
- * Configuração do transportador de email usando Nodemailer
- */
-
 const nodemailer = require('nodemailer');
 
-// Configuração do transportador
-// Para produção, use suas credenciais SMTP reais
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.office365.com',
-  port: parseInt(process.env.SMTP_PORT) || 587,
-  secure: false, // true para 465, false para outras portas
+  host: process.env.EMAIL_HOST || 'smtp-mail.outlook.com',
+  port: parseInt(process.env.EMAIL_PORT) || 587,
+  secure: false,
   auth: {
-    user: process.env.SMTP_USER || 'seu-email@hotmail.com',
-    pass: process.env.SMTP_PASS || 'sua-senha-de-app',
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   },
   tls: {
     ciphers: 'SSLv3',
-    rejectUnauthorized: false,
-  },
+    rejectUnauthorized: false
+  }
 });
 
-// Verificar conexão
 const verifyConnection = async () => {
   try {
     await transporter.verify();
-    console.log('✓ Servidor de email conectado');
+    console.log('📧 Email service ready');
     return true;
   } catch (error) {
-    console.error('✗ Erro na conexão com servidor de email:', error.message);
+    console.error('❌ Email service error:', error.message);
     return false;
   }
 };
