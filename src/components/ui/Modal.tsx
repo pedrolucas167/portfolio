@@ -10,9 +10,7 @@ interface ModalProps {
 
 export function Modal({ isOpen, onClose, children, title }: ModalProps) {
   const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
+    if (e.key === 'Escape') onClose();
   }, [onClose]);
 
   useEffect(() => {
@@ -20,7 +18,6 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
@@ -31,15 +28,12 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
       
-      {/* Modal Content */}
       <div className="relative w-full max-w-4xl max-h-[90vh] mx-4 bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
-        {/* Header */}
         {title && (
           <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-dark-border">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{title}</h2>
@@ -53,7 +47,6 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
           </div>
         )}
         
-        {/* Close button when no title */}
         {!title && (
           <button
             onClick={onClose}
@@ -64,7 +57,6 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
           </button>
         )}
         
-        {/* Body */}
         <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
           {children}
         </div>

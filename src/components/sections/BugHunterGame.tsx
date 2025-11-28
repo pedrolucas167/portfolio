@@ -49,15 +49,15 @@ export const BugHunterGame = () => {
     const rect = gameAreaRef.current.getBoundingClientRect();
     const padding = 40;
     
-    // Determinar tipo baseado em probabilidade
+    
     const rand = Math.random();
     let type: 'bug' | 'feature' | 'coffee';
     if (rand < 0.1 && lives < 3) {
-      type = 'coffee'; // 10% chance de café se tiver menos de 3 vidas
+      type = 'coffee'; 
     } else if (rand < 0.25) {
-      type = 'feature'; // 15% chance de feature
+      type = 'feature'; 
     } else {
-      type = 'bug'; // 75% chance de bug
+      type = 'bug'; 
     }
 
     const newBug: Bug = {
@@ -74,18 +74,18 @@ export const BugHunterGame = () => {
 
     setBugs(prev => [...prev, newBug]);
 
-    // Bugs desaparecem após um tempo se não forem clicados
+    
     setTimeout(() => {
       setBugs(prev => {
         const bugStillExists = prev.find(b => b.id === newBug.id);
         if (bugStillExists && bugStillExists.type === 'bug') {
-          // Bug escapou - perde vida
+          
           setLives(l => Math.max(0, l - 1));
           setCombo(0);
         }
         return prev.filter(b => b.id !== newBug.id);
       });
-    }, 4000 - level * 200); // Menos tempo em níveis mais altos
+    }, 4000 - level * 200); 
   }, [level, lives, isPaused]);
 
   const handleBugClick = (bug: Bug, e: React.MouseEvent) => {
@@ -110,19 +110,19 @@ export const BugHunterGame = () => {
     setShowCombo(true);
     setTimeout(() => setShowCombo(false), 800);
 
-    // Atualizar stats
+    
     setStats(prev => {
       const updated = { ...prev };
       if (bug.type === 'bug') updated.bugsSquashed++;
       if (bug.type === 'feature') updated.featuresAdded++;
       if (bug.type === 'coffee') {
         updated.coffeesCollected++;
-        setLives(l => Math.min(5, l + 1)); // Máximo 5 vidas
+        setLives(l => Math.min(5, l + 1)); 
       }
       return updated;
     });
 
-    // Level up a cada 100 pontos
+    
     if (score + points >= level * 100) {
       setLevel(prev => prev + 1);
     }
@@ -139,7 +139,7 @@ export const BugHunterGame = () => {
       let newY = bug.y + bug.direction.y * bug.speed;
       let newDirection = { ...bug.direction };
 
-      // Bounce off walls
+      
       if (newX < padding || newX > rect.width - 50) {
         newDirection.x *= -1;
         newX = Math.max(padding, Math.min(rect.width - 50, newX));
@@ -170,7 +170,7 @@ export const BugHunterGame = () => {
       setGameOver(true);
       setIsPlaying(false);
       
-      // Salvar high score
+      
       if (score > stats.highScore) {
         const newStats = { ...stats, highScore: score };
         setStats(newStats);
@@ -199,7 +199,7 @@ export const BugHunterGame = () => {
   return (
     <section className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-dark-bg dark:via-indigo-950/20 dark:to-dark-bg overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-        {/* Header */}
+        {}
         <div className="text-center mb-8">
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 text-red-600 dark:text-red-400 rounded-full text-sm font-medium mb-4">
             <FaBug className="animate-bounce" /> Bug Hunter Game
@@ -212,19 +212,19 @@ export const BugHunterGame = () => {
           </p>
         </div>
 
-        {/* Game Container */}
+        {}
         <div className="bg-white dark:bg-dark-card rounded-3xl shadow-2xl border border-gray-200 dark:border-dark-border overflow-hidden">
           
-          {/* Game HUD */}
+          {}
           <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-6">
-              {/* Score */}
+              {}
               <div className="flex items-center gap-2">
                 <FaStar className="text-yellow-400" />
                 <span className="text-white font-bold text-lg">{score}</span>
               </div>
               
-              {/* Lives */}
+              {}
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <FaHeart 
@@ -236,14 +236,14 @@ export const BugHunterGame = () => {
                 ))}
               </div>
 
-              {/* Level */}
+              {}
               <div className="hidden sm:flex items-center gap-2 bg-accent/20 px-3 py-1 rounded-full">
                 <FaCode className="text-accent text-sm" />
                 <span className="text-accent font-medium text-sm">Level {level}</span>
               </div>
             </div>
 
-            {/* Combo */}
+            {}
             <div className={`transition-all duration-300 ${showCombo && combo > 1 ? 'scale-110 opacity-100' : 'scale-100 opacity-70'}`}>
               {combo > 1 && (
                 <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
@@ -252,7 +252,7 @@ export const BugHunterGame = () => {
               )}
             </div>
 
-            {/* Controls */}
+            {}
             <div className="flex items-center gap-2">
               {isPlaying && !gameOver && (
                 <button
@@ -269,7 +269,7 @@ export const BugHunterGame = () => {
             </div>
           </div>
 
-          {/* Game Area */}
+          {}
           <div 
             ref={gameAreaRef}
             className="relative h-[400px] md:h-[450px] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 cursor-crosshair overflow-hidden"
@@ -281,7 +281,7 @@ export const BugHunterGame = () => {
               `,
             }}
           >
-            {/* Dev Avatar no centro */}
+            {}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <div className="relative">
                 <img
@@ -299,7 +299,7 @@ export const BugHunterGame = () => {
               </div>
             </div>
 
-            {/* Bugs */}
+            {}
             {bugs.map(bug => (
               <button
                 key={bug.id}
@@ -318,7 +318,7 @@ export const BugHunterGame = () => {
               </button>
             ))}
 
-            {/* Click Effect */}
+            {}
             {clickEffect && (
               <div
                 className="fixed pointer-events-none z-50 animate-ping"
@@ -330,7 +330,7 @@ export const BugHunterGame = () => {
               </div>
             )}
 
-            {/* Start Screen */}
+            {}
             {!isPlaying && !gameOver && (
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-20">
                 <div className="text-center p-8">
@@ -350,7 +350,7 @@ export const BugHunterGame = () => {
               </div>
             )}
 
-            {/* Pause Screen */}
+            {}
             {isPaused && (
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-20">
                 <div className="text-center p-8">
@@ -366,7 +366,7 @@ export const BugHunterGame = () => {
               </div>
             )}
 
-            {/* Game Over Screen */}
+            {}
             {gameOver && (
               <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-20">
                 <div className="text-center p-8 max-w-sm">
@@ -399,7 +399,7 @@ export const BugHunterGame = () => {
             )}
           </div>
 
-          {/* Stats Footer */}
+          {}
           <div className="bg-gray-50 dark:bg-dark-bg px-6 py-4">
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
               <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
@@ -418,7 +418,7 @@ export const BugHunterGame = () => {
           </div>
         </div>
 
-        {/* Instructions */}
+        {}
         <div className="mt-6 grid grid-cols-3 gap-4 max-w-md mx-auto text-center text-xs">
           <div className="bg-white/50 dark:bg-dark-card/50 rounded-xl p-3">
             <span className="text-2xl">🐛</span>
