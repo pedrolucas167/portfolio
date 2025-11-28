@@ -54,15 +54,15 @@ export function Hero() {
             Contato
           </Button>
         </div>
-      </div>
 
-      <button 
-        onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce cursor-pointer hover:scale-110 transition-transform"
-        aria-label="Rolar para próxima seção"
-      >
-        <FaArrowDown className="w-6 h-6 text-white/70 hover:text-accent" />
-      </button>
+        <button 
+          onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
+          className="mt-10 animate-bounce cursor-pointer hover:scale-110 transition-transform"
+          aria-label="Rolar para próxima seção"
+        >
+          <FaArrowDown className="w-6 h-6 text-white/70 hover:text-accent" />
+        </button>
+      </div>
     </section>
   );
 }
