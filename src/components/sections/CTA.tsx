@@ -3,7 +3,7 @@ import { FaRocket, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 export function CTA() {
   return (
     <section className="py-20 bg-gradient-to-br from-accent/10 via-emerald-500/10 to-teal-500/10 dark:from-accent/5 dark:via-emerald-900/10 dark:to-dark-bg">
-      <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
+      <div className="container mx-auto px-6 max-w-4xl text-center">
         <div className="bg-white dark:bg-dark-card rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-200 dark:border-dark-border relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-emerald-400 to-teal-400" />
           

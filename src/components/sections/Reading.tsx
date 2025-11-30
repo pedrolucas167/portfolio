@@ -47,8 +47,8 @@ const statusConfig = {
 
 export function Reading() {
   return (
-    <section className="py-20 bg-white dark:bg-dark-bg">
-      <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
+    <section className="py-20 bg-gray-50 dark:bg-dark-bg">
+      <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-600 dark:text-amber-400 rounded-full text-sm font-medium mb-4">
             <FaBook /> Base de Conhecimento
@@ -56,12 +56,12 @@ export function Reading() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
             Leituras de Desenvolvimento 📚
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto text-sm">
-            Livros que estou estudando para aprimorar minhas habilidades e me manter atualizado.
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            Livros que estou estudando para aprimorar minhas habilidades.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {books.map((book) => {
             const StatusIcon = statusConfig[book.status].icon;
             return (
@@ -114,9 +114,9 @@ export function Reading() {
           })}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-8 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-            "O código limpo é simples e direto. O código limpo é lido como uma prosa bem escrita."
+            “O código limpo é simples e direto.”
             <span className="block mt-1 text-accent font-medium">— Robert C. Martin</span>
           </p>
         </div>

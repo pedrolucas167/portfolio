@@ -41,8 +41,8 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-gray-50 dark:bg-dark-card/50">
-      <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
+    <section id="faq" className="py-20 bg-white dark:bg-dark-card">
+      <div className="container mx-auto px-6 max-w-3xl">
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4">
             <FaQuestionCircle /> Dúvidas Frequentes
@@ -50,12 +50,12 @@ export function FAQ() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
             Perguntas Frequentes
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-lg mx-auto text-sm">
-            Algumas respostas para as perguntas mais comuns sobre meu trabalho.
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            Respostas para as perguntas mais comuns sobre meu trabalho.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqData.map((item, index) => (
             <div
               key={index}
@@ -88,7 +88,7 @@ export function FAQ() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-8 text-center">
           <p className="text-gray-500 dark:text-gray-400 text-sm">
             Ainda tem dúvidas?{' '}
             <a

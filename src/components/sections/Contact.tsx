@@ -106,23 +106,22 @@ export function Contact() {
   };
 
   return (
-    <section id="contato" className="py-24 bg-gray-50 dark:bg-dark-bg">
-      <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
+    <section id="contato" className="py-20 bg-gray-50 dark:bg-dark-bg">
+      <div className="container mx-auto px-6 max-w-6xl">
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
               Entre em <span className="text-accent">Contato</span>
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
               Tem um projeto em mente? Vamos conversar!
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-10">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
