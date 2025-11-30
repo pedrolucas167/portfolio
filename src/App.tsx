@@ -1,6 +1,6 @@
 import { ThemeProvider } from './contexts';
 import { Layout } from './components/layout';
-import { Hero, About, Projects, TechStack, BugHunterGame, Contact } from './components/sections';
+import { Hero, About, Projects, TechStack, BugHunterGame, Reading, Contact } from './components/sections';
 
 export default function App() {
   return (
@@ -11,6 +11,7 @@ export default function App() {
         <BugHunterGame />
         <Projects />
         <TechStack />
+        <Reading />
         <Contact />
       </Layout>
     </ThemeProvider>
