@@ -5,3 +5,5 @@ export { TechStack } from './TechStack';
 export { Contact } from './Contact';
 export { BugHunterGame } from './BugHunterGame';
 export { Reading } from './Reading';
+export { CTA } from './CTA';
+export { FAQ } from './FAQ';
