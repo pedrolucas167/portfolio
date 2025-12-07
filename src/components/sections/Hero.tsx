@@ -1,68 +1,49 @@
 import { FaArrowDown } from 'react-icons/fa';
-import { Button } from '../ui';
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <div className="mb-6">
-          <div className="relative inline-block">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-accent to-accent-dark p-1 shadow-2xl">
-              <img
-                src="https://github.com/pedrolucas167.png"
-                alt="Pedro Lucas"
-                className="w-full h-full rounded-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-1 -right-1 bg-accent text-gray-900 px-2 py-0.5 rounded-full text-xs font-semibold shadow-lg">
-              Disponível
-            </div>
-          </div>
-        </div>
-
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-3">
+    <section id="inicio" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+      <div className="text-center px-6">
+        <img
+          src="https://github.com/pedrolucas167.png"
+          alt="Pedro Lucas"
+          className="w-28 h-28 rounded-full mx-auto mb-6 border-4 border-accent shadow-xl"
+        />
+        
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
           Pedro Lucas
         </h1>
-
-        <p className="text-xl md:text-2xl text-accent font-semibold mb-4">
+        
+        <p className="text-xl text-accent font-medium mb-4">
           Desenvolvedor Full-Stack
         </p>
-
-        <p className="text-base md:text-lg text-gray-300 mb-6 max-w-xl mx-auto">
-          Criando soluções inovadoras com Java, React e arquiteturas modernas.
+        
+        <p className="text-gray-400 max-w-md mx-auto mb-8">
+          Criando soluções com Java, React e arquiteturas modernas.
         </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Button 
-            variant="primary" 
-            size="lg"
-            onClick={() => document.getElementById('projetos')?.scrollIntoView({ behavior: 'smooth' })}
+        
+        <div className="flex justify-center gap-4">
+          <a
+            href="#projetos"
+            className="px-6 py-3 bg-accent text-gray-900 font-semibold rounded-lg hover:bg-accent/90 transition"
           >
             Ver Projetos
-          </Button>
-          <Button 
-            variant="secondary" 
-            size="lg"
-            onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+          </a>
+          <a
+            href="#contato"
+            className="px-6 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition"
           >
             Contato
-          </Button>
+          </a>
         </div>
-
-        <button 
-          onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
-          className="mt-10 animate-bounce cursor-pointer hover:scale-110 transition-transform"
-          aria-label="Rolar para próxima seção"
-        >
-          <FaArrowDown className="w-6 h-6 text-white/70 hover:text-accent" />
-        </button>
       </div>
+      
+      <button
+        onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+      >
+        <FaArrowDown className="text-white/50 text-xl" />
+      </button>
     </section>
   );
 }
