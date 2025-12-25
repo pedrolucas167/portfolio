@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { ThemeToggle } from '../ui';
 import { useScrollPosition } from '../../hooks';
 
 const navItems = [
@@ -83,12 +82,10 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <ThemeToggle />
             <button
               onClick={toggleMenu}
               className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card transition-colors"
