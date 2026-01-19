@@ -29,14 +29,10 @@ jobs:
           cache: npm
 
       - name: Install deps
-        run: set -euo pipefail
-          
-          npm ci
+        run: npm ci
 
       - name: Build
-        run: set -euo pipefail
-          
-          npm run build
+        run: npm run build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
