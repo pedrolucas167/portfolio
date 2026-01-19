@@ -1,5 +1,5 @@
 import { Layout } from './components/layout';
-import { Hero, About, TechStack, Projects, Reading, BugHunterGame, Contact } from './components/sections';
+import { Hero, About, TechStack, Projects, Reading, Game3D, Contact } from './components/sections';
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <TechStack />
       <Projects />
       <Reading />
-      <BugHunterGame />
+      <Game3D />
       <Contact />
     </Layout>
   );

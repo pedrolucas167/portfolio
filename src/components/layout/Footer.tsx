@@ -1,52 +1,78 @@
-import { FaGithub, FaLinkedin, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaHeart, FaArrowUp } from 'react-icons/fa';
 import { socialLinks } from '../../data';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-white dark:bg-dark-card border-t border-gray-100 dark:border-dark-border">
-      <div className="container mx-auto px-4 max-w-6xl py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="relative border-t border-white/5">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-dark-surface)] to-transparent" />
+      
+      <div className="relative section-container py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a
               href="#inicio"
-              className="text-xl font-bold text-gray-900 dark:text-white hover:text-accent transition-colors"
+              onClick={scrollToTop}
+              className="inline-block text-2xl font-bold text-white mb-2 group"
             >
-              PL<span className="text-accent">.</span>
+              PL<span className="text-[var(--color-accent)] glow-text">.</span>
             </a>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-sm text-[#64748b]">
               © {currentYear} Pedro Lucas. Todos os direitos reservados.
             </p>
           </div>
 
           {/* Made with love */}
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-            Feito com <FaHeart className="text-red-500 animate-pulse" /> e muito café
+          <div className="flex items-center gap-2 text-sm text-[#64748b]">
+            <span>Feito com</span>
+            <FaHeart className="text-red-500 animate-pulse" />
+            <span>e muito</span>
+            <span className="text-2xl">☕</span>
           </div>
 
-          {/* Social Links */}
+          {/* Social Links & Back to top */}
           <div className="flex items-center gap-4">
             <a
               href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors"
+              className="p-3 glass-card-subtle rounded-xl hover:scale-110 transition-all"
               aria-label="GitHub"
             >
-              <FaGithub className="w-5 h-5" />
+              <FaGithub className="w-5 h-5 text-white" />
             </a>
             <a
               href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors"
+              className="p-3 glass-card-subtle rounded-xl hover:scale-110 transition-all"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="w-5 h-5" />
+              <FaLinkedin className="w-5 h-5 text-white" />
             </a>
+            
+            <div className="w-px h-8 bg-white/10 mx-2" />
+            
+            <button
+              onClick={scrollToTop}
+              className="p-3 glass-card-subtle rounded-xl hover:scale-110 hover:bg-[var(--color-accent)]/20 transition-all group"
+              aria-label="Voltar ao topo"
+            >
+              <FaArrowUp className="w-5 h-5 text-white group-hover:text-[var(--color-accent)] transition-colors" />
+            </button>
           </div>
+        </div>
+
+        {/* Bottom gradient line */}
+        <div className="mt-8 pt-8 border-t border-white/5">
+          <div className="h-1 w-32 mx-auto rounded-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-secondary)] to-[var(--color-accent)] opacity-50" />
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheck, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Button, Input, Textarea } from '../ui';
-import { useIntersectionObserver } from '../../hooks';
+import { SectionWrapper, GlassCard } from '../ui';
+import { useReveal } from '../../hooks/useReveal';
 import { socialLinks } from '../../data';
 
 interface FormData {
@@ -29,8 +29,9 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref, isRevealed } = useReveal({ threshold: 0.1 });
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -105,174 +106,272 @@ export function Contact() {
     }
   };
 
+  const contactLinks = [
+    {
+      icon: FaEnvelope,
+      label: 'E-mail',
+      value: socialLinks.email,
+      href: `mailto:${socialLinks.email}`,
+      color: 'from-[var(--color-accent)] to-emerald-500',
+    },
+    {
+      icon: FaGithub,
+      label: 'GitHub',
+      value: '@pedrolucas167',
+      href: socialLinks.github,
+      color: 'from-gray-600 to-gray-800',
+    },
+    {
+      icon: FaLinkedin,
+      label: 'LinkedIn',
+      value: '/in/pedrolucas167',
+      href: socialLinks.linkedin,
+      color: 'from-blue-500 to-blue-700',
+    },
+    {
+      icon: FaMapMarkerAlt,
+      label: 'Localização',
+      value: 'Brasil',
+      href: null,
+      color: 'from-[var(--color-secondary)] to-purple-700',
+    },
+  ];
+
   return (
-    <section id="contato" className="py-20 bg-gray-50 dark:bg-dark-bg">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div
-          ref={ref as React.RefObject<HTMLDivElement>}
-          className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
-              Entre em <span className="text-accent">Contato</span>
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
-              Tem um projeto em mente? Vamos conversar!
-            </p>
-          </div>
+    <SectionWrapper id="contato">
+      <div 
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
+      >
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <span className="badge-premium accent mb-4 inline-block">Contato</span>
+          <h2 className="section-title mb-4">
+            Vamos{' '}
+            <span className="text-gradient-animated">conversar?</span>
+          </h2>
+          <p className="section-subtitle mx-auto">
+            Tem um projeto em mente? Estou sempre aberto a novas oportunidades e projetos interessantes.
+          </p>
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                  Vamos trabalhar juntos?
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">
-                  Estou sempre aberto a novas oportunidades e projetos interessantes. 
-                  Se você tem uma ideia ou precisa de ajuda com desenvolvimento, 
-                  não hesite em entrar em contato!
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-dark-card rounded-xl hover:shadow-lg transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-accent/20 rounded-lg group-hover:bg-accent/30 transition-colors">
-                    <FaEnvelope className="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">E-mail</p>
-                    <p className="text-gray-900 dark:text-white group-hover:text-accent transition-colors">
-                      {socialLinks.email}
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href={socialLinks.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-dark-card rounded-xl hover:shadow-lg transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:bg-gray-200 dark:group-hover:bg-gray-700 transition-colors">
-                    <FaGithub className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">GitHub</p>
-                    <p className="text-gray-900 dark:text-white group-hover:text-accent transition-colors">
-                      @pedrolucas167
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href={socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-dark-card rounded-xl hover:shadow-lg transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                    <FaLinkedin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">LinkedIn</p>
-                    <p className="text-gray-900 dark:text-white group-hover:text-accent transition-colors">
-                      /in/pedrolucas167
-                    </p>
-                  </div>
-                </a>
-
-                <div className="flex items-center gap-4 p-4 bg-white dark:bg-dark-card rounded-xl">
-                  <div className="p-3 bg-accent/20 rounded-lg">
-                    <FaMapMarkerAlt className="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Localização</p>
-                    <p className="text-gray-900 dark:text-white">Brasil</p>
-                  </div>
-                </div>
-              </div>
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Contact Info */}
+          <div className="space-y-6">
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Vamos trabalhar juntos?
+              </h3>
+              <p className="text-[#94a3b8] leading-relaxed">
+                Se você tem uma ideia ou precisa de ajuda com desenvolvimento, 
+                não hesite em entrar em contato! Responderei o mais breve possível.
+              </p>
             </div>
 
-            {/* Contact Form */}
-            <div className="bg-white dark:bg-dark-card rounded-2xl p-6 lg:p-8 shadow-md border border-gray-100 dark:border-dark-border">
-              {isSuccess ? (
-                <div className="flex flex-col items-center justify-center h-full py-12 text-center">
-                  <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mb-4">
-                    <FaCheck className="w-8 h-8 text-accent" />
+            {/* Contact links */}
+            <div className="space-y-4">
+              {contactLinks.map((link, index) => (
+                link.href ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                    rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                    className={`contact-link-premium transition-all duration-700 ${
+                      isRevealed 
+                        ? 'opacity-100 translate-x-0' 
+                        : 'opacity-0 -translate-x-10'
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className={`icon-wrapper bg-gradient-to-br ${link.color}`}>
+                      <link.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-[#64748b]">{link.label}</p>
+                      <p className="text-white font-medium group-hover:text-[var(--color-accent)] transition-colors">
+                        {link.value}
+                      </p>
+                    </div>
+                  </a>
+                ) : (
+                  <div
+                    key={link.label}
+                    className={`contact-link-premium cursor-default transition-all duration-700 ${
+                      isRevealed 
+                        ? 'opacity-100 translate-x-0' 
+                        : 'opacity-0 -translate-x-10'
+                    }`}
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className={`icon-wrapper bg-gradient-to-br ${link.color}`}>
+                      <link.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-[#64748b]">{link.label}</p>
+                      <p className="text-white font-medium">{link.value}</p>
+                    </div>
                   </div>
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    Mensagem Enviada!
-                  </h4>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Obrigado pelo contato. Responderei em breve!
-                  </p>
+                )
+              ))}
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <GlassCard 
+            className={`p-6 lg:p-8 transition-all duration-700 delay-300 ${
+              isRevealed 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
+            }`}
+          >
+            {isSuccess ? (
+              <div className="flex flex-col items-center justify-center h-full py-12 text-center">
+                <div className="w-20 h-20 rounded-full bg-[var(--color-accent)]/20 flex items-center justify-center mb-6 animate-scale-in">
+                  <div className="w-14 h-14 rounded-full bg-[var(--color-accent)]/30 flex items-center justify-center">
+                    <FaCheck className="w-7 h-7 text-[var(--color-accent)]" />
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <Input
-                    label="Nome"
+                <h4 className="text-xl font-bold text-white mb-2">
+                  Mensagem Enviada!
+                </h4>
+                <p className="text-[#94a3b8]">
+                  Obrigado pelo contato. Responderei em breve!
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name Input */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="name" 
+                    className={`block text-sm font-medium transition-colors ${
+                      focusedField === 'name' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
+                    }`}
+                  >
+                    Nome
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
                     placeholder="Seu nome"
                     value={formData.name}
                     onChange={handleChange('name')}
-                    error={errors.name}
+                    onFocus={() => setFocusedField('name')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`input-premium ${errors.name ? 'error' : formData.name ? 'valid' : ''}`}
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                  )}
+                </div>
 
-                  <Input
-                    label="E-mail"
+                {/* Email Input */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="email" 
+                    className={`block text-sm font-medium transition-colors ${
+                      focusedField === 'email' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
+                    }`}
+                  >
+                    E-mail
+                  </label>
+                  <input
+                    id="email"
                     type="email"
                     placeholder="seu@email.com"
                     value={formData.email}
                     onChange={handleChange('email')}
-                    error={errors.email}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`input-premium ${errors.email ? 'error' : formData.email ? 'valid' : ''}`}
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                  )}
+                </div>
 
-                  <Input
-                    label="Assunto"
+                {/* Subject Input */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="subject" 
+                    className={`block text-sm font-medium transition-colors ${
+                      focusedField === 'subject' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
+                    }`}
+                  >
+                    Assunto
+                  </label>
+                  <input
+                    id="subject"
+                    type="text"
                     placeholder="Assunto da mensagem"
                     value={formData.subject}
                     onChange={handleChange('subject')}
-                    error={errors.subject}
+                    onFocus={() => setFocusedField('subject')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`input-premium ${errors.subject ? 'error' : formData.subject ? 'valid' : ''}`}
                   />
+                  {errors.subject && (
+                    <p className="text-red-400 text-xs mt-1">{errors.subject}</p>
+                  )}
+                </div>
 
-                  <Textarea
-                    label="Mensagem"
+                {/* Message Textarea */}
+                <div className="space-y-2">
+                  <label 
+                    htmlFor="message" 
+                    className={`block text-sm font-medium transition-colors ${
+                      focusedField === 'message' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
+                    }`}
+                  >
+                    Mensagem
+                  </label>
+                  <textarea
+                    id="message"
                     placeholder="Sua mensagem..."
                     rows={5}
                     value={formData.message}
                     onChange={handleChange('message')}
-                    error={errors.message}
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`input-premium resize-none ${errors.message ? 'error' : formData.message ? 'valid' : ''}`}
                   />
-
-                  {submitError && (
-                    <p className="text-red-500 text-sm">{submitError}</p>
+                  {errors.message && (
+                    <p className="text-red-400 text-xs mt-1">{errors.message}</p>
                   )}
+                </div>
 
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="w-full"
-                    isLoading={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      'Enviando...'
-                    ) : (
-                      <>
-                        <FaPaperPlane className="mr-2" />
-                        Enviar Mensagem
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
-            </div>
-          </div>
+                {submitError && (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                    <p className="text-red-400 text-sm">{submitError}</p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-premium btn-primary-premium w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      <span>Enviando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaPaperPlane />
+                      <span>Enviar Mensagem</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </GlassCard>
         </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

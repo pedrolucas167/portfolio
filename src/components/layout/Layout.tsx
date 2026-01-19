@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { ScrollProgress } from '../ui';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,9 +9,22 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--color-dark-bg)] text-white overflow-x-hidden">
+      {/* Scroll progress indicator */}
+      <ScrollProgress />
+      
+      {/* Background gradient mesh - fixed position */}
+      <div className="fixed inset-0 bg-gradient-mesh opacity-30 pointer-events-none" />
+      
+      {/* Noise texture overlay */}
+      <div className="fixed inset-0 bg-noise pointer-events-none" />
+      
       <Header />
-      <main>{children}</main>
+      
+      <main className="relative">
+        {children}
+      </main>
+      
       <Footer />
     </div>
   );
