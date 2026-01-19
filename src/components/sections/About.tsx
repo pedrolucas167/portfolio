@@ -42,7 +42,7 @@ export function About() {
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <span className="badge-premium accent mb-4 inline-block">Sobre mim</span>
           <h2 className="section-title mb-4">
             Transformando ideias em{' '}

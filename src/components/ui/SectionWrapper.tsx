@@ -12,7 +12,7 @@ export function SectionWrapper({
   return (
     <section 
       id={id} 
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 md:py-20 overflow-hidden ${className}`}
     >
       {/* Background gradient mesh */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-50" />

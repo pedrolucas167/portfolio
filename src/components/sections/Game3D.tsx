@@ -134,10 +134,10 @@ export const Game3D = () => {
     const updateSize = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const maxWidth = Math.min(rect.width - 24, 900);
+        const maxWidth = Math.min(rect.width - 24, 750);
         setDimensions({
           width: maxWidth,
-          height: Math.min(580, Math.max(420, window.innerHeight * 0.55)),
+          height: Math.min(450, Math.max(350, window.innerHeight * 0.45)),
         });
       }
     };
@@ -848,7 +848,7 @@ export const Game3D = () => {
   };
 
   return (
-    <section id="game" className="relative py-20 md:py-28 overflow-hidden">
+    <section id="game" className="relative py-14 md:py-18 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
 
       <div className="relative z-10 section-container">
@@ -865,7 +865,7 @@ export const Game3D = () => {
           </p>
         </div>
 
-        <div ref={containerRef} className="max-w-5xl mx-auto px-3">
+        <div ref={containerRef} className="max-w-4xl mx-auto px-3">
           <div className="glass-card-premium p-4 md:p-5 rounded-2xl">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
               <canvas

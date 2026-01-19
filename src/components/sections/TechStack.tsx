@@ -12,7 +12,7 @@ export function TechStack() {
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <span className="badge-premium secondary mb-4 inline-block">Tech Stack</span>
           <h2 className="section-title mb-4">
             Tecnologias que{' '}

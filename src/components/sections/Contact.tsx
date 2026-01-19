@@ -144,7 +144,7 @@ export function Contact() {
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <span className="badge-premium accent mb-4 inline-block">Contato</span>
           <h2 className="section-title mb-4">
             Vamos{' '}
@@ -155,7 +155,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Contact Info */}
           <div className="space-y-6">
             <div className="mb-8">
