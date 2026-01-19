@@ -138,6 +138,8 @@ export function InteractiveAvatar({
 
   // Touch events
   const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const touch = e.touches[0];
     if (touch) {
       handleStart(touch.clientX, touch.clientY);
@@ -145,13 +147,18 @@ export function InteractiveAvatar({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const touch = e.touches[0];
     if (touch) {
       handleMove(touch.clientX, touch.clientY);
     }
   };
 
-  const handleTouchEnd = () => handleEnd();
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    handleEnd();
+  };
 
   // Double click to spin
   const handleDoubleClick = () => {
@@ -162,11 +169,12 @@ export function InteractiveAvatar({
   return (
     <div 
       ref={containerRef}
-      className={`relative cursor-grab active:cursor-grabbing select-none ${className}`}
+      className={`relative cursor-grab active:cursor-grabbing select-none touch-none ${className}`}
       style={{
         width: size,
         height: size,
         perspective: '1000px',
+        touchAction: 'none',
       }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}

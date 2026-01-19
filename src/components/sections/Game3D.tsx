@@ -134,10 +134,13 @@ export const Game3D = () => {
     const updateSize = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
-        const maxWidth = Math.min(rect.width - 24, 750);
+        const isMobile = window.innerWidth < 640;
+        const maxWidth = Math.min(rect.width - (isMobile ? 16 : 24), isMobile ? 400 : 750);
         setDimensions({
           width: maxWidth,
-          height: Math.min(450, Math.max(350, window.innerHeight * 0.45)),
+          height: isMobile 
+            ? Math.min(320, Math.max(280, window.innerHeight * 0.38))
+            : Math.min(450, Math.max(350, window.innerHeight * 0.45)),
         });
       }
     };
@@ -843,6 +846,7 @@ export const Game3D = () => {
   const handleMouseDown = (e: React.MouseEvent) => handleHit(e.clientX, e.clientY);
   const handleTouchStart = (e: React.TouchEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     const touch = e.touches[0];
     if (touch) handleHit(touch.clientX, touch.clientY);
   };

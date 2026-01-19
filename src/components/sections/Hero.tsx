@@ -6,10 +6,15 @@ import { typingTexts, socialLinks } from '../../data';
 
 export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const typedText = useTypingEffect(typingTexts, 80, 40, 2500);
 
   useEffect(() => {
     setIsLoaded(true);
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -48,7 +53,7 @@ export function Hero() {
           <InteractiveAvatar
             src="https://github.com/pedrolucas167.png"
             alt="Pedro Lucas"
-            size={130}
+            size={isMobile ? 100 : 130}
             className="mx-auto"
           />
         </div>
