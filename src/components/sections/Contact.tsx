@@ -124,7 +124,7 @@ export function Contact() {
     {
       icon: FaLinkedin,
       label: 'LinkedIn',
-      value: '/in/pedrolucas167',
+      value: 'in/pedromarquesdev',
       href: socialLinks.linkedin,
       color: 'from-blue-500 to-blue-700',
     },

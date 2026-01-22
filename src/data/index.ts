@@ -7,13 +7,13 @@ export const personalInfo = {
   role: 'Desenvolvedor Full-Stack',
   email: 'pedro_marques_dev@hotmail.com',
   github: 'https://github.com/pedrolucas167',
-  linkedin: 'https://linkedin.com/in/pedrolucas167',
+  linkedin: 'https://linkedin.com/in/pedromarquesdev',
   location: 'Brasil',
 };
 
 export const socialLinks = {
   github: 'https://github.com/pedrolucas167',
-  linkedin: 'https://linkedin.com/in/pedrolucas167',
+  linkedin: 'https://linkedin.com/in/pedromarquesdev',
   email: 'pedro_marques_dev@hotmail.com',
 };
 
