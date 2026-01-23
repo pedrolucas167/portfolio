@@ -5,8 +5,8 @@ import { useScrollPosition, useSmoothScroll } from '../../hooks';
 const navItems = [
   { label: 'Início', href: '#inicio' },
   { label: 'Sobre', href: '#sobre' },
-  { label: 'Projetos', href: '#projetos' },
   { label: 'Tecnologias', href: '#tecnologias' },
+  { label: 'Projetos', href: '#projetos' },
   { label: '🎮 Game', href: '#game' },
   { label: 'Contato', href: '#contato' },
 ];
@@ -65,10 +65,12 @@ export function Header() {
     };
   }, [isMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    scrollTo(href, { offset: 80 });
     closeMenu();
+    setTimeout(() => {
+      scrollTo(href, { offset: 70 });
+    }, 100);
   };
 
   return (
@@ -146,15 +148,16 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden transition-opacity duration-300 z-40 ${
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={closeMenu}
+        onTouchEnd={closeMenu}
       />
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] glass-strong border-l border-white/10 md:hidden transition-transform duration-500 ease-out ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] glass-strong border-l border-white/10 md:hidden transition-transform duration-500 ease-out z-50 ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
