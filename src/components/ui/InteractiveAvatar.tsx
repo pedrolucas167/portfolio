@@ -3,14 +3,12 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 interface InteractiveAvatarProps {
   src: string;
   alt: string;
-  size?: number;
   className?: string;
 }
 
 export function InteractiveAvatar({ 
   src, 
   alt, 
-  size = 160,
   className = '' 
 }: InteractiveAvatarProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -171,8 +169,6 @@ export function InteractiveAvatar({
       ref={containerRef}
       className={`relative cursor-grab active:cursor-grabbing select-none touch-none ${className}`}
       style={{
-        width: size,
-        height: size,
         perspective: '1000px',
         touchAction: 'none',
       }}
