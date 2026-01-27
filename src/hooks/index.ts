@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-// Re-export new premium hooks
-export { useMousePosition } from './useMousePosition';
-export { useParallax } from './useParallax';
+// Re-export premium hooks
 export { useSmoothScroll } from './useSmoothScroll';
 export { useReveal } from './useReveal';
 
@@ -42,31 +40,6 @@ export function useScrollProgress() {
   return progress;
 }
 
-export function useIntersectionObserver(options?: IntersectionObserverInit) {
-  const ref = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(element);
-        }
-      },
-      options
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [options]);
-
-  return { ref, isVisible };
-}
-
 export function useTypingEffect(texts: string[], typeSpeed = 100, deleteSpeed = 50, pauseTime = 2000) {
   const [displayText, setDisplayText] = useState('');
   const [textIndex, setTextIndex] = useState(0);
@@ -99,42 +72,6 @@ export function useTypingEffect(texts: string[], typeSpeed = 100, deleteSpeed = 
   }, [charIndex, isDeleting, textIndex, texts, typeSpeed, deleteSpeed, pauseTime]);
 
   return displayText;
-}
-
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') return initialValue;
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
-
-  const setValue = (value: T) => {
-    try {
-      setStoredValue(value);
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      }
-    } catch (error) {
-      console.error('Error saving to localStorage:', error);
-    }
-  };
-
-  return [storedValue, setValue];
-}
-
-export function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
 }
 
 export function useMediaQuery(query: string): boolean {

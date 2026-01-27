@@ -31,7 +31,7 @@ portfolio/
 │   ├── utils/
 │   │   └── helpers.ts     # Funções utilitárias
 │   └── main.ts            # Ponto de entrada da aplicação
-├── assets/                # Imagens e recursos estáticos
+├── public/                # Imagens e recursos estáticos
 ├── index.html             # HTML principal
 ├── tailwind.config.js     # Configuração do Tailwind
 ├── tsconfig.json          # Configuração do TypeScript

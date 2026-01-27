@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { useMediaQuery } from '../../hooks';
 
 interface InteractiveAvatarProps {
   src: string;
@@ -17,12 +18,13 @@ export function InteractiveAvatar({
   const [isDragging, setIsDragging] = useState(false);
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const [isSpinning, setIsSpinning] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const lastPosition = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number | null>(null);
 
-  // Physics constants
+  // Physics constants - reduced for mobile
   const friction = 0.95;
-  const springStrength = 0.08;
+  const springStrength = isMobile ? 0.15 : 0.08;
   const dampening = 0.9;
 
   // Handle mouse/touch start
@@ -42,19 +44,25 @@ export function InteractiveAvatar({
     const deltaX = clientX - lastPosition.current.x;
     const deltaY = clientY - lastPosition.current.y;
 
+    // Reduced movement range for mobile
+    const maxRotation = isMobile ? 30 : 60;
+    const maxPosition = isMobile ? 20 : 50;
+    const rotationMultiplier = isMobile ? 0.3 : 0.5;
+    const positionMultiplier = isMobile ? 0.15 : 0.3;
+
     setRotation(prev => ({
-      x: Math.max(-60, Math.min(60, prev.x - deltaY * 0.5)),
-      y: Math.max(-60, Math.min(60, prev.y + deltaX * 0.5))
+      x: Math.max(-maxRotation, Math.min(maxRotation, prev.x - deltaY * rotationMultiplier)),
+      y: Math.max(-maxRotation, Math.min(maxRotation, prev.y + deltaX * rotationMultiplier))
     }));
 
     setPosition(prev => ({
-      x: Math.max(-50, Math.min(50, prev.x + deltaX * 0.3)),
-      y: Math.max(-50, Math.min(50, prev.y + deltaY * 0.3))
+      x: Math.max(-maxPosition, Math.min(maxPosition, prev.x + deltaX * positionMultiplier)),
+      y: Math.max(-maxPosition, Math.min(maxPosition, prev.y + deltaY * positionMultiplier))
     }));
 
     setVelocity({ x: deltaX, y: deltaY });
     lastPosition.current = { x: clientX, y: clientY };
-  }, [isDragging]);
+  }, [isDragging, isMobile]);
 
   // Handle mouse/touch end
   const handleEnd = useCallback(() => {
@@ -67,9 +75,25 @@ export function InteractiveAvatar({
     }
   }, [velocity]);
 
-  // Physics animation loop
+  // Physics animation loop - only runs when needed
   useEffect(() => {
     if (isDragging) return;
+    
+    // Don't animate if everything is at rest
+    const isAtRest = 
+      Math.abs(velocity.x) < 0.1 && 
+      Math.abs(velocity.y) < 0.1 && 
+      Math.abs(rotation.x) < 0.1 && 
+      Math.abs(rotation.y) < 0.1 &&
+      Math.abs(position.x) < 0.1 &&
+      Math.abs(position.y) < 0.1;
+    
+    if (isAtRest && !isSpinning) {
+      // Reset to exact zero to prevent micro-animations
+      if (rotation.x !== 0 || rotation.y !== 0) setRotation({ x: 0, y: 0 });
+      if (position.x !== 0 || position.y !== 0) setPosition({ x: 0, y: 0 });
+      return;
+    }
 
     const animate = () => {
       setVelocity(prev => ({
@@ -81,7 +105,6 @@ export function InteractiveAvatar({
         const newX = prev.x + velocity.y * 0.3;
         const newY = prev.y + velocity.x * 0.3;
         
-        // Apply spring back to center when velocity is low
         const springX = isSpinning ? newX : newX * dampening - newX * springStrength;
         const springY = isSpinning ? newY : newY * dampening - newY * springStrength;
         
@@ -96,7 +119,6 @@ export function InteractiveAvatar({
         y: prev.y * dampening - prev.y * springStrength
       }));
 
-      // Stop spinning when velocity is low
       if (Math.abs(velocity.x) < 0.1 && Math.abs(velocity.y) < 0.1) {
         setIsSpinning(false);
       }
@@ -111,7 +133,7 @@ export function InteractiveAvatar({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isDragging, velocity, isSpinning]);
+  }, [isDragging, velocity, isSpinning, rotation, position]);
 
   // Mouse events
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -134,10 +156,9 @@ export function InteractiveAvatar({
     };
   }, [isDragging, handleMove, handleEnd]);
 
-  // Touch events
+  // Touch events - with passive option for better mobile performance
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    // Don't prevent default to allow normal page scrolling
     const touch = e.touches[0];
     if (touch) {
       handleStart(touch.clientX, touch.clientY);
@@ -145,16 +166,17 @@ export function InteractiveAvatar({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    // Only prevent default if actively dragging to avoid scroll interference
+    if (isDragging) {
+      e.stopPropagation();
+    }
     const touch = e.touches[0];
     if (touch) {
       handleMove(touch.clientX, touch.clientY);
     }
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
+  const handleTouchEnd = (_e: React.TouchEvent) => {
     handleEnd();
   };
 
@@ -167,10 +189,13 @@ export function InteractiveAvatar({
   return (
     <div 
       ref={containerRef}
-      className={`relative cursor-grab active:cursor-grabbing select-none touch-none ${className}`}
+      className={`relative cursor-grab active:cursor-grabbing select-none ${className}`}
       style={{
         perspective: '1000px',
-        touchAction: 'none',
+        touchAction: 'pan-y', // Allow vertical scrolling, capture horizontal
+        WebkitUserSelect: 'none',
+        userSelect: 'none',
+        overflow: 'visible',
       }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
@@ -178,51 +203,55 @@ export function InteractiveAvatar({
       onTouchEnd={handleTouchEnd}
       onDoubleClick={handleDoubleClick}
     >
-      {/* Glow effect */}
+      {/* Glow effect - simplified for performance */}
       <div 
-        className="absolute inset-0 rounded-full blur-2xl transition-opacity duration-300"
+        className="absolute rounded-full blur-2xl pointer-events-none"
         style={{
+          inset: isMobile ? '-10%' : '-20%',
           background: `radial-gradient(circle, var(--color-accent) 0%, var(--color-secondary) 50%, transparent 70%)`,
-          opacity: isDragging ? 0.6 : 0.3,
-          transform: `translate(${position.x * 0.5}px, ${position.y * 0.5}px)`,
+          opacity: isDragging ? 0.5 : 0.25,
+          willChange: isDragging ? 'transform, opacity' : 'auto',
         }}
       />
       
       {/* Ring effects */}
       <div 
-        className="absolute inset-[-4px] rounded-full"
+        className="absolute rounded-full pointer-events-none"
         style={{
+          inset: '-4px',
           background: `conic-gradient(from ${rotation.y * 2}deg, var(--color-accent), var(--color-secondary), var(--color-accent))`,
           transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) translate(${position.x}px, ${position.y}px)`,
-          transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+          transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+          willChange: isDragging ? 'transform' : 'auto',
         }}
       />
       
       {/* Inner dark ring */}
       <div 
-        className="absolute inset-[3px] rounded-full bg-[var(--color-dark-bg)]"
+        className="absolute rounded-full bg-[var(--color-dark-bg)] pointer-events-none"
         style={{
+          inset: '3px',
           transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) translate(${position.x}px, ${position.y}px)`,
-          transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+          transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+          willChange: isDragging ? 'transform' : 'auto',
         }}
       />
 
       {/* Avatar image */}
       <div
-        className="absolute inset-[6px] rounded-full overflow-hidden"
+        className="relative w-full h-full rounded-full overflow-hidden"
         style={{
           transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) translate(${position.x}px, ${position.y}px)`,
           transformStyle: 'preserve-3d',
-          transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+          transition: isDragging ? 'none' : 'transform 0.15s ease-out',
+          willChange: isDragging ? 'transform' : 'auto',
         }}
       >
         <img
           src={src}
           alt={alt}
           className="w-full h-full object-cover"
-          style={{
-            transform: `scale(${1 + Math.abs(rotation.x + rotation.y) * 0.002})`,
-          }}
+          loading="eager"
           draggable={false}
         />
         
@@ -240,13 +269,13 @@ export function InteractiveAvatar({
         />
       </div>
 
-      {/* Floating particles when dragging */}
-      {isDragging && (
+      {/* Floating particles when dragging - hidden on mobile for performance */}
+      {isDragging && !isMobile && (
         <>
           {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 rounded-full bg-[var(--color-accent)] animate-ping"
+              className="absolute w-1 h-1 rounded-full bg-[var(--color-accent)] animate-ping pointer-events-none"
               style={{
                 top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 60}%`,
                 left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 60}%`,
@@ -258,13 +287,15 @@ export function InteractiveAvatar({
         </>
       )}
 
-      {/* Hint text */}
-      <div 
-        className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-[#64748b] whitespace-nowrap transition-opacity duration-300"
-        style={{ opacity: isDragging ? 0 : 0.5 }}
-      >
-        Arraste ou clique duas vezes
-      </div>
+      {/* Hint text - hidden on mobile */}
+      {!isMobile && (
+        <div 
+          className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-[#64748b] whitespace-nowrap transition-opacity duration-300 pointer-events-none"
+          style={{ opacity: isDragging ? 0 : 0.5 }}
+        >
+          Arraste ou clique duas vezes
+        </div>
+      )}
     </div>
   );
 }

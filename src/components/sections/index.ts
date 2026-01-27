@@ -5,4 +5,4 @@ export { TechStack } from './TechStack';
 export { Contact } from './Contact';
 export { BugHunterGame } from './BugHunterGame';
 export { Reading } from './Reading';
-export { Game3D } from './Game3D';
+// Game3D is lazy loaded in App.tsx for performance

@@ -743,9 +743,11 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
-    opacity: 0.3;
+    opacity: 0.25;
     pointer-events: none;
-    animation: float 8s ease-in-out infinite;
+    animation: float 12s ease-in-out infinite;
+    will-change: transform;
+    contain: layout style paint;
   }
 
   .floating-orb.accent {
@@ -1145,6 +1147,7 @@
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
+/* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
 @media (max-width: 768px) {
   .glass-card:hover {
     transform: translateY(-4px);
@@ -1156,6 +1159,32 @@
 
   .tech-badge-premium:hover {
     transform: translateY(-5px) scale(1.02);
+  }
+
+  /* Reduce animations on mobile */
+  .floating-orb {
+    animation-duration: 20s;
+    opacity: 0.15;
+  }
+  
+  /* Disable complex animations on mobile */
+  .glass-card::after {
+    animation: none;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-orb {
+    animation: none;
   }
 }
 
