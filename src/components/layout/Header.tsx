@@ -107,7 +107,7 @@ export function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-0.5">
             {navItems.map((item) => (
               <a
                 key={item.href}

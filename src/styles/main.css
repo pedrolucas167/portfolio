@@ -586,39 +586,43 @@
   .nav-link-premium {
     position: relative;
     font-weight: 500;
+    font-size: 0.9rem;
     color: #94a3b8;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+    padding: 0.5rem 0.875rem;
+    border-radius: 8px;
+    transition: color 0.3s ease, background 0.3s ease;
+    letter-spacing: -0.01em;
   }
 
-  .nav-link-premium::before {
+  .nav-link-premium::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 50%;
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
     transform: translateX(-50%);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
   }
 
   .nav-link-premium:hover {
-    color: #fff;
+    color: #e2e8f0;
   }
 
-  .nav-link-premium:hover::before {
-    width: 80%;
+  .nav-link-premium:hover::after {
+    width: 60%;
   }
 
   .nav-link-premium.active {
     color: var(--color-accent);
+    font-weight: 600;
   }
 
-  .nav-link-premium.active::before {
-    width: 80%;
+  .nav-link-premium.active::after {
+    width: 60%;
+    background: var(--color-accent);
   }
 
   /* ===== PROJECT CARD PREMIUM ===== */
