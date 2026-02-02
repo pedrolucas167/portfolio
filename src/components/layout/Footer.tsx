@@ -34,7 +34,15 @@ export function Footer() {
             <span>Feito com</span>
             <FaHeart className="text-red-500 animate-pulse" />
             <span>e muito</span>
-            <span className="text-2xl">☕</span>
+            <span className="relative text-2xl group cursor-default">
+              <span className="inline-block animate-bounce-soft">☕</span>
+              {/* Steam animation */}
+              <span className="absolute -top-2 left-1/2 -translate-x-1/2 flex gap-0.5 opacity-60">
+                <span className="w-0.5 h-3 bg-gradient-to-t from-white/40 to-transparent rounded-full animate-steam-1" />
+                <span className="w-0.5 h-2.5 bg-gradient-to-t from-white/30 to-transparent rounded-full animate-steam-2" />
+                <span className="w-0.5 h-3 bg-gradient-to-t from-white/40 to-transparent rounded-full animate-steam-3" />
+              </span>
+            </span>
           </div>
 
           {/* Social Links & Back to top */}
