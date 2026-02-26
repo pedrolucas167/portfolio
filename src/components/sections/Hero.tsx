@@ -19,15 +19,15 @@ export function Hero() {
   return (
     <section 
       id="inicio" 
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-[100svh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-16 sm:pb-0"
     >
-      {/* Premium gradient background */}
+      
       <div className="absolute inset-0 bg-gradient-mesh" />
       
-      {/* Animated floating orbs */}
+      
       <FloatingOrbs />
       
-      {/* Grid pattern overlay */}
+      
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -37,33 +37,33 @@ export function Hero() {
         }}
       />
 
-      {/* Main content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* Interactive Avatar */}
+      
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+        
         <div 
-          className={`mx-auto mb-6 transition-all duration-1000 ${
+          className={`mx-auto mb-4 sm:mb-6 transition-all duration-1000 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           <InteractiveAvatar
             src="https://github.com/pedrolucas167.png"
             alt="Pedro Lucas"
-            className="mx-auto w-[100px] h-[100px] sm:w-[130px] sm:h-[130px]"
+            className="mx-auto w-[90px] h-[90px] sm:w-[130px] sm:h-[130px]"
           />
         </div>
 
-        {/* Status badge */}
+        
         <div 
-          className={`status-indicator mx-auto mb-4 transition-all duration-1000 delay-200 ${
+          className={`status-indicator mx-auto mb-3 sm:mb-4 transition-all duration-1000 delay-200 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           Disponível para projetos
         </div>
 
-        {/* Main heading with gradient */}
+        
         <h1 
-          className={`text-4xl md:text-6xl font-extrabold mb-2 transition-all duration-1000 delay-300 ${
+          className={`text-3xl sm:text-4xl md:text-6xl font-extrabold mb-2 transition-all duration-1000 delay-300 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -71,30 +71,30 @@ export function Hero() {
           <span className="text-gradient-animated">Lucas</span>
         </h1>
 
-        {/* Role with glow */}
+        
         <p 
-          className={`text-lg md:text-xl font-semibold text-[var(--color-accent)] glow-text mb-2 transition-all duration-1000 delay-400 ${
+          className={`text-base sm:text-lg md:text-xl font-semibold text-[var(--color-accent)] glow-text mb-2 transition-all duration-1000 delay-400 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
           Desenvolvedor Full-Stack
         </p>
 
-        {/* Typing effect */}
+        
         <div 
-          className={`min-h-[28px] mb-6 transition-all duration-1000 delay-500 ${
+          className={`min-h-[24px] sm:min-h-[28px] mb-5 sm:mb-6 transition-all duration-1000 delay-500 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <p className="text-base text-[#94a3b8] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#94a3b8] leading-relaxed px-2">
             {typedText}
             <span className="animate-pulse text-[var(--color-accent)]">|</span>
           </p>
         </div>
 
-        {/* CTA Buttons */}
+        
         <div 
-          className={`flex flex-col sm:flex-row justify-center gap-3 mb-8 transition-all duration-1000 delay-600 ${
+          className={`flex flex-col sm:flex-row justify-center gap-3 mb-6 sm:mb-8 px-4 sm:px-0 transition-all duration-1000 delay-600 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -103,7 +103,7 @@ export function Hero() {
             className="btn-premium btn-primary-premium"
           >
             <span>Ver Projetos</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
@@ -115,9 +115,9 @@ export function Hero() {
           </button>
         </div>
 
-        {/* Social links */}
+        
         <div 
-          className={`flex justify-center gap-4 transition-all duration-1000 delay-700 ${
+          className={`flex justify-center gap-3 sm:gap-4 transition-all duration-1000 delay-700 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -125,27 +125,27 @@ export function Hero() {
             href={socialLinks.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 glass-card-subtle rounded-full hover:scale-110 transition-transform"
+            className="p-2.5 sm:p-3 glass-card-subtle rounded-full hover:scale-110 transition-transform"
             aria-label="GitHub"
           >
-            <FaGithub className="w-6 h-6 text-white" />
+            <FaGithub className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </a>
           <a
             href={socialLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 glass-card-subtle rounded-full hover:scale-110 transition-transform"
+            className="p-2.5 sm:p-3 glass-card-subtle rounded-full hover:scale-110 transition-transform"
             aria-label="LinkedIn"
           >
-            <FaLinkedin className="w-6 h-6 text-white" />
+            <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      
       <button
         onClick={() => scrollToSection('#sobre')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#64748b] hover:text-[var(--color-accent)] transition-colors cursor-pointer group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[#64748b] hover:text-[var(--color-accent)] transition-colors cursor-pointer group"
         aria-label="Rolar para baixo"
       >
         <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -156,7 +156,7 @@ export function Hero() {
         </div>
       </button>
 
-      {/* Bottom gradient fade */}
+      
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--color-dark-bg)] to-transparent" />
     </section>
   );

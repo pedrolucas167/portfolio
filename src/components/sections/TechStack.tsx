@@ -11,20 +11,20 @@ export function TechStack() {
         ref={ref as React.RefObject<HTMLDivElement>}
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
-        {/* Section header */}
-        <div className="text-center mb-10">
-          <span className="badge-premium secondary mb-4 inline-block">Tech Stack</span>
-          <h2 className="section-title mb-4">
+        
+        <div className="text-center mb-8 sm:mb-10">
+          <span className="badge-premium secondary mb-3 sm:mb-4 inline-block">Tech Stack</span>
+          <h2 className="section-title mb-3 sm:mb-4">
             Tecnologias que{' '}
             <span className="text-gradient-animated">domino</span>
           </h2>
-          <p className="section-subtitle mx-auto">
+          <p className="section-subtitle mx-auto px-2 sm:px-0">
             Ferramentas e tecnologias que utilizo para criar soluções robustas e escaláveis.
           </p>
         </div>
 
-        {/* Tech grid with premium badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
+        
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
           {techStack.map((tech, index) => (
             <div
               key={tech.name}
@@ -34,19 +34,19 @@ export function TechStack() {
                   : 'opacity-0 translate-y-10'
               }`}
               style={{ 
-                transitionDelay: `${index * 100}ms`,
+                transitionDelay: `${index * 50}ms`,
               }}
             >
               <tech.icon 
                 className="tech-icon" 
                 style={{ color: tech.color }}
               />
-              <span className="tech-name">{tech.name}</span>
+              <span className="tech-name text-center">{tech.name}</span>
               
-              {/* Skill level indicator */}
+              
               {tech.level && (
-                <div className="w-full mt-2">
-                  <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                <div className="w-full mt-1.5 sm:mt-2">
+                  <div className="h-0.5 sm:h-1 bg-white/5 rounded-full overflow-hidden">
                     <div 
                       className="h-full rounded-full transition-all duration-1000 delay-500"
                       style={{
@@ -62,9 +62,9 @@ export function TechStack() {
           ))}
         </div>
 
-        {/* Additional info */}
-        <div className="mt-16 text-center">
-          <p className="text-[#64748b] text-lg md:text-xl">
+        
+        <div className="mt-10 sm:mt-16 text-center">
+          <p className="text-[#64748b] text-base sm:text-lg md:text-xl px-4 sm:px-0">
             E sempre aprendendo novas tecnologias...
           </p>
         </div>

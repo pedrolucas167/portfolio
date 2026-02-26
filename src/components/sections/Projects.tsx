@@ -23,19 +23,19 @@ export function Projects() {
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
         {/* Section header */}
-        <div className="text-center mb-10">
-          <span className="badge-premium accent mb-4 inline-block">Portfólio</span>
-          <h2 className="section-title mb-4">
+        <div className="text-center mb-8 sm:mb-10">
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Portfólio</span>
+          <h2 className="section-title mb-3 sm:mb-4">
             Projetos em{' '}
             <span className="text-gradient-animated">destaque</span>
           </h2>
-          <p className="section-subtitle mx-auto">
+          <p className="section-subtitle mx-auto px-2 sm:px-0">
             Uma seleção dos meus trabalhos mais recentes e relevantes.
           </p>
         </div>
 
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {projects.map((project, index) => (
             <GlassCard
               key={project.id}
@@ -49,7 +49,7 @@ export function Projects() {
               style={{ transitionDelay: `${index * 150}ms` } as React.CSSProperties}
             >
               {/* Project image/icon area */}
-              <div className={`h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+              <div className={`h-40 sm:h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                 {/* Pattern overlay */}
                 <div 
                   className="absolute inset-0 opacity-10"
@@ -61,13 +61,13 @@ export function Projects() {
                 
                 {/* Emoji/Icon */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl transform group-hover:scale-110 transition-transform duration-500">
+                  <span className="text-5xl sm:text-6xl transform group-hover:scale-110 transition-transform duration-500">
                     {projectEmojis[project.id] || '🚀'}
                   </span>
                 </div>
 
                 {/* Category badge */}
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
                   <span className="badge-premium bg-black/30 backdrop-blur-sm border-white/20 text-white text-xs">
                     {project.category}
                   </span>
@@ -75,33 +75,33 @@ export function Projects() {
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white font-medium flex items-center gap-2">
-                    Ver detalhes <FaChevronRight className="text-sm" />
+                  <span className="text-white font-medium flex items-center gap-2 text-sm sm:text-base">
+                    Ver detalhes <FaChevronRight className="text-xs sm:text-sm" />
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-[#94a3b8] text-sm line-clamp-2 mb-4">
+                <p className="text-[#94a3b8] text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-4">
                   {project.description}
                 </p>
                 
                 {/* Tech tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span 
                       key={tech} 
-                      className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-[#94a3b8] border border-white/5"
+                      className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-[#94a3b8] border border-white/5"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-[#64748b]">
+                    <span className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-[#64748b]">
                       +{project.technologies.length - 3}
                     </span>
                   )}
