@@ -16,3 +16,22 @@ root.render(
     <App />
   </StrictMode>
 );
+
+// Attempt to unregister any existing service workers and clear caches
+// This helps clients that may be stuck with an old SW serving cached assets
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  try {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      registrations.forEach(reg => {
+        try { reg.unregister(); } catch (e) { /* ignore */ }
+      });
+    }).catch(() => {});
+
+    // also try to clear caches
+    if ('caches' in window) {
+      caches.keys().then(keys => keys.forEach(k => caches.delete(k))).catch(() => {});
+    }
+  } catch (err) {
+    // ignore errors during unregister
+  }
+}
