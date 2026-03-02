@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '../../test/test-utils';
 import { Hero } from './Hero';
 
-// Mock completo dos hooks
 vi.mock('../../hooks', () => ({
   useTypingEffect: () => 'Texto de teste',
   useMediaQuery: () => false,
