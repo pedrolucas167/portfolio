@@ -22,10 +22,12 @@ export function Header() {
     const sections = navItems.map(item => item.href.slice(1));
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
+      // iterate from bottom to top without mutating the sections array
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sec = sections[i];
+        const element = document.getElementById(sec);
         if (element && element.offsetTop <= scrollPosition) {
-          setActiveSection(`#${section}`);
+          setActiveSection(`#${sec}`);
           break;
         }
       }
@@ -37,7 +39,9 @@ export function Header() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    scrollTo(href, { offset: 70 });
+    // set active immediately for responsive feedback, then perform smooth scroll
+    setActiveSection(href);
+    scrollTo(href, { offset: 80 });
     setIsMobileMenuOpen(false);
   };
 

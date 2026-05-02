@@ -15,6 +15,10 @@ describe('About Component', () => {
     
     expect(screen.getByText('Sobre mim')).toBeInTheDocument();
     expect(screen.getByText(/Transformando ideias em/)).toBeInTheDocument();
+    expect(screen.getByText(/Brainly.*2016.*2025|2016.*2025/)).toBeInTheDocument();
+    expect(screen.getByText(/1\.800|\b1800\b/)).toBeInTheDocument();
+    expect(screen.getByText(/12\.000|\b12000\b/)).toBeInTheDocument();
+    expect(screen.getByText(/Atualmente.*disponibilidade regular/i)).toBeInTheDocument();
   });
 
   it('deve renderizar os cards de skills', () => {

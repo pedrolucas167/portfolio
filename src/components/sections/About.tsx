@@ -52,6 +52,9 @@ export function About() {
             Desenvolvedor Full-Stack apaixonado por criar soluções que fazem a diferença. 
             Foco em código limpo, arquiteturas escaláveis e experiências de usuário excepcionais.
           </p>
+          <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
+            Como hobby, contribuí no Brainly entre 2016 e 2025 — mais de 1.800 respostas e 12.000+ agradecimentos — ajudando estudantes com explicações claras e didáticas em Matemática, Física, Filosofia e Programação. Atualmente não tenho disponibilidade regular para colaborar.
+          </p>
         </div>
 
         
