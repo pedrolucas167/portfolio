@@ -1,4 +1,4 @@
-import { FaCode, FaServer, FaCloud, FaLightbulb, FaRocket, FaUsers } from 'react-icons/fa';
+import { FaCode, FaServer, FaCloud, FaLightbulb, FaRocket, FaUsers, FaBrain } from 'react-icons/fa';
 import { GlassCard, SectionWrapper } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
 
@@ -23,6 +23,13 @@ const skills = [
     desc: 'Docker, AWS, CI/CD',
     color: 'from-purple-500 to-pink-500',
     details: 'Automação, containerização e deploy contínuo'
+  },
+  {
+    icon: FaBrain,
+    title: 'IA & LLMs',
+    desc: 'Modelos de Linguagem, Prompt Engineering',
+    color: 'from-amber-500 to-orange-500',
+    details: 'Fluente em arquitetura de modelos de linguagem e integração de IA em aplicações'
   },
 ];
 
@@ -55,10 +62,13 @@ export function About() {
           <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
             Como hobby, contribuí no Brainly entre 2016 e 2025 — mais de 1.800 respostas e 12.000+ agradecimentos — ajudando estudantes com explicações claras e didáticas em Matemática, Física, Filosofia e Programação. Atualmente não tenho disponibilidade regular para colaborar.
           </p>
+          <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed border-l-4 border-[var(--color-accent)] pl-4">
+            <span className="text-[var(--color-accent)] font-semibold">Fluente em IA:</span> Um modelo de linguagem é, no fundo, um sistema que prevê qual é o próximo token mais provável. Compreendo profundamente essa arquitetura e integro IA em soluções reais, desde prompt engineering até fine-tuning de modelos customizados.
+          </p>
         </div>
 
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-16">
           {skills.map((skill, i) => (
             <GlassCard 
               key={skill.title}

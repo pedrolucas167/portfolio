@@ -19,6 +19,8 @@ describe('About Component', () => {
     expect(screen.getByText(/1\.800|\b1800\b/)).toBeInTheDocument();
     expect(screen.getByText(/12\.000|\b12000\b/)).toBeInTheDocument();
     expect(screen.getByText(/Atualmente.*disponibilidade regular/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fluente em IA/)).toBeInTheDocument();
+    expect(screen.getByText(/Um modelo de linguagem é.*próximo token/i)).toBeInTheDocument();
   });
 
   it('deve renderizar os cards de skills', () => {
@@ -27,6 +29,7 @@ describe('About Component', () => {
     expect(screen.getByText('Frontend')).toBeInTheDocument();
     expect(screen.getByText('Backend')).toBeInTheDocument();
     expect(screen.getByText('DevOps')).toBeInTheDocument();
+    expect(screen.getByText('IA & LLMs')).toBeInTheDocument();
   });
 
   it('deve renderizar as tecnologias de cada skill', () => {
