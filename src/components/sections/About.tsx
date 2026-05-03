@@ -27,9 +27,9 @@ const skills = [
   {
     icon: FaBrain,
     title: 'IA & LLMs',
-    desc: 'Modelos de Linguagem, Prompt Engineering',
+    desc: 'LLMs, Prompt Engineering',
     color: 'from-amber-500 to-orange-500',
-    details: 'Fluente em arquitetura de modelos de linguagem e integração de IA em aplicações'
+    details: 'IA aplicada a produtos, automações e copilots.'
   },
 ];
 
@@ -56,14 +56,13 @@ export function About() {
             <span className="text-gradient-animated">código</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Desenvolvedor Full-Stack apaixonado por criar soluções que fazem a diferença. 
-            Foco em código limpo, arquiteturas escaláveis e experiências de usuário excepcionais.
+            Formado em Ciência de Dados e em pós-graduação em Engenharia de Software, atuo como Full Stack Developer com foco em backend, construindo APIs robustas e escaláveis com Java/Spring Boot e Node.js. Também integro IA a soluções reais, com experiência em AIOps, processamento de áudio e validação inteligente. No frontend, desenvolvo interfaces responsivas com React, Angular e Next.js, priorizando arquitetura, clean code e escalabilidade.
           </p>
           <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
             Como hobby, contribuí no Brainly entre 2016 e 2025 — mais de 1.800 respostas e 12.000+ agradecimentos — ajudando estudantes com explicações claras e didáticas em Matemática, Física, Filosofia e Programação. Atualmente não tenho disponibilidade regular para colaborar.
           </p>
-          <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed border-l-4 border-[var(--color-accent)] pl-4">
-            <span className="text-[var(--color-accent)] font-semibold">Fluente em IA:</span> Um modelo de linguagem é, no fundo, um sistema que prevê qual é o próximo token mais provável. Compreendo profundamente essa arquitetura e integro IA em soluções reais, desde prompt engineering até fine-tuning de modelos customizados.
+          <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
+            <span className="text-[var(--color-accent)] font-semibold">IA aplicada:</span> integro LLMs a produtos com foco em resultado, usando prompt engineering e fine-tuning quando necessário.
           </p>
         </div>
 
