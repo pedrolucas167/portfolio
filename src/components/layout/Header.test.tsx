@@ -1,6 +1,12 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '../../test/test-utils';
 import { Header } from './Header';
+import type { i18n as I18nInstance } from 'i18next';
+
+const mockI18n = {
+  language: 'pt',
+  changeLanguage: vi.fn(),
+} as unknown as I18nInstance;
 
 vi.mock('../../hooks', () => ({
   useScrollPosition: () => ({
@@ -15,15 +21,15 @@ vi.mock('../../hooks', () => ({
 
 describe('Header Component', () => {
   it('deve renderizar o logo', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     const logos = screen.getAllByText('PL');
     expect(logos.length).toBeGreaterThan(0);
   });
 
   it('deve renderizar os links de navegação no desktop', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     expect(screen.getAllByText('Início').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Sobre').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Tecnologias').length).toBeGreaterThan(0);
@@ -33,22 +39,22 @@ describe('Header Component', () => {
   });
 
   it('deve renderizar o botão CTA', () => {
-    render(<Header />);
-    
+     render(<Header i18n={mockI18n} />);
+
     const ctaButtons = screen.getAllByText('Fale Comigo');
     expect(ctaButtons.length).toBeGreaterThan(0);
   });
 
   it('deve renderizar o botão do menu mobile', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     const menuButton = screen.getByLabelText('Abrir menu');
     expect(menuButton).toBeInTheDocument();
   });
 
   it('deve abrir o menu mobile ao clicar no botão', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     const menuButton = screen.getByLabelText('Abrir menu');
     fireEvent.click(menuButton);
     
@@ -58,8 +64,8 @@ describe('Header Component', () => {
   });
 
   it('deve fechar o menu mobile ao clicar no botão fechar', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     // Abre o menu
     const openButton = screen.getByLabelText('Abrir menu');
     fireEvent.click(openButton);
@@ -77,8 +83,8 @@ describe('Header Component', () => {
   });
 
   it('deve ter os hrefs corretos nos links de navegação', () => {
-    render(<Header />);
-    
+    render(<Header i18n={mockI18n} />);
+
     // Pega todos os links e verifica se contém os hrefs corretos
     const allLinks = screen.getAllByRole('link');
     const hrefs = allLinks.map(link => link.getAttribute('href'));
