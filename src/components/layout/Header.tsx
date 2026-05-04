@@ -1,22 +1,29 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useScrollPosition, useSmoothScroll } from '../../hooks';
+import { useTranslation } from 'react-i18next';
+import { i18n as I18nInstance } from 'i18next'; // Import i18n type
 
-const navItems = [
-  { label: 'Início', href: '#inicio' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Tecnologias', href: '#tecnologias' },
-  { label: 'Projetos', href: '#projetos' },
-  { label: '🎮 Game', href: '#game' },
-  { label: 'Contato', href: '#contato' },
-];
+interface HeaderProps {
+  i18n: I18nInstance; // Add i18n prop
+}
 
-export function Header() {
+export function Header({ i18n }: HeaderProps) {
+  const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState('#inicio');
   const { scrollY, scrollDirection } = useScrollPosition();
   const { scrollTo } = useSmoothScroll();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isScrolled = scrollY > 50;
   const isHidden = scrollDirection === 'down' && scrollY > 400;
+
+  const navItems = [
+    { label: t('nav_home'), href: '#inicio' },
+    { label: t('nav_about'), href: '#sobre' },
+    { label: t('nav_tech'), href: '#tecnologias' },
+    { label: t('nav_projects'), href: '#projetos' },
+    { label: t('nav_game'), href: '#game' },
+    { label: t('nav_contact'), href: '#contato' },
+  ];
 
   useEffect(() => {
     const sections = navItems.map(item => item.href.slice(1));
@@ -35,7 +42,7 @@ export function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navItems]); // Re-run effect if navItems change (due to language change)
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -76,6 +83,10 @@ export function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <>
     <header
@@ -107,7 +118,17 @@ export function Header() {
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-secondary)] group-hover:w-full transition-all duration-300" />
           </a>
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2"> {/* Added gap for language selector */}
+            <select
+              onChange={(e) => changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="bg-transparent text-white border border-white/20 rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
+            >
+              <option value="pt" className="bg-[var(--color-dark-bg)]">PT</option>
+              <option value="en" className="bg-[var(--color-dark-bg)]">EN</option>
+              <option value="zh" className="bg-[var(--color-dark-bg)]">ZH</option>
+              <option value="de" className="bg-[var(--color-dark-bg)]">DE</option>
+            </select>
             <button
               onClick={toggleMobileMenu}
               className="text-white focus:outline-none"
@@ -150,6 +171,16 @@ export function Header() {
                 {item.label}
               </a>
             ))}
+            <select
+              onChange={(e) => changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="bg-transparent text-white border border-white/20 rounded-md py-1 px-2 text-sm ml-4 focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
+            >
+              <option value="pt" className="bg-[var(--color-dark-bg)]">PT</option>
+              <option value="en" className="bg-[var(--color-dark-bg)]">EN</option>
+              <option value="zh" className="bg-[var(--color-dark-bg)]">ZH</option>
+              <option value="de" className="bg-[var(--color-dark-bg)]">DE</option>
+            </select>
           </div>
 
           <a
@@ -157,7 +188,7 @@ export function Header() {
             onClick={(e) => handleNavClick(e, '#contato')}
             className="hidden md:block btn-premium btn-primary-premium py-2 px-4 text-sm ml-2"
           >
-            <span>Fale Comigo</span>
+            <span>{t('speak_to_me')}</span>
           </a>
         </nav>
       </div>
@@ -229,6 +260,18 @@ export function Header() {
                 {item.label}
               </a>
             ))}
+            <div className="mt-4 px-5">
+              <select
+                onChange={(e) => changeLanguage(e.target.value)}
+                value={i18n.language}
+                className="bg-[var(--color-dark-bg)] text-white border border-white/20 rounded-md py-2 px-3 text-base w-full focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
+              >
+                <option value="pt" className="bg-[var(--color-dark-bg)]">Português</option>
+                <option value="en" className="bg-[var(--color-dark-bg)]">English</option>
+                <option value="zh" className="bg-[var(--color-dark-bg)]">中文</option>
+                <option value="de" className="bg-[var(--color-dark-bg)]">Deutsch</option>
+              </select>
+            </div>
           </div>
 
           {/* CTA button - bottom */}
@@ -238,7 +281,7 @@ export function Header() {
               onClick={(e) => handleNavClick(e, '#contato')}
               className="btn-premium btn-primary-premium py-4 px-6 text-base w-full text-center block min-h-[48px]"
             >
-              <span>Fale Comigo</span>
+              <span>{t('speak_to_me')}</span>
             </a>
           </div>
         </div>

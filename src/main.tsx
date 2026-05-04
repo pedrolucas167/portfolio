@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './styles/main.css';
+import './i18n'; // Import the i18n configuration
+import { HelmetProvider } from 'react-helmet-async'; // Import HelmetProvider
 
 const container = document.getElementById('root');
 
@@ -13,7 +15,9 @@ const root = createRoot(container);
 
 root.render(
   <StrictMode>
-    <App />
+    <HelmetProvider> {/* Wrap App with HelmetProvider */}
+      <App />
+    </HelmetProvider>
   </StrictMode>
 );
 

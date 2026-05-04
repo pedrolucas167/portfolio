@@ -1,0 +1,17 @@
+{
+  "portfolio_title": "Pedro Lucas | Full-Stack Developer",
+  "description": "Professional portfolio of Pedro Lucas, Full-Stack Developer specialized in Java, Spring Boot, React, Node.js, and TypeScript.",
+  "keywords": "Pedro Lucas, Full-Stack Developer, Java, Spring Boot, React, Node.js, TypeScript",
+  "og_title": "Pedro Lucas | Full-Stack Developer",
+  "og_description": "Full-Stack Developer specialized in scalable and modern solutions.",
+  "twitter_title": "Pedro Lucas | Full-Stack Developer",
+  "twitter_description": "Full-Stack Developer specialized in scalable solutions.",
+  "loading_game": "Loading game...",
+  "nav_home": "Home",
+  "nav_about": "About",
+  "nav_tech": "Technologies",
+  "nav_projects": "Projects",
+  "nav_game": "🎮 Game",
+  "nav_contact": "Contact",
+  "speak_to_me": "Talk to Me"
+}

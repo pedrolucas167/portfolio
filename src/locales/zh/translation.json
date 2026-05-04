@@ -1,0 +1,17 @@
+{
+  "portfolio_title": "佩德罗·卢卡斯 | 全栈开发人员",
+  "description": "佩德罗·卢卡斯的专业作品集，全栈开发人员，专注于Java、Spring Boot、React、Node.js和TypeScript。",
+  "keywords": "佩德罗·卢卡斯, 全栈开发人员, Java, Spring Boot, React, Node.js, TypeScript",
+  "og_title": "佩德罗·卢卡斯 | 全栈开发人员",
+  "og_description": "专注于可扩展和现代解决方案的全栈开发人员。",
+  "twitter_title": "佩德罗·卢卡斯 | 全栈开发人员",
+  "twitter_description": "专注于可扩展解决方案的全栈开发人员。",
+  "loading_game": "正在加载游戏...",
+  "nav_home": "主页",
+  "nav_about": "关于",
+  "nav_tech": "技术",
+  "nav_projects": "项目",
+  "nav_game": "🎮 游戏",
+  "nav_contact": "联系",
+  "speak_to_me": "与我交谈"
+}

@@ -2,12 +2,14 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ScrollProgress } from '../ui';
+import { i18n as I18nInstance } from 'i18next'; // Import i18n type
 
 interface LayoutProps {
   children: ReactNode;
+  i18n: I18nInstance; // Add i18n prop
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, i18n }: LayoutProps) {
   return (
     <div className="min-h-screen bg-[var(--color-dark-bg)] text-white overflow-x-hidden">
       {/* Scroll progress indicator */}
@@ -19,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
       {/* Noise texture overlay */}
       <div className="fixed inset-0 bg-noise pointer-events-none" />
       
-      <Header />
+      <Header i18n={i18n} /> {/* Pass i18n to Header */}
       
       <main className="relative">
         {children}
