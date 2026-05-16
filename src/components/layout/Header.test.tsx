@@ -20,6 +20,8 @@ vi.mock('react-i18next', () => ({
 const mockI18n = {
   language: 'pt',
   changeLanguage: vi.fn(),
+  on: vi.fn(),
+  off: vi.fn(),
 } as unknown as I18nInstance;
 
 vi.mock('../../hooks', () => ({

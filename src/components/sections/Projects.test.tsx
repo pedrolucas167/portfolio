@@ -40,8 +40,9 @@ describe('Projects Component', () => {
   it('deve renderizar o título da seção', () => {
     render(<Projects />);
     
-    expect(screen.getByText('Portfólio')).toBeInTheDocument();
-    expect(screen.getByText(/Projetos em/)).toBeInTheDocument();
+    expect(screen.getByText('Trabalhos')).toBeInTheDocument();
+    expect(screen.getByText('Projetos')).toBeInTheDocument();
+    expect(screen.getByText('em destaque')).toBeInTheDocument();
   });
 
   it('deve renderizar os projetos', () => {

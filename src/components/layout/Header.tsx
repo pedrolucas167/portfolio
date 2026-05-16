@@ -93,6 +93,10 @@ export function Header({ i18n }: HeaderProps) {
 
    // Listen for language changes to keep the selector in sync
    useEffect(() => {
+      if (typeof i18n.on !== 'function' || typeof i18n.off !== 'function') {
+        return;
+      }
+
      const handleLanguageChanged = () => {
        // Component will re-render with updated currentLanguage
      };

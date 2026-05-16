@@ -43,8 +43,8 @@ describe('Hero Component', () => {
   it('deve renderizar os botões de CTA', () => {
     render(<Hero />);
     
-    expect(screen.getByText('Ver Projetos')).toBeInTheDocument();
-    expect(screen.getByText('Entrar em Contato')).toBeInTheDocument();
+    expect(screen.getByText('Explorar Trabalhos')).toBeInTheDocument();
+    expect(screen.getByText('Iniciar Conversa')).toBeInTheDocument();
   });
 
   it('deve renderizar os links sociais', () => {

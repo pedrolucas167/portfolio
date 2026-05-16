@@ -43,6 +43,6 @@ describe('TechStack Component', () => {
   it('deve renderizar a mensagem de aprendizado contínuo', () => {
     render(<TechStack />);
     
-    expect(screen.getByText(/E sempre aprendendo novas tecnologias/)).toBeInTheDocument();
+    expect(screen.getByText(/Continuamente explorando novas tecnologias para manter excelência/i)).toBeInTheDocument();
   });
 });

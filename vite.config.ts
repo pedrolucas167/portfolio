@@ -17,9 +17,18 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
       },
       output: {
-        manualChunks: {
-          'three': ['three', '@react-three/fiber', '@react-three/drei'],
-          'react-vendor': ['react', 'react-dom'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three') || id.includes('@react-three/fiber') || id.includes('@react-three/drei')) {
+              return 'three';
+            }
+
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+          }
+
+          return undefined;
         },
       },
     },

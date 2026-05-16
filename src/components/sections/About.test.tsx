@@ -13,14 +13,14 @@ describe('About Component', () => {
   it('deve renderizar o título da seção', () => {
     render(<About />);
     
-    expect(screen.getByText('Sobre mim')).toBeInTheDocument();
-    expect(screen.getByText(/Transformando ideias em/)).toBeInTheDocument();
+    expect(screen.getByText('Sobre')).toBeInTheDocument();
+    expect(screen.getByText(/Transformando visões em/)).toBeInTheDocument();
     expect(screen.getByText(/Brainly.*2016.*2025|2016.*2025/)).toBeInTheDocument();
     expect(screen.getByText(/1\.800|\b1800\b/)).toBeInTheDocument();
     expect(screen.getByText(/12\.000|\b12000\b/)).toBeInTheDocument();
-    expect(screen.getByText(/Atualmente.*disponibilidade regular/i)).toBeInTheDocument();
-    expect(screen.getByText(/IA aplicada:/i)).toBeInTheDocument();
-    expect(screen.getByText(/integro LLMs a produtos com foco em resultado/i)).toBeInTheDocument();
+    expect(screen.getByText(/Atualmente focado em projetos de maior envergadura/i)).toBeInTheDocument();
+    expect(screen.getByText(/Especialidade em IA:/i)).toBeInTheDocument();
+    expect(screen.getByText(/integro LLMs com foco em resultados mensuráveis/i)).toBeInTheDocument();
   });
 
   it('deve renderizar os cards de skills', () => {
