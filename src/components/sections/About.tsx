@@ -8,7 +8,6 @@ const skills = [
     title: 'Frontend', 
     desc: 'React, TypeScript, Tailwind CSS',
     color: 'from-cyan-500 to-blue-500',
-    details: 'Interfaces modernas e responsivas com foco em performance e acessibilidade'
   },
   { 
     icon: FaServer, 
@@ -19,7 +18,7 @@ const skills = [
   },
   { 
     icon: FaCloud, 
-    title: 'DevOps', 
+    title: 'DevOps',
     desc: 'Docker, AWS, CI/CD',
     color: 'from-purple-500 to-pink-500',
     details: 'Automação, containerização e deploy contínuo'
@@ -50,19 +49,19 @@ export function About() {
       >
         
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Sobre mim</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Sobre</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Transformando ideias em{' '}
-            <span className="text-gradient-animated">código</span>
+            Transformando visões em{' '}
+            <span className="text-gradient-animated">realidade digital</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Formado em Ciência de Dados e em pós-graduação em Engenharia de Software, atuo como Full Stack Developer com foco em backend, construindo APIs robustas e escaláveis com Java/Spring Boot e Node.js. Também integro IA a soluções reais, com experiência em AIOps, processamento de áudio e validação inteligente. No frontend, desenvolvo interfaces responsivas com React, Angular e Next.js, priorizando arquitetura, clean code e escalabilidade.
+            Formado em Ciência de Dados com pós-graduação em Engenharia de Software. Atuo como Full-Stack Engineer com foco em backend, desenvolvendo APIs enterprise com Java/Spring Boot e Node.js. Integro IA em soluções reais com experiência em processamento inteligente e arquitetura escalável. No frontend, crio interfaces responsivas com React, Angular e Next.js, sempre priorizando excelência arquitetural e clean code.
           </p>
           <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            Como hobby, contribuí no Brainly entre 2016 e 2025 — mais de 1.800 respostas e 12.000+ agradecimentos — ajudando estudantes com explicações claras e didáticas em Matemática, Física, Filosofia e Programação. Atualmente não tenho disponibilidade regular para colaborar.
+            Como contribuinte no Brainly entre 2016 e 2025, compartilhei mais de 1.800 respostas acadêmicas com 12.000+ reconhecimentos. Atualmente focado em projetos de maior envergadura.
           </p>
           <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            <span className="text-[var(--color-accent)] font-semibold">IA aplicada:</span> integro LLMs a produtos com foco em resultado, usando prompt engineering e fine-tuning quando necessário.
+            <span className="text-[var(--color-accent)] font-semibold">Especialidade em IA:</span> Integro LLMs com foco em resultados mensuráveis, utilizando prompt engineering e fine-tuning estratégico.
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Layout } from './components/layout';
 import { Hero, About, TechStack, Projects, Contact } from './components/sections';
 import { useTranslation } from 'react-i18next';
@@ -18,11 +18,36 @@ function GameLoading() {
 
 export default function App() {
   const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.resolvedLanguage ?? i18n.language?.split('-')[0] ?? 'en';
+
+  // Sync HTML lang attribute when language changes
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage;
+  }, [currentLanguage]);
+
+  // Update localStorage when language changes
+  useEffect(() => {
+    const handleLanguageChanged = () => {
+      const newLanguage = i18n.resolvedLanguage ?? i18n.language?.split('-')[0] ?? 'en';
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem('lng', newLanguage);
+        }
+      } catch (err) {
+        // ignore storage errors
+      }
+    };
+
+    i18n.on('languageChanged', handleLanguageChanged);
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, [i18n]);
 
   return (
     <>
       <Helmet>
-        <html lang={i18n.language} />
+        <html lang={currentLanguage} />
         <title>{t('portfolio_title')}</title>
         <meta name="description" content={t('description')} />
         <meta name="keywords" content={t('keywords')} />

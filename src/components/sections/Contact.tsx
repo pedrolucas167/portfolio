@@ -230,10 +230,10 @@ export function Contact() {
                   </div>
                 </div>
                 <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  Mensagem Enviada!
+                  Enviado com sucesso! 🎉
                 </h4>
                 <p className="text-[#94a3b8] text-sm sm:text-base">
-                  Obrigado pelo contato. Responderei em breve!
+                  Obrigado pela mensagem. Estarei retornando em breve!
                 </p>
               </div>
             ) : (

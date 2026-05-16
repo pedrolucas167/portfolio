@@ -65,7 +65,7 @@ export function TechStack() {
         
         <div className="mt-10 sm:mt-16 text-center">
           <p className="text-[#64748b] text-base sm:text-lg md:text-xl px-4 sm:px-0">
-            E sempre aprendendo novas tecnologias...
+            Continuamente explorando novas tecnologias para manter excelência...
           </p>
         </div>
       </div>

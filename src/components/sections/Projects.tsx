@@ -5,9 +5,10 @@ import { GlassCard, SectionWrapper } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
 
 const projectEmojis: Record<number, string> = {
-  1: '💌',
-  2: '🔍',
-  3: '📦',
+  1: '🧩',
+  2: '🧪',
+  3: '💝',
+  4: '📦',
 };
 
 export function Projects() {
@@ -24,13 +25,13 @@ export function Projects() {
       >
         {/* Section header */}
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Portfólio</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Trabalhos</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Projetos em{' '}
-            <span className="text-gradient-animated">destaque</span>
+            Projetos{' '}
+            <span className="text-gradient-animated">em destaque</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Uma seleção dos meus trabalhos mais recentes e relevantes.
+            Uma curadoria dos meus trabalhos mais significativos e impactantes.
           </p>
         </div>
 
@@ -159,25 +160,25 @@ export function Projects() {
                 {selected.fullDescription || selected.description}
               </p>
 
-              {/* Features */}
-              {selected.features && selected.features.length > 0 && (
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-                    Funcionalidades
-                  </h4>
-                  <ul className="space-y-2">
-                    {selected.features.map((feature, i) => (
-                      <li 
-                        key={i} 
-                        className="flex items-start gap-3 text-sm text-[#94a3b8]"
-                      >
-                        <span className="text-[var(--color-accent)] mt-1">✦</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+               {/* Features */}
+               {selected.features && selected.features.length > 0 && (
+                 <div className="mb-6">
+                   <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
+                     Destaques
+                   </h4>
+                   <ul className="space-y-2">
+                     {selected.features.map((feature, i) => (
+                       <li
+                         key={i}
+                         className="flex items-start gap-3 text-sm text-[#94a3b8]"
+                       >
+                         <span className="text-[var(--color-accent)] mt-1">✦</span>
+                         {feature}
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+               )}
 
               {/* Technologies */}
               <div className="mb-6">

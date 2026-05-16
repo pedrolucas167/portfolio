@@ -3,6 +3,20 @@ import { render, screen, fireEvent } from '../../test/test-utils';
 import { Header } from './Header';
 import type { i18n as I18nInstance } from 'i18next';
 
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string) => ({
+      nav_home: 'Início',
+      nav_about: 'Sobre',
+      nav_tech: 'Tecnologias',
+      nav_projects: 'Projetos',
+      nav_game: '🎮 Jogo',
+      nav_contact: 'Contato',
+      speak_to_me: 'Fale Comigo',
+    }[key] ?? key),
+  }),
+}));
+
 const mockI18n = {
   language: 'pt',
   changeLanguage: vi.fn(),
@@ -34,7 +48,7 @@ describe('Header Component', () => {
     expect(screen.getAllByText('Sobre').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Tecnologias').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Projetos').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('🎮 Game').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('🎮 Jogo').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Contato').length).toBeGreaterThan(0);
   });
 

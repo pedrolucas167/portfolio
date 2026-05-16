@@ -9,6 +9,7 @@ interface HeaderProps {
 
 export function Header({ i18n }: HeaderProps) {
   const { t } = useTranslation();
+  const currentLanguage = i18n.resolvedLanguage ?? i18n.language?.split('-')[0] ?? 'en';
   const [activeSection, setActiveSection] = useState('#inicio');
   const { scrollY, scrollDirection } = useScrollPosition();
   const { scrollTo } = useSmoothScroll();
@@ -83,9 +84,24 @@ export function Header({ i18n }: HeaderProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
+   const changeLanguage = (lng: string) => {
+     // Change language - this will trigger i18n's languageChanged event
+     i18n.changeLanguage(lng).catch((err) => {
+       console.warn('Error changing language:', err);
+     });
+   };
+
+   // Listen for language changes to keep the selector in sync
+   useEffect(() => {
+     const handleLanguageChanged = () => {
+       // Component will re-render with updated currentLanguage
+     };
+     
+     i18n.on('languageChanged', handleLanguageChanged);
+     return () => {
+       i18n.off('languageChanged', handleLanguageChanged);
+     };
+   }, [i18n]);
 
   return (
     <>
@@ -121,7 +137,7 @@ export function Header({ i18n }: HeaderProps) {
           <div className="md:hidden flex items-center gap-2"> {/* Added gap for language selector */}
             <select
               onChange={(e) => changeLanguage(e.target.value)}
-              value={i18n.language}
+              value={currentLanguage}
               className="bg-transparent text-white border border-white/20 rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
             >
               <option value="pt" className="bg-[var(--color-dark-bg)]">PT</option>
@@ -132,6 +148,7 @@ export function Header({ i18n }: HeaderProps) {
             <button
               onClick={toggleMobileMenu}
               className="text-white focus:outline-none"
+              aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
             >
               <svg
                 className="w-6 h-6"
@@ -173,7 +190,7 @@ export function Header({ i18n }: HeaderProps) {
             ))}
             <select
               onChange={(e) => changeLanguage(e.target.value)}
-              value={i18n.language}
+              value={currentLanguage}
               className="bg-transparent text-white border border-white/20 rounded-md py-1 px-2 text-sm ml-4 focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
             >
               <option value="pt" className="bg-[var(--color-dark-bg)]">PT</option>
@@ -224,7 +241,7 @@ export function Header({ i18n }: HeaderProps) {
             <button
               onClick={toggleMobileMenu}
               className="text-white/70 hover:text-white focus:outline-none transition-colors p-2 -mr-2 min-w-[48px] min-h-[48px] flex items-center justify-center"
-              aria-label="Fechar menu"
+               aria-label="Fechar navegação"
             >
               <svg
                 className="w-6 h-6"
@@ -263,7 +280,7 @@ export function Header({ i18n }: HeaderProps) {
             <div className="mt-4 px-5">
               <select
                 onChange={(e) => changeLanguage(e.target.value)}
-                value={i18n.language}
+                value={currentLanguage}
                 className="bg-[var(--color-dark-bg)] text-white border border-white/20 rounded-md py-2 px-3 text-base w-full focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
               >
                 <option value="pt" className="bg-[var(--color-dark-bg)]">Português</option>

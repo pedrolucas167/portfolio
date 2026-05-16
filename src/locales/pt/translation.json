@@ -1,17 +1,17 @@
 {
-  "portfolio_title": "Pedro Lucas | Desenvolvedor Full-Stack",
-  "description": "Portfólio profissional de Pedro Lucas, Desenvolvedor Full-Stack especializado em Java, Spring Boot, React, Node.js e TypeScript.",
-  "keywords": "Pedro Lucas, Desenvolvedor Full-Stack, Java, Spring Boot, React, Node.js, TypeScript",
-  "og_title": "Pedro Lucas | Desenvolvedor Full-Stack",
-  "og_description": "Desenvolvedor Full-Stack especializado em soluções escaláveis e modernas.",
-  "twitter_title": "Pedro Lucas | Desenvolvedor Full-Stack",
-  "twitter_description": "Desenvolvedor Full-Stack especializado em soluções escaláveis.",
-  "loading_game": "Carregando jogo...",
+  "portfolio_title": "Pedro Lucas | Full-Stack Engineer",
+  "description": "Portfólio profissional de Pedro Lucas, Full-Stack Engineer especializado em soluções enterprise com Java, Spring Boot, React, Node.js e TypeScript.",
+  "keywords": "Pedro Lucas, Full-Stack Engineer, Java, Spring Boot, React, Node.js, TypeScript, Soluções Enterprise",
+  "og_title": "Pedro Lucas | Full-Stack Engineer",
+  "og_description": "Full-Stack Engineer projetando soluções escaláveis e sistemas de alta performance.",
+  "twitter_title": "Pedro Lucas | Full-Stack Engineer",
+  "twitter_description": "Full-Stack Engineer | Soluções Enterprise | Arquitetura Escalável",
+  "loading_game": "Carregando experiência...",
   "nav_home": "Início",
   "nav_about": "Sobre",
   "nav_tech": "Tecnologias",
-  "nav_projects": "Projetos",
-  "nav_game": "🎮 Jogo",
+  "nav_projects": "Trabalhos",
+  "nav_game": "🎮 Interativo",
   "nav_contact": "Contato",
-  "speak_to_me": "Fale Comigo"
+  "speak_to_me": "Vamos Conversar"
 }

@@ -102,7 +102,7 @@ export function Hero() {
             onClick={() => scrollToSection('#projetos')}
             className="btn-premium btn-primary-premium"
           >
-            <span>Ver Projetos</span>
+            <span>Explorar Trabalhos</span>
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -111,7 +111,7 @@ export function Hero() {
             onClick={() => scrollToSection('#contato')}
             className="btn-premium btn-secondary-premium"
           >
-            <span>Entrar em Contato</span>
+            <span>Iniciar Conversa</span>
           </button>
         </div>
 

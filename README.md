@@ -1,13 +1,14 @@
-# Portfolio - Pedro Marques
+# Portfolio - Pedro Lucas
 
-Portfólio profissional moderno construído com **TypeScript**, **Tailwind CSS** e **Vite**.
+Portfólio profissional moderno e de alto impacto construído com **TypeScript**, **React**, **Tailwind CSS** e **Vite**.
 
 ## 🚀 Tecnologias
 
-- **Vite** - Build tool rápido e moderno
-- **TypeScript** - Tipagem estática para JavaScript
-- **Tailwind CSS** - Framework CSS utility-first
-- **Particles.js** - Efeitos de partículas interativas
+- **Vite** - Build tool de próxima geração
+- **React** - UI library progressiva
+- **TypeScript** - Type-safety em larga escala
+- **Tailwind CSS** - Design system utility-first
+- **Framer Motion** - Animações fluidas e performáticas
 
 ## 📁 Estrutura do Projeto
 
@@ -83,4 +84,4 @@ npm run preview
 
 ## 📄 Licença
 
-MIT © Pedro Marques
+MIT © Pedro Lucas - [2024-2026]
