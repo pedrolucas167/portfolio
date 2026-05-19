@@ -3,6 +3,7 @@ import { FaGithub, FaExternalLinkAlt, FaTimes, FaChevronRight } from 'react-icon
 import { projects, Project } from '../../data';
 import { GlassCard, SectionWrapper } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const projectEmojis: Record<number, string> = {
   1: '🧩',
@@ -12,6 +13,7 @@ const projectEmojis: Record<number, string> = {
 };
 
 export function Projects() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [selected, setSelected] = useState<Project | null>(null);
   const { ref, isRevealed } = useReveal({ threshold: 0.1 });
 
@@ -25,13 +27,13 @@ export function Projects() {
       >
         {/* Section header */}
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Trabalhos</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">{t('projects_badge')}</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Projetos{' '}
-            <span className="text-gradient-animated">em destaque</span>
+            {t('projects_title_part1')}{' '}
+            <span className="text-gradient-animated">{t('projects_title_part2')}</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Uma curadoria dos meus trabalhos mais significativos e impactantes.
+            {t('projects_subtitle')}
           </p>
         </div>
 
@@ -70,14 +72,14 @@ export function Projects() {
                 {/* Category badge */}
                 <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
                   <span className="badge-premium bg-black/30 backdrop-blur-sm border-white/20 text-white text-xs">
-                    {project.category}
+                    {t(project.category)}
                   </span>
                 </div>
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <span className="text-white font-medium flex items-center gap-2 text-sm sm:text-base">
-                    Ver detalhes <FaChevronRight className="text-xs sm:text-sm" />
+                    {t('projects_view_details')} <FaChevronRight className="text-xs sm:text-sm" />
                   </span>
                 </div>
               </div>
@@ -85,15 +87,15 @@ export function Projects() {
               {/* Content */}
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-[var(--color-accent)] transition-colors">
-                  {project.title}
+                  {t(project.title)}
                 </h3>
                 <p className="text-[#94a3b8] text-xs sm:text-sm line-clamp-2 mb-3 sm:mb-4">
-                  {project.description}
+                  {t(project.description)}
                 </p>
                 
                 {/* Tech tags */}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.technologies.slice(0, 3).map((tech) => (
+                  {project.technologies.map((tech) => (
                     <span 
                       key={tech} 
                       className="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-[#94a3b8] border border-white/5"
@@ -140,7 +142,7 @@ export function Projects() {
               <button 
                 onClick={closeModal}
                 className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/50 transition-colors"
-                aria-label="Fechar"
+                aria-label={t('projects_close')}
               >
                 <FaTimes />
               </button>
@@ -149,22 +151,22 @@ export function Projects() {
             {/* Modal content */}
             <div className="p-6 max-h-[60vh] overflow-y-auto modal-scroll">
               <span className="badge-premium accent text-xs mb-3 inline-block">
-                {selected.category}
+                {t(selected.category)}
               </span>
               
               <h3 className="text-2xl font-bold text-white mb-4">
-                {selected.title}
+                {t(selected.title)}
               </h3>
               
               <p className="text-[#94a3b8] mb-6 leading-relaxed">
-                {selected.fullDescription || selected.description}
+                {t(selected.fullDescription || selected.description)}
               </p>
 
                {/* Features */}
                {selected.features && selected.features.length > 0 && (
                  <div className="mb-6">
                    <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-                     Destaques
+                     {t('projects_features_title')}
                    </h4>
                    <ul className="space-y-2">
                      {selected.features.map((feature, i) => (
@@ -173,7 +175,7 @@ export function Projects() {
                          className="flex items-start gap-3 text-sm text-[#94a3b8]"
                        >
                          <span className="text-[var(--color-accent)] mt-1">✦</span>
-                         {feature}
+                         {t(feature)}
                        </li>
                      ))}
                    </ul>
@@ -183,7 +185,7 @@ export function Projects() {
               {/* Technologies */}
               <div className="mb-6">
                 <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-                  Tecnologias
+                  {t('projects_technologies_title')}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {selected.technologies.map((tech) => (
@@ -207,7 +209,7 @@ export function Projects() {
                     className="btn-premium btn-secondary-premium flex-1 justify-center"
                   >
                     <FaGithub className="text-lg" />
-                    <span>Código</span>
+                    <span>{t('projects_code_button')}</span>
                   </a>
                 )}
                 {selected.demo && (
@@ -218,7 +220,7 @@ export function Projects() {
                     className="btn-premium btn-primary-premium flex-1 justify-center"
                   >
                     <FaExternalLinkAlt />
-                    <span>Demo</span>
+                    <span>{t('projects_demo_button')}</span>
                   </a>
                 )}
               </div>

@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FloatingOrbs, InteractiveAvatar } from '../ui';
 import { useTypingEffect } from '../../hooks';
-import { typingTexts, socialLinks } from '../../data';
+import { typingTexts, socialLinks, personalInfo } from '../../data'; // Import personalInfo
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export function Hero() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [isLoaded, setIsLoaded] = useState(false);
-  const typedText = useTypingEffect(typingTexts, 80, 40, 2500);
+  
+  // Translate typingTexts before passing to useTypingEffect
+  const translatedTypingTexts = typingTexts.map(key => t(key));
+  const typedText = useTypingEffect(translatedTypingTexts, 80, 40, 2500);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -58,7 +63,7 @@ export function Hero() {
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          Disponível para projetos
+          {t('hero_available_for_projects')} {/* Translated */}
         </div>
 
         
@@ -77,7 +82,7 @@ export function Hero() {
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          Desenvolvedor Full-Stack
+          {t(personalInfo.role)} {/* Translated using personalInfo.role key */}
         </p>
 
         
@@ -102,7 +107,7 @@ export function Hero() {
             onClick={() => scrollToSection('#projetos')}
             className="btn-premium btn-primary-premium"
           >
-            <span>Explorar Trabalhos</span>
+            <span>{t('hero_explore_work')}</span> {/* Translated */}
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -111,7 +116,7 @@ export function Hero() {
             onClick={() => scrollToSection('#contato')}
             className="btn-premium btn-secondary-premium"
           >
-            <span>Iniciar Conversa</span>
+            <span>{t('hero_start_conversation')}</span> {/* Translated */}
           </button>
         </div>
 
@@ -149,7 +154,7 @@ export function Hero() {
         aria-label="Rolar para baixo"
       >
         <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-          Rolar
+          {t('hero_scroll_down')} {/* Translated */}
         </span>
         <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
           <div className="w-1.5 h-3 bg-current rounded-full animate-bounce-soft" />
@@ -161,4 +166,3 @@ export function Hero() {
     </section>
   );
 }
-

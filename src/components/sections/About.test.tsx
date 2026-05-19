@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '../../test/test-utils';
+import '../../i18n';
 import { About } from './About';
 
 vi.mock('../../hooks/useReveal', () => ({
@@ -20,7 +21,7 @@ describe('About Component', () => {
     expect(screen.getByText(/12\.000|\b12000\b/)).toBeInTheDocument();
     expect(screen.getByText(/Atualmente focado em projetos de maior envergadura/i)).toBeInTheDocument();
     expect(screen.getByText(/Especialidade em IA:/i)).toBeInTheDocument();
-    expect(screen.getByText(/integro LLMs com foco em resultados mensuráveis/i)).toBeInTheDocument();
+    expect(screen.getByText(/Integro LLMs com foco em resultados mensuráveis/i)).toBeInTheDocument();
   });
 
   it('deve renderizar os cards de skills', () => {
@@ -47,6 +48,7 @@ describe('About Component', () => {
     expect(screen.getByText('Pensamento Criativo')).toBeInTheDocument();
     expect(screen.getByText('Alta Performance')).toBeInTheDocument();
     expect(screen.getByText('Colaboração')).toBeInTheDocument();
+    expect(screen.getByText('Contribuidor Expert')).toBeInTheDocument();
   });
 
   it('deve ter o id correto para navegação', () => {

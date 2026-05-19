@@ -11,6 +11,46 @@ import de from './locales/de/translation.json';
 import pt from './locales/pt/translation.json';
 
 const supportedLngs = ['en', 'zh', 'de', 'pt'] as const;
+const fallbackLanguage = 'en';
+
+function normalizeLanguage(input?: string | null): (typeof supportedLngs)[number] | null {
+  if (!input) {
+    return null;
+  }
+
+  const languageOnly = input.toLowerCase().split('-')[0];
+
+  // Never allow i18next key-debug mode in production UI.
+  if (languageOnly === 'cimode') {
+    return fallbackLanguage;
+  }
+
+  return (supportedLngs as readonly string[]).includes(languageOnly)
+    ? (languageOnly as (typeof supportedLngs)[number])
+    : null;
+}
+
+function getInitialLanguage(): (typeof supportedLngs)[number] {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const fromStorage = normalizeLanguage(window.localStorage.getItem('lng'));
+      if (fromStorage) {
+        return fromStorage;
+      }
+    }
+  } catch {
+    // ignore storage access errors
+  }
+
+  if (typeof navigator !== 'undefined') {
+    const fromNavigator = normalizeLanguage(navigator.language);
+    if (fromNavigator) {
+      return fromNavigator;
+    }
+  }
+
+  return fallbackLanguage;
+}
 
 i18n
   .use(LanguageDetector)
@@ -30,6 +70,7 @@ i18n
         translation: pt,
       },
     },
+    lng: getInitialLanguage(),
     supportedLngs,
     nonExplicitSupportedLngs: true,
     load: 'languageOnly',
@@ -41,9 +82,10 @@ i18n
       lookupLocalStorage: 'lng',
       // cache user language on
       caches: ['localStorage'],
+      excludeCacheFor: ['cimode'],
     },
     // fallback language if translation is missing or detection fails
-    fallbackLng: 'en',
+    fallbackLng: fallbackLanguage,
 
     interpolation: {
       escapeValue: false, // react already safes from xss

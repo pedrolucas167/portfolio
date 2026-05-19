@@ -2,7 +2,8 @@ import { useState, FormEvent } from 'react';
 import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheck, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { SectionWrapper, GlassCard } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
-import { socialLinks } from '../../data';
+import { socialLinks, contactLinks as dataContactLinks } from '../../data'; // Import dataContactLinks
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 interface FormData {
   name: string;
@@ -19,6 +20,7 @@ interface FormErrors {
 }
 
 export function Contact() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -37,21 +39,21 @@ export function Contact() {
     const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Nome é obrigatório';
+      newErrors.name = t('contact_form_name_required');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'E-mail é obrigatório';
+      newErrors.email = t('contact_form_email_required');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'E-mail inválido';
+      newErrors.email = t('contact_form_email_invalid');
     }
 
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Assunto é obrigatório';
+      newErrors.subject = t('contact_form_subject_required');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Mensagem é obrigatória';
+      newErrors.message = t('contact_form_message_required');
     }
 
     setErrors(newErrors);
@@ -91,7 +93,7 @@ export function Contact() {
         setIsSuccess(false);
       }, 5000);
     } catch (error) {
-      setSubmitError('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+      setSubmitError(t('contact_form_submit_error'));
     } finally {
       setIsSubmitting(false);
     }
@@ -106,36 +108,11 @@ export function Contact() {
     }
   };
 
-  const contactLinks = [
-    {
-      icon: FaEnvelope,
-      label: 'E-mail',
-      value: socialLinks.email,
-      href: `mailto:${socialLinks.email}`,
-      color: 'from-[var(--color-accent)] to-emerald-500',
-    },
-    {
-      icon: FaGithub,
-      label: 'GitHub',
-      value: '@pedrolucas167',
-      href: socialLinks.github,
-      color: 'from-gray-600 to-gray-800',
-    },
-    {
-      icon: FaLinkedin,
-      label: 'LinkedIn',
-      value: 'in/pedromarquesdev',
-      href: socialLinks.linkedin,
-      color: 'from-blue-500 to-blue-700',
-    },
-    {
-      icon: FaMapMarkerAlt,
-      label: 'Localização',
-      value: 'Brasil',
-      href: null,
-      color: 'from-[var(--color-secondary)] to-purple-700',
-    },
-  ];
+  const contactLinks = dataContactLinks.map(link => ({
+    ...link,
+    label: t(link.label),
+    value: link.name === 'Location' ? t(link.value) : link.value, // Translate location value
+  }));
 
   return (
     <SectionWrapper id="contato">
@@ -144,13 +121,13 @@ export function Contact() {
         className={`transition-all duration-1000 ${isRevealed ? 'opacity-100' : 'opacity-0'}`}
       >
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Contato</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">{t('contact_badge')}</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Vamos{' '}
-            <span className="text-gradient-animated">conversar?</span>
+            {t('contact_title_part1')}{' '}
+            <span className="text-gradient-animated">{t('contact_title_part2')}</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Tem um projeto em mente? Estou sempre aberto a novas oportunidades e projetos interessantes.
+            {t('contact_subtitle')}
           </p>
         </div>
 
@@ -158,11 +135,10 @@ export function Contact() {
           <div className="space-y-4 sm:space-y-6">
             <div className="mb-6 sm:mb-8">
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
-                Vamos trabalhar juntos?
+                {t('contact_work_together_title')}
               </h3>
               <p className="text-[#94a3b8] leading-relaxed text-sm sm:text-base">
-                Se você tem uma ideia ou precisa de ajuda com desenvolvimento, 
-                não hesite em entrar em contato! Responderei o mais breve possível.
+                {t('contact_work_together_text')}
               </p>
             </div>
 
@@ -170,7 +146,7 @@ export function Contact() {
               {contactLinks.map((link, index) => (
                 link.href ? (
                   <a
-                    key={link.label}
+                    key={link.name} // Corrected key
                     href={link.href}
                     target={link.href.startsWith('mailto') ? undefined : '_blank'}
                     rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
@@ -193,7 +169,7 @@ export function Contact() {
                   </a>
                 ) : (
                   <div
-                    key={link.label}
+                    key={link.name} // Corrected key
                     className={`contact-link-premium cursor-default transition-all duration-700 ${
                       isRevealed 
                         ? 'opacity-100 translate-x-0' 
@@ -230,10 +206,10 @@ export function Contact() {
                   </div>
                 </div>
                 <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
-                  Enviado com sucesso! 🎉
+                  {t('contact_form_success_title')}
                 </h4>
                 <p className="text-[#94a3b8] text-sm sm:text-base">
-                  Obrigado pela mensagem. Estarei retornando em breve!
+                  {t('contact_form_success_message')}
                 </p>
               </div>
             ) : (
@@ -246,12 +222,12 @@ export function Contact() {
                       focusedField === 'name' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
                     }`}
                   >
-                    Nome
+                    {t('contact_form_name_label')}
                   </label>
                   <input
                     id="name"
                     type="text"
-                    placeholder="Seu nome"
+                    placeholder={t('contact_form_name_placeholder')}
                     value={formData.name}
                     onChange={handleChange('name')}
                     onFocus={() => setFocusedField('name')}
@@ -271,12 +247,12 @@ export function Contact() {
                       focusedField === 'email' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
                     }`}
                   >
-                    E-mail
+                    {t('contact_form_email_label')}
                   </label>
                   <input
                     id="email"
                     type="email"
-                    placeholder="seu@email.com"
+                    placeholder={t('contact_form_email_placeholder')}
                     value={formData.email}
                     onChange={handleChange('email')}
                     onFocus={() => setFocusedField('email')}
@@ -296,12 +272,12 @@ export function Contact() {
                       focusedField === 'subject' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
                     }`}
                   >
-                    Assunto
+                    {t('contact_form_subject_label')}
                   </label>
                   <input
                     id="subject"
                     type="text"
-                    placeholder="Assunto da mensagem"
+                    placeholder={t('contact_form_subject_placeholder')}
                     value={formData.subject}
                     onChange={handleChange('subject')}
                     onFocus={() => setFocusedField('subject')}
@@ -321,11 +297,11 @@ export function Contact() {
                       focusedField === 'message' ? 'text-[var(--color-accent)]' : 'text-[#94a3b8]'
                     }`}
                   >
-                    Mensagem
+                    {t('contact_form_message_label')}
                   </label>
                   <textarea
                     id="message"
-                    placeholder="Sua mensagem..."
+                    placeholder={t('contact_form_message_placeholder')}
                     rows={4}
                     value={formData.message}
                     onChange={handleChange('message')}
@@ -353,14 +329,14 @@ export function Contact() {
                     <>
                       <svg className="animate-spin w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                       </svg>
-                      <span>Enviando...</span>
+                      <span>{t('contact_form_sending_button')}</span>
                     </>
                   ) : (
                     <>
                       <FaPaperPlane className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span>Enviar Mensagem</span>
+                      <span>{t('contact_form_send_button')}</span>
                     </>
                   )}
                 </button>

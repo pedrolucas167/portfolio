@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
+window.localStorage.setItem('lng', 'pt');
+
 const mockIntersectionObserver = vi.fn();
 mockIntersectionObserver.mockReturnValue({
   observe: () => null,

@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import './i18n'; // Import the i18n configuration first
 import App from './App';
 import './styles/main.css';
-import './i18n'; // Import the i18n configuration
 import { HelmetProvider } from 'react-helmet-async'; // Import HelmetProvider
 
 const container = document.getElementById('root');

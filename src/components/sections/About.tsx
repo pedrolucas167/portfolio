@@ -10,37 +10,49 @@ export function About() {
   const skills = [
     { 
       icon: FaCode, 
-      title: t('about_skill_frontend_title'), 
-      desc: t('about_skill_frontend_desc'),
+      title: t('about_skill_frontend_title', 'Frontend'), 
+      desc: t('about_skill_frontend_desc', 'React, Next.js, Tailwind'),
       color: 'from-cyan-500 to-blue-500',
     },
     { 
       icon: FaServer, 
-      title: t('about_skill_backend_title'), 
-      desc: t('about_skill_backend_desc'),
+      title: t('about_skill_backend_title', 'Backend'), 
+      desc: t('about_skill_backend_desc', 'Node.js, Go, Python'),
       color: 'from-green-500 to-emerald-500',
-      details: t('about_skill_backend_details')
+      details: t('about_skill_backend_details', 'Construção de APIs robustas e microserviços.')
     },
     { 
       icon: FaCloud, 
-      title: t('about_skill_devops_title'),
-      desc: t('about_skill_devops_desc'),
+      title: t('about_skill_devops_title', 'DevOps'),
+      desc: t('about_skill_devops_desc', 'Docker, AWS, CI/CD'),
       color: 'from-purple-500 to-pink-500',
-      details: t('about_skill_devops_details')
+      details: t('about_skill_devops_details', 'Deploy automatizado e infraestrutura escalável.')
     },
     {
       icon: FaBrain,
-      title: t('about_skill_ia_llms_title'),
-      desc: t('about_skill_ia_llms_desc'),
+      title: t('about_skill_ia_llms_title', 'IA & LLMs'),
+      desc: t('about_skill_ia_llms_desc', 'OpenAI, LangChain, RAG'),
       color: 'from-amber-500 to-orange-500',
-      details: t('about_skill_ia_llms_details')
+      details: t('about_skill_ia_llms_details', 'Desenvolvimento de agentes e sistemas inteligentes.')
     },
   ];
 
   const highlights = [
-    { icon: FaLightbulb, label: t('about_highlight_creative_thinking_label'), value: t('about_highlight_creative_thinking_value') },
-    { icon: FaRocket, label: t('about_highlight_high_performance_label'), value: t('about_highlight_high_performance_value') },
-    { icon: FaUsers, label: t('about_highlight_collaboration_label'), value: t('about_highlight_collaboration_value') },
+    { 
+      icon: FaLightbulb, 
+      label: t('about_highlight_creative_thinking_label', 'Pensamento'), 
+      value: t('about_highlight_creative_thinking_value', 'Criativo') 
+    },
+    { 
+      icon: FaRocket, 
+      label: t('about_highlight_high_performance_label', 'Alta'), 
+      value: t('about_highlight_high_performance_value', 'Performance') 
+    },
+    { 
+      icon: FaUsers, 
+      label: t('about_highlight_collaboration_label', 'Foco em'), 
+      value: t('about_highlight_collaboration_value', 'Colaboração') 
+    },
     { 
       icon: FaGraduationCap, 
       label: 'Brainly', 
@@ -57,19 +69,19 @@ export function About() {
       >
         
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">{t('about_badge')}</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">{t('about_badge', 'Sobre Mim')}</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            {t('about_title_part1')}{' '}
-            <span className="text-gradient-animated">{t('about_title_part2')}</span>
+            {t('about_title_part1', 'Transformando Ideias em')}{' '}
+            <span className="text-gradient-animated">{t('about_title_part2', 'Soluções Digitais')}</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            {t('about_subtitle_p1')}
+            {t('about_subtitle_p1', 'Desenvolvedor Full Stack apaixonado por criar experiências excepcionais.')}
           </p>
           <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            {t('about_subtitle_p2')}
+            {t('about_subtitle_p2', 'Com vasta experiência em tecnologias modernas, foco em construir aplicações escaláveis e performáticas.')}
           </p>
           <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            <span className="text-[var(--color-accent)] font-semibold">{t('about_subtitle_ia_specialty_label')}</span> {t('about_subtitle_ia_specialty_text')}
+            <span className="text-[var(--color-accent)] font-semibold">{t('about_subtitle_ia_specialty_label', 'Especialista em IA:')}</span> {t('about_subtitle_ia_specialty_text', 'Integração de LLMs e automação inteligente.')}
           </p>
         </div>
 

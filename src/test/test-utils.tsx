@@ -1,5 +1,6 @@
 import { render, RenderOptions } from '@testing-library/react';
 import { ReactElement } from 'react';
+import '../i18n';
 
 function AllTheProviders({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

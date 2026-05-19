@@ -1,7 +1,9 @@
 import { FaGithub, FaLinkedin, FaHeart, FaArrowUp } from 'react-icons/fa';
 import { socialLinks } from '../../data';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export function Footer() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -25,15 +27,15 @@ export function Footer() {
               PL<span className="text-[var(--color-accent)] glow-text">.</span>
             </a>
             <p className="text-sm text-[#64748b]">
-              © {currentYear} Pedro Lucas. Todos os direitos reservados.
+              © {currentYear} {t('footer_copyright')}
             </p>
           </div>
 
           {/* Made with love */}
           <div className="flex items-center gap-2 text-sm text-[#64748b]">
-            <span>Feito com</span>
+            <span>{t('footer_made_with_love_part1')}</span>
             <FaHeart className="text-red-500 animate-pulse" />
-            <span>e muito</span>
+            <span>{t('footer_made_with_love_part2')}</span>
             <span className="relative text-2xl group cursor-default">
               <span className="inline-block animate-bounce-soft">☕</span>
               {/* Steam animation */}
@@ -71,7 +73,7 @@ export function Footer() {
             <button
               onClick={scrollToTop}
               className="p-3 glass-card-subtle rounded-xl hover:scale-110 hover:bg-[var(--color-accent)]/20 transition-all group"
-              aria-label="Voltar ao topo"
+              aria-label={t('footer_scroll_to_top')}
             >
               <FaArrowUp className="w-5 h-5 text-white group-hover:text-[var(--color-accent)] transition-colors" />
             </button>

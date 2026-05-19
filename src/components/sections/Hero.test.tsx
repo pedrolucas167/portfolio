@@ -12,6 +12,9 @@ vi.mock('../../hooks', () => ({
 
 // Mock dos dados
 vi.mock('../../data', () => ({
+  personalInfo: {
+    role: 'hero_role',
+  },
   typingTexts: ['Texto 1', 'Texto 2'],
   socialLinks: {
     github: 'https://github.com/pedrolucas167',

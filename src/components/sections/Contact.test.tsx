@@ -10,6 +10,12 @@ vi.mock('../../hooks/useReveal', () => ({
 }));
 
 vi.mock('../../data', () => ({
+  contactLinks: [
+    { name: 'Email', label: 'contact_link_email_label', value: 'test@test.com', href: 'mailto:test@test.com', icon: () => null, color: 'from-cyan-500 to-blue-500' },
+    { name: 'GitHub', label: 'contact_link_github_label', value: 'GitHub', href: 'https://github.com/test', icon: () => null, color: 'from-purple-500 to-pink-500' },
+    { name: 'LinkedIn', label: 'contact_link_linkedin_label', value: 'LinkedIn', href: 'https://linkedin.com/in/test', icon: () => null, color: 'from-blue-500 to-cyan-500' },
+    { name: 'Location', label: 'contact_link_location_label', value: 'contact_link_location_value', icon: () => null, color: 'from-green-500 to-emerald-500' },
+  ],
   socialLinks: {
     email: 'test@test.com',
     github: 'https://github.com/test',
@@ -58,9 +64,9 @@ describe('Contact Component', () => {
     render(<Contact />);
     
     expect(screen.getAllByText(/E-mail/i).length).toBeGreaterThan(0);
-    expect(screen.getByText('GitHub')).toBeInTheDocument();
-    expect(screen.getByText('LinkedIn')).toBeInTheDocument();
-    expect(screen.getByText('Localização')).toBeInTheDocument();
+    expect(screen.getAllByText('GitHub').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('LinkedIn').length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Localiza/i).length).toBeGreaterThan(0);
   });
 
   it('deve renderizar o formulário de contato', () => {

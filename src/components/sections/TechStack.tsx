@@ -1,8 +1,10 @@
 import { techStack } from '../../data';
 import { SectionWrapper } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export function TechStack() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const { ref, isRevealed } = useReveal({ threshold: 0.1 });
 
   return (
@@ -13,13 +15,13 @@ export function TechStack() {
       >
         
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium secondary mb-3 sm:mb-4 inline-block">Tech Stack</span>
+          <span className="badge-premium secondary mb-3 sm:mb-4 inline-block">{t('techstack_badge')}</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Tecnologias que{' '}
-            <span className="text-gradient-animated">domino</span>
+            {t('techstack_title_part1')}{' '}
+            <span className="text-gradient-animated">{t('techstack_title_part2')}</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Ferramentas e tecnologias que utilizo para criar soluções robustas e escaláveis.
+            {t('techstack_subtitle')}
           </p>
         </div>
 
@@ -65,7 +67,7 @@ export function TechStack() {
         
         <div className="mt-10 sm:mt-16 text-center">
           <p className="text-[#64748b] text-base sm:text-lg md:text-xl px-4 sm:px-0">
-            Continuamente explorando novas tecnologias para manter excelência...
+            {t('techstack_footer_text')}
           </p>
         </div>
       </div>
