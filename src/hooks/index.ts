@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export { useSmoothScroll } from './useSmoothScroll';
 export { useReveal } from './useReveal';
+export { useMediumArticles } from './useMediumArticles';
 
 export function useScrollPosition() {
   const [scrollY, setScrollY] = useState(0);

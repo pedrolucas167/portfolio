@@ -22,6 +22,7 @@ export function Header({ i18n }: HeaderProps) {
     { label: t('nav_about'), href: '#sobre' },
     { label: t('nav_tech'), href: '#tecnologias' },
     { label: t('nav_projects'), href: '#projetos' },
+    { label: t('nav_articles'), href: '#artigos' },
     { label: t('nav_game'), href: '#game' },
     { label: t('nav_contact'), href: '#contato' },
   ];

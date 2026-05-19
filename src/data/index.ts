@@ -163,6 +163,60 @@ export const contactLinks = [
   },
 ];
 
+export interface Article {
+  id: number;
+  titleKey: string;
+  descriptionKey: string;
+  url: string;
+  tag: string;
+  gradient: string;
+  emoji: string;
+  readingTime: string;
+}
+
+export const articles: Article[] = [
+  {
+    id: 1,
+    titleKey: 'article_rag_title',
+    descriptionKey: 'article_rag_description',
+    url: 'https://medium.com/@preluramos/por-que-as-ias-mentem-com-tanta-confian%C3%A7a-e-como-a-arquitetura-rag-resolve-isso-868c6b7edb66',
+    tag: 'IA & RAG',
+    gradient: 'from-violet-500 to-purple-600',
+    emoji: '🤖',
+    readingTime: '8 min',
+  },
+  {
+    id: 2,
+    titleKey: 'article_spring_projection_title',
+    descriptionKey: 'article_spring_projection_description',
+    url: 'https://medium.com/@preluramos/otimizando-performance-com-spring-data-projection-836e1c7077da',
+    tag: 'Java & Spring',
+    gradient: 'from-green-500 to-emerald-600',
+    emoji: '⚡',
+    readingTime: '6 min',
+  },
+  {
+    id: 3,
+    titleKey: 'article_dune_title',
+    descriptionKey: 'article_dune_description',
+    url: 'https://medium.com/@preluramos/e-se-duna-n%C3%A3o-fosse-fic%C3%A7%C3%A3o-b8a519678659',
+    tag: 'Ficção & Tech',
+    gradient: 'from-amber-500 to-orange-600',
+    emoji: '🏜️',
+    readingTime: '5 min',
+  },
+  {
+    id: 4,
+    titleKey: 'article_argonauts_title',
+    descriptionKey: 'article_argonauts_description',
+    url: 'https://medium.com/@preluramos/the-argonauts-of-ai-exploring-the-new-frontier-of-intelligence-140b68fb0aff',
+    tag: 'AI & Philosophy',
+    gradient: 'from-cyan-500 to-blue-600',
+    emoji: '🚀',
+    readingTime: '7 min',
+  },
+];
+
 export const navLinks = [
   { href: '#sobre', label: 'Sobre' },
   { href: '#projetos', label: 'Projetos' },

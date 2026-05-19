@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import './i18n';
 import { Layout } from './components/layout';
-import { Hero, About, TechStack, Projects, Contact } from './components/sections';
+import { Hero, About, TechStack, Projects, Contact, Articles } from './components/sections';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 
@@ -75,6 +75,7 @@ export default function App() {
         <About />
         <TechStack />
         <Projects />
+        <Articles />
         <Suspense fallback={<GameLoading />}>
           <Game3D />
         </Suspense>
