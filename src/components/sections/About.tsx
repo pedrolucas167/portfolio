@@ -1,45 +1,53 @@
-import { FaCode, FaServer, FaCloud, FaLightbulb, FaRocket, FaUsers, FaBrain } from 'react-icons/fa';
+import { FaCode, FaServer, FaCloud, FaLightbulb, FaRocket, FaUsers, FaBrain, FaGraduationCap } from 'react-icons/fa';
 import { GlassCard, SectionWrapper } from '../ui';
 import { useReveal } from '../../hooks/useReveal';
-
-const skills = [
-  { 
-    icon: FaCode, 
-    title: 'Frontend', 
-    desc: 'React, TypeScript, Tailwind CSS',
-    color: 'from-cyan-500 to-blue-500',
-  },
-  { 
-    icon: FaServer, 
-    title: 'Backend', 
-    desc: 'Java, Spring Boot, Node.js',
-    color: 'from-green-500 to-emerald-500',
-    details: 'APIs robustas e escaláveis com arquitetura clean code'
-  },
-  { 
-    icon: FaCloud, 
-    title: 'DevOps',
-    desc: 'Docker, AWS, CI/CD',
-    color: 'from-purple-500 to-pink-500',
-    details: 'Automação, containerização e deploy contínuo'
-  },
-  {
-    icon: FaBrain,
-    title: 'IA & LLMs',
-    desc: 'LLMs, Prompt Engineering',
-    color: 'from-amber-500 to-orange-500',
-    details: 'IA aplicada a produtos, automações e copilots.'
-  },
-];
-
-const highlights = [
-  { icon: FaLightbulb, label: 'Pensamento Criativo', value: 'Soluções inovadoras' },
-  { icon: FaRocket, label: 'Alta Performance', value: 'Código otimizado' },
-  { icon: FaUsers, label: 'Colaboração', value: 'Trabalho em equipe' },
-];
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 export function About() {
+  const { t } = useTranslation(); // Initialize useTranslation
   const { ref, isRevealed } = useReveal({ threshold: 0.1 });
+
+  const skills = [
+    { 
+      icon: FaCode, 
+      title: t('about_skill_frontend_title'), 
+      desc: t('about_skill_frontend_desc'),
+      color: 'from-cyan-500 to-blue-500',
+    },
+    { 
+      icon: FaServer, 
+      title: t('about_skill_backend_title'), 
+      desc: t('about_skill_backend_desc'),
+      color: 'from-green-500 to-emerald-500',
+      details: t('about_skill_backend_details')
+    },
+    { 
+      icon: FaCloud, 
+      title: t('about_skill_devops_title'),
+      desc: t('about_skill_devops_desc'),
+      color: 'from-purple-500 to-pink-500',
+      details: t('about_skill_devops_details')
+    },
+    {
+      icon: FaBrain,
+      title: t('about_skill_ia_llms_title'),
+      desc: t('about_skill_ia_llms_desc'),
+      color: 'from-amber-500 to-orange-500',
+      details: t('about_skill_ia_llms_details')
+    },
+  ];
+
+  const highlights = [
+    { icon: FaLightbulb, label: t('about_highlight_creative_thinking_label'), value: t('about_highlight_creative_thinking_value') },
+    { icon: FaRocket, label: t('about_highlight_high_performance_label'), value: t('about_highlight_high_performance_value') },
+    { icon: FaUsers, label: t('about_highlight_collaboration_label'), value: t('about_highlight_collaboration_value') },
+    { 
+      icon: FaGraduationCap, 
+      label: 'Brainly', 
+      value: t('about_highlight_brainly_value', 'Contribuidor Expert'), 
+      href: 'https://brainly.com.br/app/profile/3845094/answers' 
+    },
+  ];
 
   return (
     <SectionWrapper id="sobre" className="bg-[var(--color-dark-bg)]">
@@ -49,19 +57,19 @@ export function About() {
       >
         
         <div className="text-center mb-8 sm:mb-10">
-          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">Sobre</span>
+          <span className="badge-premium accent mb-3 sm:mb-4 inline-block">{t('about_badge')}</span>
           <h2 className="section-title mb-3 sm:mb-4">
-            Transformando visões em{' '}
-            <span className="text-gradient-animated">realidade digital</span>
+            {t('about_title_part1')}{' '}
+            <span className="text-gradient-animated">{t('about_title_part2')}</span>
           </h2>
           <p className="section-subtitle mx-auto px-2 sm:px-0">
-            Formado em Ciência de Dados com pós-graduação em Engenharia de Software. Atuo como Full-Stack Engineer com foco em backend, desenvolvendo APIs enterprise com Java/Spring Boot e Node.js. Integro IA em soluções reais com experiência em processamento inteligente e arquitetura escalável. No frontend, crio interfaces responsivas com React, Angular e Next.js, sempre priorizando excelência arquitetural e clean code.
+            {t('about_subtitle_p1')}
           </p>
           <p className="mt-4 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            Como contribuinte no Brainly entre 2016 e 2025, compartilhei mais de 1.800 respostas acadêmicas com 12.000+ reconhecimentos. Atualmente focado em projetos de maior envergadura.
+            {t('about_subtitle_p2')}
           </p>
           <p className="mt-6 mx-auto max-w-3xl px-2 sm:px-0 text-sm sm:text-base text-[#94a3b8] leading-relaxed">
-            <span className="text-[var(--color-accent)] font-semibold">Especialidade em IA:</span> Integro LLMs com foco em resultados mensuráveis, utilizando prompt engineering e fine-tuning estratégico.
+            <span className="text-[var(--color-accent)] font-semibold">{t('about_subtitle_ia_specialty_label')}</span> {t('about_subtitle_ia_specialty_text')}
           </p>
         </div>
 
@@ -100,26 +108,34 @@ export function About() {
 
         
         <div className="glass-card-subtle p-5 sm:p-8 rounded-xl sm:rounded-2xl">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
-            {highlights.map((item, i) => (
-              <div 
-                key={item.label}
-                className={`flex items-center gap-3 sm:gap-4 transition-all duration-700 ${
-                  isRevealed 
-                    ? 'opacity-100 translate-x-0' 
-                    : 'opacity-0 -translate-x-10'
-                }`}
-                style={{ transitionDelay: `${600 + i * 150}ms` }}
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="text-lg sm:text-xl text-[var(--color-accent)]" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-[#64748b]">{item.label}</p>
-                  <p className="text-white font-semibold text-sm sm:text-base">{item.value}</p>
-                </div>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+            {highlights.map((item, i) => {
+              const content = (
+                <>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="text-lg sm:text-xl text-[var(--color-accent)]" />
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm text-[#64748b]">{item.label}</p>
+                    <p className="text-white font-semibold text-sm sm:text-base">{item.value}</p>
+                  </div>
+                </>
+              );
+
+              const commonProps = {
+                key: item.label,
+                className: `flex items-center gap-3 sm:gap-4 transition-all duration-700 ${
+                  isRevealed ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                } ${'href' in item ? 'hover:opacity-70 transition-opacity cursor-pointer' : ''}`,
+                style: { transitionDelay: `${600 + i * 150}ms` }
+              };
+
+              return 'href' in item ? (
+                <a href={item.href} target="_blank" rel="noopener noreferrer" {...commonProps}>{content}</a>
+              ) : (
+                <div {...commonProps}>{content}</div>
+              );
+            })}
           </div>
         </div>
       </div>
