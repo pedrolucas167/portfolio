@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 
-// Re-export premium hooks
 export { useSmoothScroll } from './useSmoothScroll';
 export { useReveal } from './useReveal';
 

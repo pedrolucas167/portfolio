@@ -76,7 +76,6 @@ describe('Projects Component', () => {
       fireEvent.click(projectCard);
     }
     
-    // Verifica se o modal apareceu com a descrição completa
     expect(screen.getByText('Descrição completa do projeto 1')).toBeInTheDocument();
   });
 

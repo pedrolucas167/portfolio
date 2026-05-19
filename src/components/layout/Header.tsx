@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useScrollPosition, useSmoothScroll } from '../../hooks';
 import { useTranslation } from 'react-i18next';
-import { i18n as I18nInstance } from 'i18next'; // Import i18n type
+import { i18n as I18nInstance } from 'i18next';
 
 interface HeaderProps {
-  i18n: I18nInstance; // Add i18n prop
+  i18n: I18nInstance;
 }
 
 export function Header({ i18n }: HeaderProps) {
@@ -30,7 +30,6 @@ export function Header({ i18n }: HeaderProps) {
     const sections = navItems.map(item => item.href.slice(1));
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
-      // iterate from bottom to top without mutating the sections array
       for (let i = sections.length - 1; i >= 0; i--) {
         const sec = sections[i];
         const element = document.getElementById(sec);
@@ -43,11 +42,10 @@ export function Header({ i18n }: HeaderProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]); // Re-run effect if navItems change (due to language change)
+  }, [navItems]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement> | React.TouchEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    // set active immediately for responsive feedback, then perform smooth scroll
     setActiveSection(href);
     scrollTo(href, { offset: 80 });
     setIsMobileMenuOpen(false);
@@ -57,7 +55,6 @@ export function Header({ i18n }: HeaderProps) {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -72,7 +69,6 @@ export function Header({ i18n }: HeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
-  // Close on Escape key
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape' && isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
@@ -85,21 +81,17 @@ export function Header({ i18n }: HeaderProps) {
   }, [handleKeyDown]);
 
    const changeLanguage = (lng: string) => {
-     // Change language - this will trigger i18n's languageChanged event
      i18n.changeLanguage(lng).catch((err) => {
        console.warn('Error changing language:', err);
      });
    };
 
-   // Listen for language changes to keep the selector in sync
    useEffect(() => {
       if (typeof i18n.on !== 'function' || typeof i18n.off !== 'function') {
         return;
       }
 
-     const handleLanguageChanged = () => {
-       // Component will re-render with updated currentLanguage
-     };
+     const handleLanguageChanged = () => {};
      
      i18n.on('languageChanged', handleLanguageChanged);
      return () => {
@@ -138,7 +130,7 @@ export function Header({ i18n }: HeaderProps) {
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-secondary)] group-hover:w-full transition-all duration-300" />
           </a>
-          <div className="md:hidden flex items-center gap-2"> {/* Added gap for language selector */}
+          <div className="md:hidden flex items-center gap-2">
             <select
               onChange={(e) => changeLanguage(e.target.value)}
               value={currentLanguage}
@@ -148,6 +140,7 @@ export function Header({ i18n }: HeaderProps) {
               <option value="en" className="bg-[var(--color-dark-bg)]">EN</option>
               <option value="zh" className="bg-[var(--color-dark-bg)]">ZH</option>
               <option value="de" className="bg-[var(--color-dark-bg)]">DE</option>
+              <option value="es" className="bg-[var(--color-dark-bg)]">ES</option>
             </select>
             <button
               onClick={toggleMobileMenu}
@@ -180,7 +173,6 @@ export function Header({ i18n }: HeaderProps) {
             </button>
           </div>
 
-          {/* Navegação para desktop */}
           <div className="hidden md:flex items-center gap-0.5">
             {navItems.map((item) => (
               <a
@@ -201,6 +193,7 @@ export function Header({ i18n }: HeaderProps) {
               <option value="en" className="bg-[var(--color-dark-bg)]">EN</option>
               <option value="zh" className="bg-[var(--color-dark-bg)]">ZH</option>
               <option value="de" className="bg-[var(--color-dark-bg)]">DE</option>
+              <option value="es" className="bg-[var(--color-dark-bg)]">ES</option>
             </select>
           </div>
 
@@ -215,7 +208,6 @@ export function Header({ i18n }: HeaderProps) {
       </div>
     </header>
 
-      {/* Mobile menu - fullscreen overlay (best practice for mobile) */}
       <div
         className={`md:hidden fixed inset-0 z-[100] transition-all duration-300 ${
           isMobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0 pointer-events-none'
@@ -224,20 +216,17 @@ export function Header({ i18n }: HeaderProps) {
         aria-modal="true"
         aria-label="Menu de navegação"
       >
-        {/* Fullscreen background */}
         <div
           className={`absolute inset-0 bg-[var(--color-dark-bg)] transition-opacity duration-300 ${
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
         />
 
-        {/* Content */}
         <div
           className={`relative h-full flex flex-col transition-all duration-300 ease-out ${
             isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}
         >
-          {/* Header */}
           <div className="flex justify-between items-center px-6 py-5">
             <span className="text-2xl font-bold text-white">
               PL<span className="text-[var(--color-accent)] glow-text">.</span>
@@ -264,7 +253,6 @@ export function Header({ i18n }: HeaderProps) {
             </button>
           </div>
 
-          {/* Nav links - centered vertically */}
           <div className="flex-1 flex flex-col justify-center px-6 gap-2">
             {navItems.map((item, index) => (
               <a
@@ -291,11 +279,11 @@ export function Header({ i18n }: HeaderProps) {
                 <option value="en" className="bg-[var(--color-dark-bg)]">English</option>
                 <option value="zh" className="bg-[var(--color-dark-bg)]">中文</option>
                 <option value="de" className="bg-[var(--color-dark-bg)]">Deutsch</option>
+                <option value="es" className="bg-[var(--color-dark-bg)]">Español</option>
               </select>
             </div>
           </div>
 
-          {/* CTA button - bottom */}
           <div className="px-6 pb-8 pt-4">
             <a
               href="#contato"

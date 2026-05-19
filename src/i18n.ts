@@ -1,17 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-// Language detector for automatic browser/localStorage detection
-// @ts-ignore: module may not have type declarations available in this repo
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Import translation files
 import en from './locales/en/translation.json';
 import zh from './locales/zh/translation.json';
 import de from './locales/de/translation.json';
 import pt from './locales/pt/translation.json';
+import es from './locales/es/translation.json';
 
-const supportedLngs = ['en', 'zh', 'de', 'pt'] as const;
-const fallbackLanguage = 'en';
+const supportedLngs = ['en', 'zh', 'de', 'pt', 'es'] as const;
+const fallbackLanguage = 'pt';
 
 function normalizeLanguage(input?: string | null): (typeof supportedLngs)[number] | null {
   if (!input) {
@@ -20,7 +18,6 @@ function normalizeLanguage(input?: string | null): (typeof supportedLngs)[number
 
   const languageOnly = input.toLowerCase().split('-')[0];
 
-  // Never allow i18next key-debug mode in production UI.
   if (languageOnly === 'cimode') {
     return fallbackLanguage;
   }
@@ -39,7 +36,6 @@ function getInitialLanguage(): (typeof supportedLngs)[number] {
       }
     }
   } catch {
-    // ignore storage access errors
   }
 
   if (typeof navigator !== 'undefined') {
@@ -54,7 +50,7 @@ function getInitialLanguage(): (typeof supportedLngs)[number] {
 
 i18n
   .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     resources: {
       en: {
@@ -69,26 +65,24 @@ i18n
       pt: {
         translation: pt,
       },
+      es: {
+        translation: es,
+      },
     },
     lng: getInitialLanguage(),
     supportedLngs,
     nonExplicitSupportedLngs: true,
     load: 'languageOnly',
-    // detection options: try localStorage first, then browser navigator
     detection: {
-      // order and from where user language should be detected
       order: ['localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
-      // keys to lookup language from
       lookupLocalStorage: 'lng',
-      // cache user language on
       caches: ['localStorage'],
       excludeCacheFor: ['cimode'],
     },
-    // fallback language if translation is missing or detection fails
     fallbackLng: fallbackLanguage,
 
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 

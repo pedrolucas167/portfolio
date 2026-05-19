@@ -3,19 +3,18 @@ import './i18n';
 import { Layout } from './components/layout';
 import { Hero, About, TechStack, Projects, Contact } from './components/sections';
 import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet-async'; // Import Helmet
+import { Helmet } from 'react-helmet-async';
 
-const supportedLanguages = new Set(['en', 'pt', 'de', 'zh']);
+const supportedLanguages = new Set(['en', 'pt', 'de', 'zh', 'es']);
 
 function getSafeLanguage(input?: string): string {
   const normalized = (input ?? '').toLowerCase().split('-')[0];
   if (!normalized || normalized === 'cimode') {
-    return 'en';
+    return 'pt';
   }
-  return supportedLanguages.has(normalized) ? normalized : 'en';
+  return supportedLanguages.has(normalized) ? normalized : 'pt';
 }
 
-// Lazy load heavy components
 const Game3D = lazy(() => import('./components/sections/Game3D').then(m => ({ default: m.Game3D })));
 
 function GameLoading() {
@@ -32,21 +31,16 @@ export default function App() {
   const rawLanguage = i18n.resolvedLanguage ?? i18n.language;
   const currentLanguage = getSafeLanguage(rawLanguage);
 
-  // If detector picks an unsupported/special language, normalize it immediately.
   useEffect(() => {
     if (rawLanguage !== currentLanguage) {
-      i18n.changeLanguage(currentLanguage).catch(() => {
-        // ignore language switch errors
-      });
+      i18n.changeLanguage(currentLanguage).catch(() => {});
     }
   }, [rawLanguage, currentLanguage, i18n]);
 
-  // Sync HTML lang attribute when language changes
   useEffect(() => {
     document.documentElement.lang = currentLanguage;
   }, [currentLanguage]);
 
-  // Update localStorage when language changes
   useEffect(() => {
     const handleLanguageChanged = () => {
       const newLanguage = getSafeLanguage(i18n.resolvedLanguage ?? i18n.language);
@@ -55,7 +49,6 @@ export default function App() {
           window.localStorage.setItem('lng', newLanguage);
         }
       } catch (err) {
-        // ignore storage errors
       }
     };
 

@@ -75,7 +75,6 @@ describe('Header Component', () => {
     const menuButton = screen.getByLabelText('Abrir menu');
     fireEvent.click(menuButton);
     
-    // Após abrir, deve mostrar o botão de fechar (haverá dois)
     const closeButtons = screen.getAllByLabelText('Fechar menu');
     expect(closeButtons.length).toBeGreaterThan(0);
   });
@@ -83,11 +82,9 @@ describe('Header Component', () => {
   it('deve fechar o menu mobile ao clicar no botão fechar', () => {
     render(<Header i18n={mockI18n} />);
 
-    // Abre o menu
     const openButton = screen.getByLabelText('Abrir menu');
     fireEvent.click(openButton);
     
-    // Fecha o menu
     const closeButtons = screen.getAllByLabelText('Fechar menu');
     expect(closeButtons.length).toBeGreaterThan(0);
 
@@ -95,14 +92,12 @@ describe('Header Component', () => {
     expect(firstCloseButton).toBeDefined();
     fireEvent.click(firstCloseButton!);
     
-    // Verifica se voltou ao estado inicial
     expect(screen.getByLabelText('Abrir menu')).toBeInTheDocument();
   });
 
   it('deve ter os hrefs corretos nos links de navegação', () => {
     render(<Header i18n={mockI18n} />);
 
-    // Pega todos os links e verifica se contém os hrefs corretos
     const allLinks = screen.getAllByRole('link');
     const hrefs = allLinks.map(link => link.getAttribute('href'));
     

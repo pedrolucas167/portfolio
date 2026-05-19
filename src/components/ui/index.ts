@@ -5,7 +5,6 @@ export { Input } from './Input';
 export { Textarea } from './Textarea';
 export { Modal } from './Modal';
 
-// Premium UI Components
 export { GlassCard } from './GlassCard';
 export { AnimatedText } from './AnimatedText';
 export { FloatingOrbs } from './FloatingOrbs';
