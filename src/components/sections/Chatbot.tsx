@@ -31,8 +31,12 @@ export function Chatbot() {
     setInput('');
     setIsLoading(true);
 
+    const API_URL = import.meta.env.PROD 
+      ? '/api/chat' 
+      : 'http://localhost:3001/api/chat';
+
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

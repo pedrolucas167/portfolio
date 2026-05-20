@@ -95,4 +95,4 @@ GUIDELINES:
   return basePrompt + (languageInstructions[language] || languageInstructions.pt);
 }
 
-module.exports = { generateChatResponse };
+module.exports = { generateChatResponse, buildSystemPrompt };
