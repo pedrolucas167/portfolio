@@ -7,13 +7,29 @@ interface Message {
   content: string;
 }
 
+// Check if chatbot API is available (Vercel or localhost)
+function isChatbotAvailable(): boolean {
+  const hostname = window.location.hostname;
+  return hostname.includes('vercel.app') || hostname === 'localhost' || hostname === '127.0.0.1';
+}
+
 export function Chatbot() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsAvailable(isChatbotAvailable());
+  }, []);
+
+  // Don't render if chatbot is not available (e.g., GitHub Pages)
+  if (!isAvailable) {
+    return null;
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
