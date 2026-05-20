@@ -119,8 +119,8 @@ export function Hero() {
             <span>{t('hero_start_conversation')}</span> {/* Translated */}
           </button>
           <a
-            href="/resume/resume_pedro_marques.pdf"
-            download
+            href="/portfolio/resume/resume_pedro_marques.pdf"
+            download="resume_pedro_marques.pdf"
             className="btn-premium btn-secondary-premium"
           >
             <span>{t('hero_download_resume')}</span>
