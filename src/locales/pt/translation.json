@@ -23,6 +23,7 @@
   "hero_typing_text_4": "Criando experiências excepcionais",
   "hero_explore_work": "Explorar Trabalhos",
   "hero_start_conversation": "Iniciar Conversa",
+  "hero_download_resume": "Baixar Currículo",
   "hero_scroll_down": "Rolar",
   "about_badge": "Sobre",
   "about_title_part1": "Transformando visões em",
@@ -146,5 +147,11 @@
   "footer_copyright": "Pedro Lucas. Todos os direitos reservados.",
   "footer_made_with_love_part1": "Feito com",
   "footer_made_with_love_part2": "e muito",
-  "footer_scroll_to_top": "Rolar para cima"
+  "footer_scroll_to_top": "Rolar para cima",
+  "chatbot_title": "Nova AI",
+  "chatbot_subtitle": "Powered by AI",
+  "chatbot_open": "Abrir chatbot",
+  "chatbot_welcome": "Olá! Sou um assistente de IA treinado com os dados do portfólio do Pedro. Pergunte sobre suas habilidades, projetos ou experiências!",
+  "chatbot_placeholder": "Digite sua pergunta...",
+  "chatbot_error": "Desculpe, ocorreu um erro ao processar sua mensagem. Tente novamente."
 }

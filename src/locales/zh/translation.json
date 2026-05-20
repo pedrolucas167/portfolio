@@ -23,6 +23,7 @@
   "hero_typing_text_4": "创造卓越体验",
   "hero_explore_work": "探索作品",
   "hero_start_conversation": "开始对话",
+  "hero_download_resume": "下载简历",
   "hero_scroll_down": "滚动",
   "about_badge": "关于",
   "about_title_part1": "将愿景转化为",
@@ -146,5 +147,11 @@
   "footer_copyright": "Pedro Lucas。保留所有权利。",
   "footer_made_with_love_part1": "用心制作",
   "footer_made_with_love_part2": "和很多",
-  "footer_scroll_to_top": "滚动到顶部"
+  "footer_scroll_to_top": "滚动到顶部",
+  "chatbot_title": "Nova AI",
+  "chatbot_subtitle": "AI驱动",
+  "chatbot_open": "打开聊天机器人",
+  "chatbot_welcome": "你好！我是用佩德罗作品集数据训练的AI助手。可以询问他的技能、项目或经历！",
+  "chatbot_placeholder": "输入您的问题...",
+  "chatbot_error": "抱歉，处理您的消息时出错。请重试。"
 }

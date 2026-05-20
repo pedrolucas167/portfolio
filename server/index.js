@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 
 const contactRoutes = require('./routes/contact');
+const chatRoutes = require('./routes/chat');
 const { verifyConnection } = require('./config/email');
 
 const app = express();
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use('/api/contact', contactRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({

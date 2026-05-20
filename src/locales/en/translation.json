@@ -23,6 +23,7 @@
   "hero_typing_text_4": "Creating exceptional experiences",
   "hero_explore_work": "Explore Work",
   "hero_start_conversation": "Start a Conversation",
+  "hero_download_resume": "Download Resume",
   "hero_scroll_down": "Scroll",
   "about_badge": "About",
   "about_title_part1": "Transforming visions into",
@@ -146,5 +147,11 @@
   "footer_copyright": "Pedro Lucas. All rights reserved.",
   "footer_made_with_love_part1": "Made with",
   "footer_made_with_love_part2": "and much",
-  "footer_scroll_to_top": "Scroll to top"
+  "footer_scroll_to_top": "Scroll to top",
+  "chatbot_title": "Nova AI",
+  "chatbot_subtitle": "Powered by AI",
+  "chatbot_open": "Open chatbot",
+  "chatbot_welcome": "Hello! I'm an AI assistant trained with Pedro's portfolio data. Ask about his skills, projects, or experiences!",
+  "chatbot_placeholder": "Type your question...",
+  "chatbot_error": "Sorry, an error occurred processing your message. Please try again."
 }
