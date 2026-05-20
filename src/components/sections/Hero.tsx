@@ -121,7 +121,7 @@ export function Hero() {
           <a
             href="/portfolio/resume/resume_pedro_marques.pdf"
             download="resume_pedro_marques.pdf"
-            className="btn-premium btn-secondary-premium"
+Es            className="btn-premium btn-secondary-premium"
           >
             <span>{t('hero_download_resume')}</span>
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
