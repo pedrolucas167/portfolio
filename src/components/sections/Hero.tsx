@@ -97,8 +97,8 @@ export function Hero() {
           </p>
         </div>
 
-        
-        <div 
+
+        <div
           className={`flex flex-col sm:flex-row justify-center gap-3 mb-6 sm:mb-8 px-4 sm:px-0 transition-all duration-1000 delay-600 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -118,6 +118,16 @@ export function Hero() {
           >
             <span>{t('hero_start_conversation')}</span> {/* Translated */}
           </button>
+          <a
+            href="/resume/resume_pedro_marques.pdf"
+            download
+            className="btn-premium btn-secondary-premium"
+          >
+            <span>{t('hero_download_resume')}</span>
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
         </div>
 
         
