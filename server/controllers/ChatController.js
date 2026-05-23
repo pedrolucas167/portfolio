@@ -28,11 +28,12 @@ async function generateChatResponse(req, res) {
 }
 
 function buildSystemPrompt(language) {
-  const basePrompt = `You are a helpful AI assistant for Pedro Lucas's portfolio website. 
-You answer questions about Pedro Lucas, a Full-Stack Software Engineer from Brazil.
+  const basePrompt = `You are a helpful AI assistant for Pedro Lucas Marques's portfolio website. 
+You answer questions about Pedro Lucas Marques, a Full-Stack Software Engineer from Brazil.
 
-KEY INFORMATION ABOUT PEDRO LUCAS:
-- Name: Pedro Lucas
+KEY INFORMATION ABOUT PEDRO LUCAS MARQUES:
+- Name: Pedro Lucas Marques
+- Age: 24 years old
 - Role: Full-Stack Software Engineer
 - Email: pedro_marques_dev@hotmail.com
 - GitHub: https://github.com/pedrolucas167

@@ -3,8 +3,9 @@ import { SiTypescript, SiSpring, SiPostgresql } from 'react-icons/si';
 import { IconType } from 'react-icons';
 
 export const personalInfo = {
-  name: 'Pedro Lucas',
+  name: 'Pedro Lucas Marques',
   role: 'hero_role',
+  age: 24,
   email: 'pedro_marques_dev@hotmail.com',
   github: 'https://github.com/pedrolucas167',
   linkedin: 'https://linkedin.com/in/pedromarquesdev',

@@ -26,9 +26,9 @@ describe('Hero Component', () => {
   it('deve renderizar o nome corretamente', () => {
     render(<Hero />);
     
-    // O nome "Pedro " e "Lucas" estão em spans separados
+    // O nome "Pedro Lucas " e "Marques" estão em spans separados
     expect(screen.getByText(/Pedro/)).toBeInTheDocument();
-    expect(screen.getByText('Lucas')).toBeInTheDocument();
+    expect(screen.getByText('Marques')).toBeInTheDocument();
   });
 
   it('deve renderizar o cargo', () => {
@@ -65,7 +65,7 @@ describe('Hero Component', () => {
   it('deve renderizar o avatar', () => {
     render(<Hero />);
     
-    const avatar = screen.getByAltText('Pedro Lucas');
+    const avatar = screen.getByAltText('Pedro Lucas Marques');
     expect(avatar).toBeInTheDocument();
   });
 });

@@ -411,7 +411,7 @@ export const BugHunterGame = () => {
               <div className="relative">
                 <img
                   src="https://github.com/pedrolucas167.png"
-                  alt="Pedro Lucas"
+                  alt="Pedro Lucas Marques"
                   className={`w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-white dark:border-gray-700 shadow-xl transition-transform duration-300 ${
                     isPlaying && !isPaused ? 'animate-pulse' : ''
                   }`}

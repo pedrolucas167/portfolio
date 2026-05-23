@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // SPA redirect for GitHub Pages
+    // Captures the path and redirects to index.html with the route as a hash
+    const path = window.location.pathname.replace('/portfolio', '');
+    const redirect = '/portfolio/#' + path;
+    window.location.replace(redirect);
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>

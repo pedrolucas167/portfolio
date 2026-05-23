@@ -1,15 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaRobot, FaTimes, FaPaperPlane, FaSpinner } from 'react-icons/fa';
+import { FaRobot, FaTimes, FaPaperPlane, FaSpinner, FaDownload } from 'react-icons/fa';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  showDownload?: boolean;
 }
 
-// Check if chatbot API is available (Vercel or localhost)
+// Check if chatbot API is available (Vercel or localhost, not GitHub Pages)
 function isChatbotAvailable(): boolean {
   const hostname = window.location.hostname;
+  // Only available on Vercel or localhost, not on GitHub Pages
   return hostname.includes('vercel.app') || hostname === 'localhost' || hostname === '127.0.0.1';
 }
 
@@ -39,12 +41,42 @@ export function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
+  const RESUME_URL = `${import.meta.env.BASE_URL}resume/resume_pedromarques.pdf`;
+
+  const isResumeRequest = (text: string): boolean => {
+    const lower = text.toLowerCase();
+    const keywords = [
+      'currículo', 'curriculo', 'curriculum', 'resume', 'cv',
+      'baixar', 'download', 'lebenslauf', '简历', 'descargar'
+    ];
+    return keywords.some(kw => lower.includes(kw));
+  };
+
+  const triggerDownload = () => {
+    const a = document.createElement('a');
+    a.href = RESUME_URL;
+    a.download = 'resume_pedro_marques.pdf';
+    a.click();
+  };
+
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    const currentInput = input;
+    const userMessage: Message = { role: 'user', content: currentInput };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
+
+    if (isResumeRequest(currentInput)) {
+      triggerDownload();
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: t('chatbot_resume_response'),
+        showDownload: true,
+      }]);
+      return;
+    }
+
     setIsLoading(true);
 
     const API_URL = import.meta.env.PROD 
@@ -56,7 +88,7 @@ export function Chatbot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          message: input,
+          message: currentInput,
           language: i18n.language 
         })
       });
@@ -116,9 +148,20 @@ export function Chatbot() {
       {/* Messages */}
       <div className="h-96 overflow-y-auto p-4 space-y-4 bg-gray-900">
         {messages.length === 0 && (
-          <div className="text-center text-gray-400 py-8">
-            <FaRobot size={40} className="mx-auto mb-3 text-cyan-500" />
-            <p>{t('chatbot_welcome')}</p>
+          <div className="flex flex-col items-center text-gray-400 py-6 gap-4">
+            <FaRobot size={40} className="text-cyan-500" />
+            <p className="text-center text-sm">{t('chatbot_welcome')}</p>
+            <div className="flex flex-wrap justify-center gap-2 w-full mt-1">
+              {(['chatbot_suggestion_1', 'chatbot_suggestion_2', 'chatbot_suggestion_3', 'chatbot_suggestion_4'] as const).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => { setInput(t(key)); }}
+                  className="text-xs bg-gray-800 hover:bg-gray-700 text-cyan-400 border border-cyan-500/30 hover:border-cyan-500/70 px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105"
+                >
+                  {t(key)}
+                </button>
+              ))}
+            </div>
           </div>
         )}
         
@@ -135,6 +178,15 @@ export function Chatbot() {
               }`}
             >
               <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+              {msg.showDownload && (
+                <button
+                  onClick={triggerDownload}
+                  className="mt-2 flex items-center gap-2 text-xs bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 px-3 py-1.5 rounded-full transition-all duration-200 w-full justify-center"
+                >
+                  <FaDownload size={11} />
+                  {t('chatbot_resume_download_btn')}
+                </button>
+              )}
             </div>
           </div>
         ))}

@@ -28,7 +28,7 @@
   "about_badge": "关于",
   "about_title_part1": "将愿景转化为",
   "about_title_part2": "数字现实",
-  "about_subtitle_p1": "数据科学专业毕业，软件工程研究生。我是一名全栈工程师，专注于后端，使用Java/Spring Boot和Node.js开发企业级API。我将AI集成到实际解决方案中，在智能处理和可扩展架构方面拥有经验。在前端，我使用React、Angular和Next.js创建响应式界面，始终优先考虑卓越的架构和简洁的代码。",
+  "about_subtitle_p1": "24岁。数据科学专业毕业，软件工程研究生。我是一名全栈工程师，专注于后端，使用Java/Spring Boot和Node.js开发企业级API。我将AI集成到实际解决方案中，在智能处理和可扩展架构方面拥有经验。在前端，我使用React、Angular和Next.js创建响应式界面，始终优先考虑卓越的架构和简洁的代码。",
   "about_subtitle_p2": "作为Brainly在2016年至2025年期间的贡献者，我分享了1800多个学术答案，获得了12000多次认可。目前专注于更大规模的项目。",
   "about_subtitle_ia_specialty_label": "AI专业：",
   "about_subtitle_ia_specialty_text": "我整合LLM，专注于可衡量的结果，使用提示工程和战略性微调。",
@@ -144,7 +144,7 @@
   "article_dune_description": "对沙丘宇宙中的技术与我们当今在AI、生物工程和控制系统方面所开发的内容进行比较的潮想性分析。",
   "article_argonauts_title": "The Argonauts of AI: Exploring the New Frontier of Intelligence",
   "article_argonauts_description": "探索新一代AI代理和自主系统，它们正在次证智能和决策制定的未知领域。",
-  "footer_copyright": "Pedro Lucas。保留所有权利。",
+  "footer_copyright": "Pedro Lucas Marques。保留所有权利。",
   "footer_made_with_love_part1": "用心制作",
   "footer_made_with_love_part2": "和很多",
   "footer_scroll_to_top": "滚动到顶部",
@@ -153,5 +153,11 @@
   "chatbot_open": "打开聊天机器人",
   "chatbot_welcome": "你好！我是用佩德罗作品集数据训练的AI助手。可以询问他的技能、项目或经历！",
   "chatbot_placeholder": "输入您的问题...",
-  "chatbot_error": "抱歉，处理您的消息时出错。请重试。"
+  "chatbot_error": "抱歉，处理您的消息时出错。请重试。",
+  "chatbot_suggestion_1": "你的主要技术是什么？",
+  "chatbot_suggestion_2": "告诉我你的项目",
+  "chatbot_suggestion_3": "如何联系你？",
+  "chatbot_suggestion_4": "你在AI方面有什么经验？",
+  "chatbot_resume_response": "这是Pedro的简历！下载已自动开始。如果没有成功，请点击下方按钮。",
+  "chatbot_resume_download_btn": "下载简历 (PDF)"
 }

@@ -1,9 +1,17 @@
 // Vercel Serverless Function for chatbot
 import { buildSystemPrompt } from '../server/controllers/ChatController.js';
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const MODEL = 'meta-llama/llama-3.2-3b-instruct';
+
+function getRefererUrl() {
+  if (process.env.SITE_URL) return process.env.SITE_URL;
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'https://pedrolucas167.github.io/portfolio/';
+}
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -21,6 +29,7 @@ export default async function handler(req, res) {
 
   try {
     const { message, language = 'pt' } = req.body;
+    const openRouterApiKey = process.env.OPENROUTER_API_KEY;
 
     if (!message) {
       return res.status(400).json({
@@ -29,7 +38,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!OPENROUTER_API_KEY) {
+    if (!openRouterApiKey) {
       return res.status(500).json({
         success: false,
         message: 'OPENROUTER_API_KEY not configured'
@@ -41,10 +50,10 @@ export default async function handler(req, res) {
     const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${openRouterApiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.VERCEL_URL || 'https://pedrolucas167.github.io/portfolio/',
-        'X-Title': 'Pedro Lucas Portfolio'
+        'HTTP-Referer': getRefererUrl(),
+        'X-Title': 'Pedro Lucas Marques Portfolio'
       },
       body: JSON.stringify({
         model: MODEL,
@@ -58,8 +67,9 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`OpenRouter API error: ${response.status} - ${error}`);
+      const errorText = await response.text();
+      console.error('OpenRouter API error:', response.status, errorText);
+      throw new Error(`OpenRouter request failed with status ${response.status}`);
     }
 
     const data = await response.json();

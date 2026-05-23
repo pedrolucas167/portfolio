@@ -52,7 +52,7 @@ export function Hero() {
         >
           <InteractiveAvatar
             src="https://github.com/pedrolucas167.png"
-            alt="Pedro Lucas"
+            alt="Pedro Lucas Marques"
             className="mx-auto w-[90px] h-[90px] sm:w-[130px] sm:h-[130px]"
           />
         </div>
@@ -72,8 +72,8 @@ export function Hero() {
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <span className="text-white">Pedro </span>
-          <span className="text-gradient-animated">Lucas</span>
+          <span className="text-white">Pedro Lucas </span>
+          <span className="text-gradient-animated">Marques</span>
         </h1>
 
         
@@ -119,7 +119,7 @@ export function Hero() {
             <span>{t('hero_start_conversation')}</span> {/* Translated */}
           </button>
           <a
-            href="/portfolio/resume/resume_pedro_marques.pdf"
+            href={`${import.meta.env.BASE_URL}resume/resume_pedromarques.pdf`}
             download="resume_pedro_marques.pdf"
             className="btn-premium btn-secondary-premium"
           >
