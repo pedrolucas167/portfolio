@@ -144,6 +144,8 @@
   "article_dune_description": "对沙丘宇宙中的技术与我们当今在AI、生物工程和控制系统方面所开发的内容进行比较的潮想性分析。",
   "article_argonauts_title": "The Argonauts of AI: Exploring the New Frontier of Intelligence",
   "article_argonauts_description": "探索新一代AI代理和自主系统，它们正在次证智能和决策制定的未知领域。",
+  "article_geometry_title": "意义的几何：AI如何在语言之外映射世界",
+  "article_geometry_description": "对AI如何通过多维嵌入构建世界的内部表征的思考，创造出超越语言限制的意义几何。",
   "footer_copyright": "Pedro Lucas Marques。保留所有权利。",
   "footer_made_with_love_part1": "用心制作",
   "footer_made_with_love_part2": "和很多",
@@ -158,6 +160,7 @@
   "chatbot_suggestion_2": "告诉我你的项目",
   "chatbot_suggestion_3": "如何联系你？",
   "chatbot_suggestion_4": "你在AI方面有什么经验？",
+  "chatbot_suggestion_resume": "下载简历",
   "chatbot_resume_response": "这是Pedro的简历！下载已自动开始。如果没有成功，请点击下方按钮。",
   "chatbot_resume_download_btn": "下载简历 (PDF)"
 }

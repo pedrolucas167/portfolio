@@ -152,7 +152,7 @@ export function Chatbot() {
             <FaRobot size={40} className="text-cyan-500" />
             <p className="text-center text-sm">{t('chatbot_welcome')}</p>
             <div className="flex flex-wrap justify-center gap-2 w-full mt-1">
-              {(['chatbot_suggestion_1', 'chatbot_suggestion_2', 'chatbot_suggestion_3', 'chatbot_suggestion_4'] as const).map((key) => (
+              {(['chatbot_suggestion_1', 'chatbot_suggestion_2', 'chatbot_suggestion_3', 'chatbot_suggestion_resume'] as const).map((key) => (
                 <button
                   key={key}
                   onClick={() => { setInput(t(key)); }}

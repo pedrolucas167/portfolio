@@ -144,6 +144,8 @@
   "article_dune_description": "A speculative analysis of how the technologies of the Dune universe compare to what we are developing today in AI, bioengineering and control systems.",
   "article_argonauts_title": "The Argonauts of AI: Exploring the New Frontier of Intelligence",
   "article_argonauts_description": "An exploration of the new generation of AI agents and autonomous systems navigating uncharted territories of intelligence and decision-making.",
+  "article_geometry_title": "The Geometry of Meaning: How AI Maps the World Beyond Words",
+  "article_geometry_description": "A reflection on how AI constructs internal representations of the world through multidimensional embeddings, creating a geometry of meaning beyond the limitations of language.",
   "footer_copyright": "Pedro Lucas Marques. All rights reserved.",
   "footer_made_with_love_part1": "Made with",
   "footer_made_with_love_part2": "and much",
@@ -158,6 +160,7 @@
   "chatbot_suggestion_2": "Tell me about your projects",
   "chatbot_suggestion_3": "How can I contact you?",
   "chatbot_suggestion_4": "What's your experience with AI?",
+  "chatbot_suggestion_resume": "Download resume",
   "chatbot_resume_response": "Here's Pedro's resume! The download has started automatically. If it didn't work, click the button below.",
   "chatbot_resume_download_btn": "Download Resume (PDF)"
 }

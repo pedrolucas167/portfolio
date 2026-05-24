@@ -144,6 +144,8 @@
   "article_dune_description": "Uma análise especulativa sobre como as tecnologias do universo de Duna se comparam com o que estamos desenvolvendo hoje em IA, bioengenharia e sistemas de controle.",
   "article_argonauts_title": "The Argonauts of AI: Exploring the New Frontier of Intelligence",
   "article_argonauts_description": "An exploration of the new generation of AI agents and autonomous systems navigating uncharted territories of intelligence and decision-making.",
+  "article_geometry_title": "A Geometria do Sentido: Como a IA Mapeia o Mundo Além das Palavras",
+  "article_geometry_description": "Uma reflexão sobre como a IA constrói representações internas do mundo através de embeddings multidimensionais, criando uma geometria do significado além das limitações da linguagem.",
   "footer_copyright": "Pedro Lucas Marques. Todos os direitos reservados.",
   "footer_made_with_love_part1": "Feito com",
   "footer_made_with_love_part2": "e muito",
@@ -158,6 +160,7 @@
   "chatbot_suggestion_2": "Me fale sobre seus projetos",
   "chatbot_suggestion_3": "Como entrar em contato?",
   "chatbot_suggestion_4": "Qual é sua experiência com IA?",
+  "chatbot_suggestion_resume": "Baixar currículo",
   "chatbot_resume_response": "Aqui está o currículo do Pedro! O download já foi iniciado automaticamente. Se não funcionou, clique no botão abaixo.",
   "chatbot_resume_download_btn": "Baixar Currículo (PDF)"
 }

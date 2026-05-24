@@ -100,7 +100,6 @@ export const projects: Project[] = [
     technologies: ['TypeScript', 'React', 'Node.js', 'Auth', 'Media Streaming'],
     category: 'project_messagelove_category',
     gradient: 'from-pink-500 to-rose-600',
-    github: 'https://github.com/pedrolucas167/messagelove',
     demo: 'https://messagelove.com.br',
     features: [
       'project_messagelove_feature_1',
@@ -215,6 +214,16 @@ export const articles: Article[] = [
     gradient: 'from-cyan-500 to-blue-600',
     emoji: '🚀',
     readingTime: '7 min',
+  },
+  {
+    id: 5,
+    titleKey: 'article_geometry_title',
+    descriptionKey: 'article_geometry_description',
+    url: 'https://medium.com/@preluramos/a-geometria-do-sentido-como-a-ia-mapeia-o-mundo-al%C3%A9m-das-palavras-a56b30172c66',
+    tag: 'AI & Philosophy',
+    gradient: 'from-indigo-500 to-purple-600',
+    emoji: '🧠',
+    readingTime: '8 min',
   },
 ];
 

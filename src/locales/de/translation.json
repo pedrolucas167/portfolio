@@ -144,6 +144,8 @@
   "article_dune_description": "Eine spekulative Analyse darüber, wie die Technologien des Dune-Universums mit dem verglichen werden, was wir heute in KI, Bioingenieurwesen und Kontrollsystemen entwickeln.",
   "article_argonauts_title": "The Argonauts of AI: Exploring the New Frontier of Intelligence",
   "article_argonauts_description": "Eine Erkundung der neuen Generation von KI-Agenten und autonomen Systemen, die unbekannte Gebiete der Intelligenz und Entscheidungsfindung erkunden.",
+  "article_geometry_title": "Die Geometrie der Bedeutung: Wie KI die Welt jenseits von Worten abbildet",
+  "article_geometry_description": "Eine Reflexion darüber, wie KI durch multidimensionale Embeddings interne Repräsentationen der Welt aufbaut und so eine Geometrie der Bedeutung jenseits der Grenzen der Sprache schafft.",
   "footer_copyright": "Pedro Lucas Marques. Alle Rechte vorbehalten.",
   "footer_made_with_love_part1": "Hergestellt mit",
   "footer_made_with_love_part2": "und viel",
@@ -158,6 +160,7 @@
   "chatbot_suggestion_2": "Erzähl mir von deinen Projekten",
   "chatbot_suggestion_3": "Wie kann ich dich kontaktieren?",
   "chatbot_suggestion_4": "Was ist deine Erfahrung mit KI?",
+  "chatbot_suggestion_resume": "Lebenslauf herunterladen",
   "chatbot_resume_response": "Hier ist Pedros Lebenslauf! Der Download wurde automatisch gestartet. Falls es nicht funktioniert hat, klicke auf den Button unten.",
   "chatbot_resume_download_btn": "Lebenslauf herunterladen (PDF)"
 }
