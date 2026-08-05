@@ -1,12 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaRobot, FaTimes, FaPaperPlane, FaSpinner, FaDownload } from 'react-icons/fa';
+import { FaRobot, FaTimes, FaPaperPlane, FaSpinner, FaDownload, FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
   showDownload?: boolean;
 }
+
+// Type declaration for Web Speech API
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
+
+type SpeechRecognition = any;
 
 // Check if chatbot API is available (Vercel or localhost, not GitHub Pages)
 function isChatbotAvailable(): boolean {
@@ -22,11 +32,60 @@ export function Chatbot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(true);
+  const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   useEffect(() => {
     setIsAvailable(isChatbotAvailable());
   }, []);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+      if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = i18n.language === 'pt' ? 'pt-BR' : i18n.language;
+
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          setInput(transcript);
+          setIsRecording(false);
+        };
+
+        recognition.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error);
+          setIsRecording(false);
+        };
+
+        recognition.onend = () => {
+          setIsRecording(false);
+        };
+
+        recognitionRef.current = recognition;
+      }
+    }
+  }, [i18n.language]);
+
+  const toggleRecording = () => {
+    if (!recognitionRef.current) {
+      alert('Speech recognition is not supported in your browser');
+      return;
+    }
+
+    if (isRecording) {
+      recognitionRef.current.stop();
+      setIsRecording(false);
+    } else {
+      recognitionRef.current.lang = i18n.language === 'pt' ? 'pt-BR' : i18n.language;
+      recognitionRef.current.start();
+      setIsRecording(true);
+    }
+  };
 
   // Don't render if chatbot is not available (e.g., GitHub Pages)
   if (!isAvailable) {
@@ -214,6 +273,18 @@ export function Chatbot() {
             className="flex-1 bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:border-cyan-500 transition-colors"
             disabled={isLoading}
           />
+          <button
+            onClick={toggleRecording}
+            disabled={isLoading}
+            className={`p-2 rounded-xl transition-all duration-200 ${
+              isRecording 
+                ? 'bg-red-500 text-white animate-pulse' 
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            }`}
+            title={isRecording ? 'Stop recording' : 'Start voice input'}
+          >
+            {isRecording ? <FaMicrophoneSlash size={18} /> : <FaMicrophone size={18} />}
+          </button>
           <button
             onClick={sendMessage}
             disabled={!input.trim() || isLoading}
