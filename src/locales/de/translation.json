@@ -162,5 +162,12 @@
   "chatbot_suggestion_4": "Was ist deine Erfahrung mit KI?",
   "chatbot_suggestion_resume": "Lebenslauf herunterladen",
   "chatbot_resume_response": "Hier ist Pedros Lebenslauf! Der Download wurde automatisch gestartet. Falls es nicht funktioniert hat, klicke auf den Button unten.",
-  "chatbot_resume_download_btn": "Lebenslauf herunterladen (PDF)"
+  "chatbot_resume_download_btn": "Lebenslauf herunterladen (PDF)",
+  "chatbot_voice_start": "Spracheingabe verwenden",
+  "chatbot_voice_stop": "Spracheingabe stoppen",
+  "chatbot_voice_unsupported": "Spracherkennung wird in diesem Browser nicht unterstützt. Verwende Chrome, Edge oder Safari.",
+  "chatbot_voice_permission_denied": "Mikrofonzugriff wurde verweigert. Aktiviere ihn in den Browsereinstellungen.",
+  "chatbot_voice_no_device": "Kein Mikrofon gefunden.",
+  "chatbot_voice_no_speech": "Keine Sprache erkannt. Bitte versuche es erneut.",
+  "chatbot_voice_start_error": "Spracherkennung konnte nicht gestartet werden. Bitte versuche es erneut."
 }

@@ -162,5 +162,12 @@
   "chatbot_suggestion_4": "你在AI方面有什么经验？",
   "chatbot_suggestion_resume": "下载简历",
   "chatbot_resume_response": "这是Pedro的简历！下载已自动开始。如果没有成功，请点击下方按钮。",
-  "chatbot_resume_download_btn": "下载简历 (PDF)"
+  "chatbot_resume_download_btn": "下载简历 (PDF)",
+  "chatbot_voice_start": "使用语音输入",
+  "chatbot_voice_stop": "停止语音输入",
+  "chatbot_voice_unsupported": "此浏览器不支持语音识别。请使用 Chrome、Edge 或 Safari。",
+  "chatbot_voice_permission_denied": "麦克风权限被拒绝。请在浏览器设置中开启。",
+  "chatbot_voice_no_device": "未找到麦克风。",
+  "chatbot_voice_no_speech": "未检测到语音。请重试。",
+  "chatbot_voice_start_error": "无法启动语音识别。请重试。"
 }

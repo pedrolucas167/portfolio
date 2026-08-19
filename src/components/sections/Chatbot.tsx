@@ -25,6 +25,16 @@ function isChatbotAvailable(): boolean {
   return hostname.includes('vercel.app') || hostname === 'localhost' || hostname === '127.0.0.1';
 }
 
+function getRecognitionLang(language: string): string {
+  const lang = language.toLowerCase();
+  if (lang.startsWith('pt')) return 'pt-BR';
+  if (lang.startsWith('en')) return 'en-US';
+  if (lang.startsWith('es')) return 'es-ES';
+  if (lang.startsWith('de')) return 'de-DE';
+  if (lang.startsWith('zh')) return 'zh-CN';
+  return language;
+}
+
 export function Chatbot() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +43,10 @@ export function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAvailable, setIsAvailable] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
+  const [recordingError, setRecordingError] = useState<string | null>(null);
+  const [isSpeechSupported, setIsSpeechSupported] = useState(() =>
+    typeof window !== 'undefined' && !!(window.SpeechRecognition || window.webkitSpeechRecognition)
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
@@ -40,50 +54,125 @@ export function Chatbot() {
     setIsAvailable(isChatbotAvailable());
   }, []);
 
+  const handleRecognitionError = (error: string) => {
+    switch (error) {
+      case 'not-allowed':
+      case 'service-not-allowed':
+        setRecordingError(t('chatbot_voice_permission_denied'));
+        break;
+      case 'no-speech':
+        setRecordingError(t('chatbot_voice_no_speech'));
+        break;
+      case 'audio-capture':
+      case 'not-found':
+        setRecordingError(t('chatbot_voice_no_device'));
+        break;
+      default:
+        setRecordingError(t('chatbot_voice_start_error'));
+    }
+    setIsRecording(false);
+  };
+
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      
-      if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = i18n.language === 'pt' ? 'pt-BR' : i18n.language;
+    if (typeof window === 'undefined') return;
 
-        recognition.onresult = (event: any) => {
-          const transcript = event.results[0][0].transcript;
-          setInput(transcript);
-          setIsRecording(false);
-        };
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        recognition.onerror = (event: any) => {
-          console.error('Speech recognition error:', event.error);
-          setIsRecording(false);
-        };
-
-        recognition.onend = () => {
-          setIsRecording(false);
-        };
-
-        recognitionRef.current = recognition;
-      }
+    if (!SpeechRecognition) {
+      setIsSpeechSupported(false);
+      return;
     }
+
+    setIsSpeechSupported(true);
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = getRecognitionLang(i18n.language);
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+      setIsRecording(false);
+    };
+
+    recognition.onerror = (event: any) => {
+      handleRecognitionError(event.error);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      try {
+        recognition.stop();
+      } catch {
+        // Ignore if already stopped
+      }
+      recognitionRef.current = null;
+    };
   }, [i18n.language]);
 
-  const toggleRecording = () => {
+  // Stop recording when the chat is closed
+  useEffect(() => {
+    if (!isOpen && isRecording && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {
+        // Ignore if already stopped
+      }
+      setIsRecording(false);
+    }
+  }, [isOpen, isRecording]);
+
+  const toggleRecording = async () => {
     if (!recognitionRef.current) {
-      alert('Speech recognition is not supported in your browser');
+      setRecordingError(t('chatbot_voice_unsupported'));
       return;
     }
 
     if (isRecording) {
-      recognitionRef.current.stop();
+      try {
+        recognitionRef.current.stop();
+      } catch (error) {
+        console.error('Error stopping speech recognition:', error);
+      }
       setIsRecording(false);
-    } else {
-      recognitionRef.current.lang = i18n.language === 'pt' ? 'pt-BR' : i18n.language;
+      return;
+    }
+
+    setRecordingError(null);
+
+    try {
+      // Explicitly request microphone access so the browser prompt is shown
+      // and we can surface a friendly message if permission is denied.
+      if (navigator.mediaDevices?.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+      }
+    } catch (error) {
+      const err = error as Error;
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        setRecordingError(t('chatbot_voice_permission_denied'));
+      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+        setRecordingError(t('chatbot_voice_no_device'));
+      } else {
+        setRecordingError(t('chatbot_voice_start_error'));
+      }
+      return;
+    }
+
+    try {
+      recognitionRef.current.lang = getRecognitionLang(i18n.language);
       recognitionRef.current.start();
       setIsRecording(true);
+    } catch (error) {
+      console.error('Speech recognition start error:', error);
+      setRecordingError(t('chatbot_voice_start_error'));
     }
   };
 
@@ -263,11 +352,19 @@ export function Chatbot() {
 
       {/* Input */}
       <div className="p-4 border-t border-gray-700 bg-gray-900">
+        {recordingError && (
+          <div className="mb-2 text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+            {recordingError}
+          </div>
+        )}
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setRecordingError(null);
+            }}
             onKeyPress={handleKeyPress}
             placeholder={t('chatbot_placeholder')}
             className="flex-1 bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:border-cyan-500 transition-colors"
@@ -277,11 +374,11 @@ export function Chatbot() {
             onClick={toggleRecording}
             disabled={isLoading}
             className={`p-2 rounded-xl transition-all duration-200 ${
-              isRecording 
-                ? 'bg-red-500 text-white animate-pulse' 
+              isRecording
+                ? 'bg-red-500 text-white animate-pulse'
                 : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
             }`}
-            title={isRecording ? 'Stop recording' : 'Start voice input'}
+            title={isSpeechSupported ? (isRecording ? t('chatbot_voice_stop') : t('chatbot_voice_start')) : t('chatbot_voice_unsupported')}
           >
             {isRecording ? <FaMicrophoneSlash size={18} /> : <FaMicrophone size={18} />}
           </button>

@@ -162,5 +162,12 @@
   "chatbot_suggestion_4": "¿Cuál es tu experiencia con IA?",
   "chatbot_suggestion_resume": "Descargar CV",
   "chatbot_resume_response": "¡Aquí está el currículum de Pedro! La descarga se inició automáticamente. Si no funcionó, haz clic en el botón de abajo.",
-  "chatbot_resume_download_btn": "Descargar CV (PDF)"
+  "chatbot_resume_download_btn": "Descargar CV (PDF)",
+  "chatbot_voice_start": "Usar entrada de voz",
+  "chatbot_voice_stop": "Detener entrada de voz",
+  "chatbot_voice_unsupported": "El reconocimiento de voz no es compatible con este navegador. Usa Chrome, Edge o Safari.",
+  "chatbot_voice_permission_denied": "Permiso de micrófono denegado. Habilítalo en la configuración del navegador.",
+  "chatbot_voice_no_device": "No se encontró micrófono.",
+  "chatbot_voice_no_speech": "No se detectó voz. Inténtalo de nuevo.",
+  "chatbot_voice_start_error": "No se pudo iniciar el reconocimiento de voz. Inténtalo de nuevo."
 }

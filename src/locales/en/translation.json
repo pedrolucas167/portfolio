@@ -162,5 +162,12 @@
   "chatbot_suggestion_4": "What's your experience with AI?",
   "chatbot_suggestion_resume": "Download resume",
   "chatbot_resume_response": "Here's Pedro's resume! The download has started automatically. If it didn't work, click the button below.",
-  "chatbot_resume_download_btn": "Download Resume (PDF)"
+  "chatbot_resume_download_btn": "Download Resume (PDF)",
+  "chatbot_voice_start": "Start voice input",
+  "chatbot_voice_stop": "Stop voice input",
+  "chatbot_voice_unsupported": "Voice recognition is not supported in this browser. Try Chrome, Edge, or Safari.",
+  "chatbot_voice_permission_denied": "Microphone permission was denied. Enable microphone access in your browser settings.",
+  "chatbot_voice_no_device": "No microphone found.",
+  "chatbot_voice_no_speech": "No speech detected. Please try again.",
+  "chatbot_voice_start_error": "Could not start voice recognition. Please try again."
 }
