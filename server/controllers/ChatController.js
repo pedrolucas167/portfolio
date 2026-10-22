@@ -1,100 +1,15 @@
-const openAIConfig = require('../config/openai');
-
+const { generateReply, ChatInputError } = require('../services/chat');
+function chatError(error) {
+  const status = error instanceof ChatInputError ? 400 : error.name === 'TimeoutError' ? 504 : 502;
+  if (status !== 400) console.error('Chat request failed:', error.name);
+  return { status, body: { success: false, message: status === 400 ? error.message : 'Failed to generate response' } };
+}
 async function generateChatResponse(req, res) {
   try {
-    const { message, language = 'pt' } = req.body ?? {};
-
-    if (typeof message !== 'string' || !message.trim() || message.length > 4000) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Message must contain between 1 and 4000 characters'
-      });
-    }
-
-    const systemPrompt = buildSystemPrompt(language);
-    const response = await openAIConfig.chat(message.trim(), systemPrompt);
-
-    res.json({
-      success: true,
-      response: response
-    });
+    return res.json({ success: true, response: await generateReply(req.body) });
   } catch (error) {
-    console.error('Chat request failed:', error.name);
-    res.status(error.name === 'TimeoutError' ? 504 : 502).json({
-      success: false, 
-      message: 'Failed to generate response' 
-    });
+    const { status, body } = chatError(error);
+    return res.status(status).json(body);
   }
 }
-
-function buildSystemPrompt(language) {
-  language = typeof language === 'string' ? language.toLowerCase().split('-')[0] : 'pt';
-  const basePrompt = `You are a helpful AI assistant for Pedro Lucas Marques's portfolio website. 
-You answer questions about Pedro Lucas Marques, a Full-Stack Software Engineer from Brazil.
-
-KEY INFORMATION ABOUT PEDRO LUCAS MARQUES:
-- Name: Pedro Lucas Marques
-- Age: 24 years old
-- Role: Full-Stack Software Engineer
-- Email: pedro_marques_dev@hotmail.com
-- GitHub: https://github.com/pedrolucas167
-- LinkedIn: https://linkedin.com/in/pedromarquesdev
-- Location: Brasil
-
-TECH STACK (with proficiency levels):
-- Java (90%) - Core expertise
-- Spring Boot (85%) - Backend development
-- Node.js (85%) - Server-side JavaScript
-- React (90%) - Frontend development
-- TypeScript (88%) - Type-safe JavaScript
-- Docker (75%) - Containerization
-- PostgreSQL (80%) - Database management
-- Git (90%) - Version control
-
-PROJECTS:
-1. NovaMesh - Microfrontends platform using React, TypeScript, Vite, Module Federation
-   - Features: Module federation architecture, independent deployments, shared components, performance optimization, scalable microfrontends
-   - GitHub: https://github.com/pedrolucas167/novamesh
-
-2. Sistema de Estoque (Inventory System) - Full-stack inventory management
-   - Technologies: Java, Spring Boot, React, PostgreSQL, Docker
-   - Features: RESTful API, real-time stock updates, user authentication, data visualization, report generation
-   - GitHub: https://github.com/pedrolucas167/sistema-estoque
-
-3. MessageLove - Messaging platform with media streaming
-   - Technologies: TypeScript, React, Node.js, Auth, Media Streaming
-   - Features: Real-time messaging, media sharing, user authentication, streaming optimization, responsive design
-   - GitHub: https://github.com/pedrolucas167/messagelove
-   - Demo: https://messagelove.com.br
-
-4. Toy Data Platform - Data processing and visualization platform
-   - Technologies: Python, Docker, Data Processing, Visualization, Pandas
-   - Features: Data pipeline automation, interactive dashboards, statistical analysis, export capabilities, real-time processing
-   - GitHub: https://github.com/pedrolucas167/toy-data-platform
-
-ARTICLES (Medium):
-- "Why AIs Lie with Confidence and How RAG Architecture Solves It" - AI & RAG architecture (8 min read)
-- "Optimizing Performance with Spring Data Projection" - Java & Spring performance (6 min read)
-- "What if Dune Wasn't Fiction" - Fiction & Technology (5 min read)
-- "The Argonauts of AI: Exploring the New Frontier of Intelligence" - AI & Philosophy (7 min read)
-
-GUIDELINES:
-- Answer questions about Pedro's skills, projects, experience, and contact information
-- Be friendly, professional, and concise
-- If asked about something not covered above, politely explain you don't have that information
-- Encourage visitors to contact Pedro for collaboration or opportunities
-- Keep responses under 150 words when possible
-- Respond in the same language as the user's question`;
-
-  const languageInstructions = {
-    pt: '\n\nResponda sempre em português.',
-    en: '\n\nAlways respond in English.',
-    de: '\n\nAntworte immer auf Deutsch.',
-    zh: '\n\n请始终用中文回答。',
-    es: '\n\nSiempre responde en español.'
-  };
-
-  return basePrompt + (Object.hasOwn(languageInstructions, language) ? languageInstructions[language] : languageInstructions.pt);
-}
-
-module.exports = { generateChatResponse, buildSystemPrompt };
+module.exports = { generateChatResponse, chatError };

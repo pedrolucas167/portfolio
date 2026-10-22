@@ -14,13 +14,13 @@ interface RevealReturn {
 }
 
 export function useReveal(options: RevealOptions = {}): RevealReturn {
-  const { 
-    threshold = 0.1, 
-    rootMargin = '0px', 
+  const {
+    threshold = 0.1,
+    rootMargin = '0px',
     triggerOnce = true,
-    delay = 0 
+    delay = 0
   } = options;
-  
+
   const ref = useRef<HTMLElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -29,22 +29,25 @@ export function useReveal(options: RevealOptions = {}): RevealReturn {
     const element = ref.current;
     if (!element) return;
 
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry) {
           setProgress(entry.intersectionRatio);
-          
+
           if (entry.isIntersecting) {
             if (delay > 0) {
-              setTimeout(() => setIsRevealed(true), delay);
+              clearTimeout(timer);
+              timer = setTimeout(() => setIsRevealed(true), delay);
             } else {
               setIsRevealed(true);
             }
-            
+
             if (triggerOnce) {
               observer.unobserve(element);
             }
           } else if (!triggerOnce) {
+            clearTimeout(timer);
             setIsRevealed(false);
           }
         }
@@ -53,7 +56,7 @@ export function useReveal(options: RevealOptions = {}): RevealReturn {
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); clearTimeout(timer); };
   }, [threshold, rootMargin, triggerOnce, delay]);
 
   return { ref, isRevealed, progress };

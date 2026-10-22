@@ -23,10 +23,6 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('three') || id.includes('@react-three/fiber') || id.includes('@react-three/drei')) {
-                return 'three';
-              }
-
               if (id.includes('react') || id.includes('react-dom')) {
                 return 'react-vendor';
               }

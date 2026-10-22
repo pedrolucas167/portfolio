@@ -1,3 +1,4 @@
+import { resumeUrl } from '../../content/resume';
 import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FloatingOrbs, InteractiveAvatar } from '../ui';
@@ -8,7 +9,7 @@ import { useTranslation } from 'react-i18next'; // Import useTranslation
 export function Hero() {
   const { t } = useTranslation(); // Initialize useTranslation
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   // Translate typingTexts before passing to useTypingEffect
   const translatedTypingTexts = typingTexts.map(key => t(key));
   const typedText = useTypingEffect(translatedTypingTexts, 80, 40, 2500);
@@ -22,18 +23,18 @@ export function Hero() {
   };
 
   return (
-    <section 
-      id="inicio" 
+    <section
+      id="inicio"
       className="relative min-h-[100svh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-16 sm:pb-0"
     >
-      
+
       <div className="absolute inset-0 bg-gradient-mesh" />
-      
-      
+
+
       <FloatingOrbs />
-      
-      
-      <div 
+
+
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px),
@@ -42,10 +43,10 @@ export function Hero() {
         }}
       />
 
-      
+
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-        
-        <div 
+
+        <div
           className={`mx-auto mb-4 sm:mb-6 transition-all duration-1000 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -57,8 +58,8 @@ export function Hero() {
           />
         </div>
 
-        
-        <div 
+
+        <div
           className={`status-indicator mx-auto mb-3 sm:mb-4 transition-all duration-1000 delay-200 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -66,8 +67,8 @@ export function Hero() {
           {t('hero_available_for_projects')} {/* Translated */}
         </div>
 
-        
-        <h1 
+
+        <h1
           className={`text-3xl sm:text-4xl md:text-6xl font-extrabold mb-2 transition-all duration-1000 delay-300 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -76,8 +77,8 @@ export function Hero() {
           <span className="text-gradient-animated">Marques</span>
         </h1>
 
-        
-        <p 
+
+        <p
           className={`text-base sm:text-lg md:text-xl font-semibold text-[var(--color-accent)] glow-text mb-2 transition-all duration-1000 delay-400 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -85,8 +86,8 @@ export function Hero() {
           {t(personalInfo.role)} {/* Translated using personalInfo.role key */}
         </p>
 
-        
-        <div 
+
+        <div
           className={`min-h-[24px] sm:min-h-[28px] mb-5 sm:mb-6 transition-all duration-1000 delay-500 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -119,7 +120,7 @@ export function Hero() {
             <span>{t('hero_start_conversation')}</span> {/* Translated */}
           </button>
           <a
-            href={`${import.meta.env.BASE_URL}resume/resume_pedromarques.pdf`}
+            href={resumeUrl}
             download="resume_pedro_marques.pdf"
             className="btn-premium btn-secondary-premium"
           >
@@ -130,8 +131,8 @@ export function Hero() {
           </a>
         </div>
 
-        
-        <div 
+
+        <div
           className={`flex justify-center gap-3 sm:gap-4 transition-all duration-1000 delay-700 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
@@ -157,7 +158,7 @@ export function Hero() {
         </div>
       </div>
 
-      
+
       <button
         onClick={() => scrollToSection('#sobre')}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-[#64748b] hover:text-[var(--color-accent)] transition-colors cursor-pointer group"
@@ -171,7 +172,7 @@ export function Hero() {
         </div>
       </button>
 
-      
+
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--color-dark-bg)] to-transparent" />
     </section>
   );

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, waitFor, act } from '../../test/test-utils';
+import { render, screen, waitFor, act } from '../../../test/test-utils';
 import userEvent from '@testing-library/user-event';
-import i18n from '../../i18n';
+import i18n from '../../../i18n';
 import { Chatbot } from './Chatbot';
 
 const mockStart = vi.fn();
@@ -150,5 +150,25 @@ describe('Chatbot voice input', () => {
     await waitFor(() => expect(signal).toBeDefined());
     unmount();
     expect(signal!.aborted).toBe(true);
+  });
+
+  it('does not start recording if permission resolves after the chat closes', async () => {
+    let allowMicrophone!: (stream: MediaStream) => void;
+    const stopTrack = vi.fn();
+    Object.defineProperty(navigator, 'mediaDevices', {
+      configurable: true,
+      value: { getUserMedia: vi.fn(() => new Promise<MediaStream>(resolve => { allowMicrophone = resolve; })) },
+    });
+    try {
+      const user = userEvent.setup();
+      await openChat(user);
+      await user.click(screen.getByTitle('Start voice input'));
+      await user.click(screen.getByRole('button', { name: 'Close chatbot' }));
+      await act(async () => allowMicrophone({ getTracks: () => [{ stop: stopTrack }] } as unknown as MediaStream));
+      expect(stopTrack).toHaveBeenCalledTimes(1);
+      expect(mockStart).not.toHaveBeenCalled();
+    } finally {
+      Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: undefined });
+    }
   });
 });
