@@ -153,6 +153,7 @@
   "chatbot_title": "Nova AI",
   "chatbot_subtitle": "Powered by OpenRouter",
   "chatbot_open": "Open chatbot",
+  "chatbot_close": "Close chatbot",
   "chatbot_welcome": "Hello! I'm an AI assistant trained with Pedro's portfolio data. Ask about his skills, projects, or experiences!",
   "chatbot_placeholder": "Type your question...",
   "chatbot_error": "Sorry, an error occurred processing your message. Please try again.",

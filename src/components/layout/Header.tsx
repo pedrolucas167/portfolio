@@ -1,14 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useScrollPosition, useSmoothScroll } from '../../hooks';
 import { useTranslation } from 'react-i18next';
 import { i18n as I18nInstance } from 'i18next';
 
 interface HeaderProps {
-  i18n: I18nInstance;
+  i18n?: I18nInstance;
 }
 
-export function Header({ i18n }: HeaderProps) {
-  const { t } = useTranslation();
+export function Header({ i18n: providedI18n }: HeaderProps) {
+  const { t, i18n: contextI18n } = useTranslation();
+  const i18n = providedI18n ?? contextI18n;
   const currentLanguage = i18n.resolvedLanguage ?? i18n.language?.split('-')[0] ?? 'en';
   const [activeSection, setActiveSection] = useState('#inicio');
   const { scrollY, scrollDirection } = useScrollPosition();
@@ -17,7 +18,7 @@ export function Header({ i18n }: HeaderProps) {
   const isScrolled = scrollY > 50;
   const isHidden = scrollDirection === 'down' && scrollY > 400;
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { label: t('nav_home'), href: '#inicio' },
     { label: t('nav_about'), href: '#sobre' },
     { label: t('nav_tech'), href: '#tecnologias' },
@@ -25,7 +26,7 @@ export function Header({ i18n }: HeaderProps) {
     { label: t('nav_articles'), href: '#artigos' },
     { label: t('nav_game'), href: '#game' },
     { label: t('nav_contact'), href: '#contato' },
-  ];
+  ], [t]);
 
   useEffect(() => {
     const sections = navItems.map(item => item.href.slice(1));
@@ -87,18 +88,6 @@ export function Header({ i18n }: HeaderProps) {
      });
    };
 
-   useEffect(() => {
-      if (typeof i18n.on !== 'function' || typeof i18n.off !== 'function') {
-        return;
-      }
-
-     const handleLanguageChanged = () => {};
-     
-     i18n.on('languageChanged', handleLanguageChanged);
-     return () => {
-       i18n.off('languageChanged', handleLanguageChanged);
-     };
-   }, [i18n]);
 
   return (
     <>
@@ -111,9 +100,9 @@ export function Header({ i18n }: HeaderProps) {
           : 'py-5'
       }`}
     >
-      <div 
+      <div
         className={`absolute inset-0 transition-all duration-500 ${
-          isScrolled 
+          isScrolled
             ? 'bg-[var(--color-dark-bg)]/80 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/10'
             : 'bg-transparent'
         }`}

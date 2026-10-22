@@ -15,6 +15,7 @@
     "deploy": "VITE_BASE_PATH=/portfolio/ npm run build && node scripts/deploy.mjs",
     "test": "vitest",
     "test:run": "vitest run",
+    "test:server": "node --test server/chat.test.cjs",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage"
   },
@@ -56,11 +57,8 @@
     "vitest": "^5.0.5"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@types/three": "^0.182.0",
     "@vitejs/plugin-react": "^4.7.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -72,7 +70,6 @@
     "react-dom": "^19.2.0",
     "react-helmet-async": "^3.0.0",
     "react-i18next": "^17.0.6",
-    "react-icons": "^5.5.0",
-    "three": "^0.182.0"
+    "react-icons": "^5.5.0"
   }
 }
