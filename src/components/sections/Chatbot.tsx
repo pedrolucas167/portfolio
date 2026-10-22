@@ -49,6 +49,19 @@ export function Chatbot() {
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const requestRef = useRef<AbortController | null>(null);
+  const voiceAttemptRef = useRef(0);
+  const voiceStartingRef = useRef(false);
+
+  useEffect(() => () => {
+    voiceAttemptRef.current++;
+    requestRef.current?.abort();
+    requestRef.current = null;
+  }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   useEffect(() => {
     setIsAvailable(isChatbotAvailable());
@@ -108,6 +121,11 @@ export function Chatbot() {
     recognitionRef.current = recognition;
 
     return () => {
+      voiceAttemptRef.current++;
+      voiceStartingRef.current = false;
+      recognition.onresult = null;
+      recognition.onerror = null;
+      recognition.onend = null;
       try {
         recognition.stop();
       } catch {
@@ -119,6 +137,10 @@ export function Chatbot() {
 
   // Stop recording when the chat is closed
   useEffect(() => {
+    if (!isOpen) {
+      voiceAttemptRef.current++;
+      voiceStartingRef.current = false;
+    }
     if (!isOpen && isRecording && recognitionRef.current) {
       try {
         recognitionRef.current.stop();
@@ -130,6 +152,7 @@ export function Chatbot() {
   }, [isOpen, isRecording]);
 
   const toggleRecording = async () => {
+    if (voiceStartingRef.current) return;
     if (!recognitionRef.current) {
       setRecordingError(t('chatbot_voice_unsupported'));
       return;
@@ -146,6 +169,9 @@ export function Chatbot() {
     }
 
     setRecordingError(null);
+    const attempt = ++voiceAttemptRef.current;
+    const recognition = recognitionRef.current;
+    voiceStartingRef.current = true;
 
     try {
       // Explicitly request microphone access so the browser prompt is shown
@@ -155,6 +181,8 @@ export function Chatbot() {
         stream.getTracks().forEach(track => track.stop());
       }
     } catch (error) {
+      if (attempt !== voiceAttemptRef.current) return;
+      voiceStartingRef.current = false;
       const err = error as Error;
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
         setRecordingError(t('chatbot_voice_permission_denied'));
@@ -166,6 +194,11 @@ export function Chatbot() {
       return;
     }
 
+    if (attempt !== voiceAttemptRef.current || recognitionRef.current !== recognition) {
+      voiceStartingRef.current = false;
+      return;
+    }
+    voiceStartingRef.current = false;
     try {
       recognitionRef.current.lang = getRecognitionLang(i18n.language);
       recognitionRef.current.start();
@@ -180,14 +213,6 @@ export function Chatbot() {
   if (!isAvailable) {
     return null;
   }
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const RESUME_URL = `${import.meta.env.BASE_URL}resume/resume_pedromarques.pdf`;
 
@@ -208,7 +233,7 @@ export function Chatbot() {
   };
 
   const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || requestRef.current) return;
 
     const currentInput = input;
     const userMessage: Message = { role: 'user', content: currentInput };
@@ -226,6 +251,9 @@ export function Chatbot() {
     }
 
     setIsLoading(true);
+    const controller = new AbortController();
+    requestRef.current = controller;
+    const timeout = setTimeout(() => controller.abort(), 25000);
 
     const API_URL = import.meta.env.PROD 
       ? '/api/chat' 
@@ -234,6 +262,7 @@ export function Chatbot() {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
+        signal: controller.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: currentInput,
@@ -242,21 +271,28 @@ export function Chatbot() {
       });
 
       const data = await response.json();
+      controller.signal.throwIfAborted();
       
-      if (data.success) {
+      if (response.ok && data.success && typeof data.response === 'string' && data.response.trim()) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
       } else {
         setMessages(prev => [...prev, { role: 'assistant', content: t('chatbot_error') }]);
       }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: t('chatbot_error') }]);
+      if (requestRef.current === controller) {
+        setMessages(prev => [...prev, { role: 'assistant', content: t('chatbot_error') }]);
+      }
     } finally {
-      setIsLoading(false);
+      clearTimeout(timeout);
+      if (requestRef.current === controller) {
+        requestRef.current = null;
+        setIsLoading(false);
+      }
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       sendMessage();
     }
@@ -365,7 +401,7 @@ export function Chatbot() {
               setInput(e.target.value);
               setRecordingError(null);
             }}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             placeholder={t('chatbot_placeholder')}
             className="flex-1 bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-xl px-4 py-2 focus:outline-none focus:border-cyan-500 transition-colors"
             disabled={isLoading}

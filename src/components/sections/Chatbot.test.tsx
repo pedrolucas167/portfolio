@@ -41,6 +41,7 @@ describe('Chatbot voice input', () => {
   });
 
   afterEach(() => {
+    vi.unstubAllGlobals();
     Object.defineProperty(window, 'SpeechRecognition', {
       writable: true,
       configurable: true,
@@ -120,5 +121,34 @@ describe('Chatbot voice input', () => {
 
     const input = screen.getByPlaceholderText('Type your question...') as HTMLInputElement;
     await waitFor(() => expect(input.value).toBe('Quais são suas tecnologias?'));
+  });
+
+  it('shows an error for an HTTP failure even if the body claims success', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: false,
+      json: async () => ({ success: true, response: 'invalid success' }),
+    }));
+    const user = userEvent.setup();
+    await openChat(user);
+    await user.type(screen.getByPlaceholderText('Type your question...'), 'Hello{Enter}');
+    expect(await screen.findByText(i18n.t('chatbot_error'))).toBeInTheDocument();
+    expect(screen.queryByText('invalid success')).not.toBeInTheDocument();
+  });
+
+  it('aborts an outstanding request when the component unmounts', async () => {
+    let signal: AbortSignal | undefined;
+    vi.stubGlobal('fetch', vi.fn((_url, options) => {
+      signal = options.signal;
+      return new Promise((_resolve, reject) => {
+        signal!.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')));
+      });
+    }));
+    const user = userEvent.setup();
+    const { unmount } = render(<Chatbot />);
+    await user.click(await screen.findByTitle('Open chatbot'));
+    await user.type(screen.getByPlaceholderText('Type your question...'), 'Hello{Enter}');
+    await waitFor(() => expect(signal).toBeDefined());
+    unmount();
+    expect(signal!.aborted).toBe(true);
   });
 });

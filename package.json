@@ -15,6 +15,7 @@
     "deploy": "VITE_BASE_PATH=/portfolio/ npm run build && node scripts/deploy.mjs",
     "test": "vitest",
     "test:run": "vitest run",
+    "test:server": "node --test server/chat.test.cjs",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage"
   },

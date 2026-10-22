@@ -2,25 +2,25 @@ const openAIConfig = require('../config/openai');
 
 async function generateChatResponse(req, res) {
   try {
-    const { message, language = 'pt' } = req.body;
+    const { message, language = 'pt' } = req.body ?? {};
 
-    if (!message) {
+    if (typeof message !== 'string' || !message.trim() || message.length > 4000) {
       return res.status(400).json({ 
         success: false, 
-        message: 'Message is required' 
+        message: 'Message must contain between 1 and 4000 characters'
       });
     }
 
     const systemPrompt = buildSystemPrompt(language);
-    const response = await openAIConfig.chat(message, systemPrompt);
+    const response = await openAIConfig.chat(message.trim(), systemPrompt);
 
     res.json({
       success: true,
       response: response
     });
   } catch (error) {
-    console.error('Chat error:', error);
-    res.status(500).json({ 
+    console.error('Chat request failed:', error.name);
+    res.status(error.name === 'TimeoutError' ? 504 : 502).json({
       success: false, 
       message: 'Failed to generate response' 
     });
@@ -28,6 +28,7 @@ async function generateChatResponse(req, res) {
 }
 
 function buildSystemPrompt(language) {
+  language = typeof language === 'string' ? language.toLowerCase().split('-')[0] : 'pt';
   const basePrompt = `You are a helpful AI assistant for Pedro Lucas Marques's portfolio website. 
 You answer questions about Pedro Lucas Marques, a Full-Stack Software Engineer from Brazil.
 
@@ -93,7 +94,7 @@ GUIDELINES:
     es: '\n\nSiempre responde en español.'
   };
 
-  return basePrompt + (languageInstructions[language] || languageInstructions.pt);
+  return basePrompt + (Object.hasOwn(languageInstructions, language) ? languageInstructions[language] : languageInstructions.pt);
 }
 
 module.exports = { generateChatResponse, buildSystemPrompt };

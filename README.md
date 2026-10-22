@@ -76,6 +76,7 @@ Para configurar o caminho público do frontend, defina `VITE_BASE_PATH` em `.env
 | `npm run preview` | Serve o build localmente na porta 4173 |
 | `npm test` | Executa os testes em modo de acompanhamento |
 | `npm run test:run` | Executa os testes uma vez |
+| `npm run test:server` | Verifica validação, falhas e integração do chatbot com respostas simuladas |
 | `npm run test:coverage` | Gera relatórios de cobertura em `coverage/` |
 | `npm run deploy` | Gera o build para `/portfolio/` e publica em `origin/gh-pages` |
 

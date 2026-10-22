@@ -1,13 +1,11 @@
 require('dotenv').config({ path: './server/.env' });
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-// Using meta-llama/llama-3.2-3b-instruct - very cheap and efficient
-// Pricing: ~$0.15/M input tokens, $0.60/M output tokens
 const MODEL = 'meta-llama/llama-3.2-3b-instruct';
 
 async function chat(userMessage, systemPrompt) {
+  const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY is not configured');
   }
@@ -15,10 +13,11 @@ async function chat(userMessage, systemPrompt) {
   try {
     const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
+      signal: AbortSignal.timeout(20000),
       headers: {
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:5173',
+        'HTTP-Referer': process.env.SITE_URL || process.env.FRONTEND_URL || 'http://localhost:3000',
         'X-Title': 'Pedro Lucas Portfolio'
       },
       body: JSON.stringify({
@@ -33,14 +32,17 @@ async function chat(userMessage, systemPrompt) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`OpenRouter API error: ${response.status} - ${error}`);
+      await response.body?.cancel();
+      throw new Error(`OpenRouter request failed with status ${response.status}`);
     }
 
     const data = await response.json();
-    return data.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+    const content = data.choices?.[0]?.message?.content;
+    if (typeof content !== 'string' || !content.trim()) {
+      throw new Error('OpenRouter returned an empty response');
+    }
+    return content.trim();
   } catch (error) {
-    console.error('OpenRouter API call failed:', error);
     throw error;
   }
 }
