@@ -1,4 +1,4 @@
-export const resumeUrl = import.meta.env.BASE_URL + 'resume/Curriculum%20-%20Pedro%20Marques.pdf';
+export const resumeUrl = import.meta.env.BASE_URL + 'resume/Curriculum-Pedro Marques.pdf';
 export function downloadResume() {
   const link = document.createElement('a');
   link.href = resumeUrl;
