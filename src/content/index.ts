@@ -21,7 +21,7 @@ export interface TechItem {
   level?: number;
 }
 
-const icons: Record<string, IconType> = { FaJava, SiSpring, FaNodeJs, FaReact, SiTypescript, FaDocker, SiPostgresql, FaGitAlt };
+const icons: Record<string, IconType> = { FaJava, SiSpring, FaNodeJs, FaReact, SiTypescript, FaDocker, SiPostgresql, FaGitAlt, FaAngular, SiNextdotjs };
 export const techStack: TechItem[] = content.techStack.map(item => ({ ...item, icon: icons[item.icon] }));
 
 export interface Project {
