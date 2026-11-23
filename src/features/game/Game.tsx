@@ -18,7 +18,7 @@ export function Game() {
             Bug <span className="text-gradient-animated">Hunter</span>
             <span className="text-sm sm:text-lg text-[#64748b] font-normal ml-2">PRO</span>
           </h2>
-          <p className="text-[#94a3b8] text-sm sm:text-base px-4 sm:px-0">
+          <p className="mx-auto text-[#94a3b8] text-sm sm:text-base px-4 sm:px-0">
             Defenda seu código. Destrua os bugs. Sobreviva.
           </p>
         </div>
