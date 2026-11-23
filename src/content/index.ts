@@ -1,6 +1,6 @@
 import content from '../../shared/portfolio/content.json';
-import { FaJava, FaNodeJs, FaReact, FaDocker, FaGitAlt, FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
-import { SiTypescript, SiSpring, SiPostgresql } from 'react-icons/si';
+import { FaJava, FaNodeJs, FaReact, FaDocker, FaGitAlt, FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaAngular } from 'react-icons/fa';
+import { SiTypescript, SiSpring, SiPostgresql, SiNextdotjs } from 'react-icons/si';
 import { IconType } from 'react-icons';
 
 export const personalInfo = content.personalInfo;

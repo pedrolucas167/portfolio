@@ -180,6 +180,18 @@
       "level": 90
     },
     {
+      "name": "Angular",
+      "icon": "FaAngular",
+      "color": "#dd0031",
+      "level": 80
+    },
+    {
+      "name": "Next.js",
+      "icon": "SiNextdotjs",
+      "color": "#ffffff",
+      "level": 82
+    },
+    {
       "name": "TypeScript",
       "icon": "SiTypescript",
       "color": "#3178c6",
